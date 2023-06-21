@@ -16,6 +16,33 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
+			<div class="slides">
+				<section>
+					<pre>
+						<code class="python">
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route("/")
+def root():
+    return "<p>Hello, World!</p>"
+						</code>
+					</pre>
+				</section>
+				<section>
+					<pre>
+						<code class="python">
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/")
+async def root():
+    return {"message": "Hello World"}
+						</code>
+					</pre>
+				</section>
 				<section data-background-video="Geoscape-snapshot.mp4">
 					<div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
 					</div>
@@ -33,6 +60,7 @@
 			// - https://revealjs.com/config/
 			Reveal.initialize({
 				hash: true,
+				transition: "none",
 
 				// Learn about plugins: https://revealjs.com/plugins/
 				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
