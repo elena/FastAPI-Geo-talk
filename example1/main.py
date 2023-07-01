@@ -1,3 +1,8 @@
+"""
+Example:
+
+Basic path variable input.
+"""
 from fastapi import APIRouter
 
 routes_eg1 = APIRouter(prefix="/example1")

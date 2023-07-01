@@ -1,3 +1,8 @@
+"""
+Example:
+
+Basic parameter input.
+"""
 from fastapi import APIRouter
 
 routes_eg2 = APIRouter(prefix="/example2")
@@ -25,7 +30,6 @@ address_list = [
     "2 park rd"
     "12 park rd"
 ]
-
 @routes_eg2.get("/predict/address/")
 async def root(search_term: str = None) -> dict[str, list[str]]:
     return {"output": [i for i in address_list if search_term in i]}
