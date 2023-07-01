@@ -97,14 +97,104 @@
             </div>
         </section>
         <section id="owned-by-states" data-background="graphics/background/states-0.png">
-            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; margin-top: -350px; ">
+            <div style="margin-top: 0px; color: rgba(0, 0, 0, 0.85); font-size: 75%;">
+                Not Government, but Government owned
+            </div>
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; margin-bottom: 380px; ">
                 <img height="100px" src="/graphics/background/Geoscape_Logo.jpg">
-                <h3>Owned by</h3>
-                <div style="color: rgba(255, 255, 255, 0.25); font-size: 75%;">
-                    Not Government, but Government owned
-                </div>
+                <h3 style="font-weight: normal; text-transform: none;">Owned by: <b>the States</b></h3>
+            </div>
+
+        </section>
+
+        <section id="fastapi-title">
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
+                <div style="font-size: 200%">FastAPI</div>
             </div>
         </section>
+        <section id="trends" data-background="graphics/trends.png"></section>
+        <section id="code-flask">
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
+                <code>app.py</code>
+            </div><br>
+            <pre>
+					<code data-trim data-line-numbers="" class="python"  style="font-size: 1.2em; line-height: 1.25">
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route("/")
+def root():
+    return "<p>Hello, World!</p>"
+					</code>
+				</pre>
+        </section>
+        <section id="code-fastapi-basic">
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
+                <code>app.py</code>
+            </div><br>
+            <pre>
+					<code data-trim data-line-numbers="" class="python"  style="font-size: 1.2em; line-height: 1.25">
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/")
+async def root():
+    return {"message": "Hello World"}
+					</code>
+				</pre>
+        </section>
+        <section id="code-fastapi-flask-compare">
+            FastAPI
+            <pre>
+					<code data-trim data-line-numbers="|5|6|7" class="python" style="font-size: 1.2em; line-height: 1.25">
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/")
+async def root():
+    return {"message": "Hello World"}
+					</code>
+				</pre>
+
+            Flask
+            <pre>
+					<code data-trim data-line-numbers="" class="python" style="opacity: 0.6; font-size: 1.2em; line-height: 1.25;">
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route("/")
+def root():
+    return "<p>Hello, World!</p>"
+					</code>
+				</pre>
+
+        </section>
+        <section id="runserver">
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
+                Run locally:
+            </div>
+            <br>
+            <pre class="fragment" data-id="code-animation"><code data-trim data-line-numbers="1-2|4" style="font-size: 1.2em; line-height: 1.25;"><script type="text/template">
+$ pip install fastapi
+$ pip install uvicorn
+
+$ uvicorn main:app --reload
+				</script></code></pre>
+            <pre class="fragment" style="padding: 30px 0">
+<span style="color: green;">INFO</span>:  Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+<span style="color: green;">INFO</span>:  Started reloader process [28720]
+<span style="color: green;">INFO</span>:  Started server process [28722]
+<span style="color: green;">INFO</span>:  Waiting for application startup.
+<span style="color: green;">INFO</span>:  Application startup complete.
+				</pre>
+        </section>
+
+
+
     </div>
 </div>
 <footer>
