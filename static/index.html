@@ -1,56 +1,70 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>PyConAU 2023: Elena Williams -- Learning FastAPI on Hard Mode</title>
+    <title>PyConAU 2023: Elena Williams -- Learning FastAPI on Hard Mode</title>
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css">
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/black.css">
 
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css">
-		<style>
-			.subtext {font-size: 85%}
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css">
+    <style>
+        .subtext {
+            font-size: 85%
+        }
 
-		</style>
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section data-background-video="graphics/geoscape.mp4">
-					<div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-						<h1>Learning FastAPI</h1>
-						<h3>On Hard Hode</h3>
-						<p><em>Getting out lots of Geo data fast &raquo; </em></p>
-					</div>
-				</section>
+    </style>
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section data-background-video="graphics/geoscape.mp4">
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
+                <h1>Learning FastAPI</h1>
+                <h3>On Hard Hode</h3>
+                <p><em>Getting out lots of Geo data fast &raquo; </em></p>
+            </div>
+        </section>
+        <section>
+            <br>
+            <h3>Elena Williams</h3>
+            <div>github/<b>elena</b></div>
+            <div>Software Engineer, Geoscape</div>
+            <div>Sessional Academic, CECC, ANU</div>
+            <div>Organiser, Canberra Python User Group</div>
+            <div>Organiser, Django Girls Canberra</div>
+            <div>DSF/PSF</div>
+            <br>
+            <div style="color: rgba(255, 255, 255, 0.25); font-size: 50%; text-align: right">"just zis guy, you
+                know?"
+            </div>
+        </section>
+    </div>
+</div>
+<footer>
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.2"
+            integrity="sha384-L6OqL9pRWyyFU3+/bjdSri+iIphTN/bvYyM37tICVyOJkWZLpP2vGn6VUEXgzg6h"
+            crossorigin="anonymous"></script>
+    <script>
+        // More info about initialization & config:
+        // - https://revealjs.com/initialization/
+        // - https://revealjs.com/config/
+        Reveal.initialize({
+            hash: true,
+            transition: "none",
 
-			</div>
-		</div>
-
-
-
-	<footer>
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script src="https://unpkg.com/htmx.org@1.9.2" integrity="sha384-L6OqL9pRWyyFU3+/bjdSri+iIphTN/bvYyM37tICVyOJkWZLpP2vGn6VUEXgzg6h" crossorigin="anonymous"></script>
-		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
-			Reveal.initialize({
-				hash: true,
-				transition: "none",
-
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
-			});
-		</script>
-	</footer>
-	</body>
+// Learn about plugins: https://revealjs.com/plugins/
+            plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+        });
+    </script>
+</footer>
+</body>
 </html>
