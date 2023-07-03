@@ -232,6 +232,82 @@ async def root():
             Most cases would say this is overkill but there are cases, where we like performance. Let me share one.
             </aside>
         </section>
+        <section id="eg1-code-hello">
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
+                Hello World
+            </div><br>
+            <pre>
+					<code data-trim data-line-numbers="" class="python"  style="font-size: 1.2em; line-height: 1.25">
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/")
+async def root():
+    return {"message": "Hello World"}
+					</code>
+				</pre>
+        </section>
+        <section id="eg1-quick=filter">
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
+                Quick filter
+            </div>
+            <pre>
+					<code data-line-numbers="" class="python"  style="font-size: 1.1em; line-height: 1.25">show_list = [
+    "abcd",
+    "zabc",
+    "yzab",
+    "xyza",
+]
+
+@app.get("/search/")
+async def root(term: str = None):
+    results = filter(lambda x: term in x, show_list)
+    return {"output": results}
+					</code>
+				</pre>
+        </section>
+        <section id="eg1-quick=filter-results">
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
+                Quick filter
+            </div>
+            <pre>
+					<code data-line-numbers="" class="python"  style="font-size: 1.1em; line-height: 1.25">show_list = [
+    "abcd",
+    "zabc",
+    "yzab",
+    "xyza",
+]
+
+@app.get("/search/")
+async def root(term: str = None):
+    results = filter(lambda x: term in x, show_list)
+    return {"output": results}
+					</code>
+				</pre>
+        </section>
+
+        <section id="eg1-code-hello-params-step">
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
+                Quick filter
+            </div>
+            <pre>
+					<code data-line-numbers="|1-6|9|10|" class="python"  style="font-size: 1.1em; line-height: 1.25">show_list = [
+    "abcd",
+    "zabc",
+    "yzab",
+    "xyza",
+]
+
+@ppp.get("/search/")
+async def root(term: str = None):
+    results = filter(lambda x: term in x, show_list)
+    return {"output": results}
+					</code>
+				</pre>
+        </section>
+
+
 
 
         <section id="eg2-code-park">
