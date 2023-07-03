@@ -203,6 +203,35 @@ $ uvicorn main:app --reload
             </div>
         </section>
 
+        <section id="title-async">
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
+                <div style="font-size: 200%">Async</div>
+            </div><br>
+            <div style="color: rgba(255, 255, 255, 0.5)">
+                <em>"<b style="color: white;">threading</b> is for <b style="color: white;">working</b> in parallel,<br>
+                    <b style="color: white;">async</b> is for <b style="color: white;">waiting</b> in parallel"</em>
+            </div>
+        </section>
+        <section id="async" data-background="graphics/async.png"></section>
+        <section id="async-what-matters">
+            <code class="hljs-keyword">async</code> and <code class="hljs-keyword">await</code><br>
+            <pre>
+					<code data-line-numbers="|1-2|1,5|10,4|" class="python" style="font-size: 1.2em; line-height: 1.25">async def get_data():
+    return {"item": "Bar"}
+
+async def logic():
+    data = await get_data()
+    return {"Foo": data["item"]}
+
+@app.get("/")
+async def root():
+    return await logic()
+                    </code>
+            </pre>
+            <aside class="notes">Normal functions are fine. Don't forget await, even when it's complex.
+            Most cases would say this is overkill but there are cases, where we like performance. Let me share one.
+            </aside>
+        </section>
 
 
         <section id="eg2-code-park">
