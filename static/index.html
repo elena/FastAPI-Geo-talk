@@ -32,6 +32,7 @@
         <section id="credits">
             <br>
             <h3>Elena Williams</h3>
+
             <div>github/<b>elena</b></div>
             <div>Software Engineer, Geoscape</div>
             <div>Sessional Academic, CECC, ANU</div>
@@ -39,6 +40,8 @@
             <div>Organiser, Django Girls Canberra</div>
             <div>DSF/PSF</div>
             <br>
+            <code>github.com/elena/</code><code style="font-weight: bolder">FastAPI-Geo-talk</code>
+
             <div style="color: rgba(255, 255, 255, 0.25); font-size: 50%; text-align: right">"just zis guy, you
                 know?"
             </div>
@@ -203,7 +206,7 @@ def root():
 $ pip install fastapi
 $ pip install uvicorn
 
-$ uvicorn main:app --reload
+$ uvicorn app:app --reload
 				</script></code></pre>
             <pre class="fragment" style="padding: 30px 0">
 <span style="color: green;">INFO</span>:  Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
@@ -211,8 +214,11 @@ $ uvicorn main:app --reload
 <span style="color: green;">INFO</span>:  Started server process [28722]
 <span style="color: green;">INFO</span>:  Waiting for application startup.
 <span style="color: green;">INFO</span>:  Application startup complete.
-				</pre>
-            <code class="fragment">github.com/elena/FastAPI-Geo-talk</code>
+            </pre>
+            <aside class="notes">
+                This talk here is all running from a fastapi application.
+                "Eat thine own dogfood"
+            </aside>
         </section>
         <section id="flask-doc" data-background="graphics/docs.png">
             <div style="position: relative; width: 55%; margin-left: 280px; top: -280px; background-color: rgba(0, 0, 0, 0.8); color: #fff; padding: 20px;">
@@ -237,13 +243,13 @@ $ uvicorn main:app --reload
 					<code data-line-numbers="|1-2|1,5|10,4|" class="python" style="font-size: 1.2em; line-height: 1.25">async def get_data():
     return {"item": "Bar"}
 
-async def logic():
+async def do_logic():
     data = await get_data()
     return {"Foo": data["item"]}
 
 @app.get("/")
 async def root():
-    return await logic()
+    return await do_logic()
                     </code>
             </pre>
             <aside class="notes">Normal functions are fine. Don't forget await, even when it's complex.
@@ -325,9 +331,6 @@ async def root(term: str = None):
 				</pre>
         </section>
 
-
-
-
         <section id="eg2-code-park">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
                 <div style="font-size: 200%"></div>
@@ -344,15 +347,58 @@ async def root(term: str = None):
             </div>
         </section>
 
-        <section id="title-pydantic">
+        <section id="title-pydantic-0">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-                <div style="font-size: 200%"></div>
+                <h1 style="font-size: 200%">Pydantic</h1>
             </div>
         </section>
-        <section id="pydantic-bdfl">
+        <section id="title-pydantic-0-del">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-                <div style="font-size: 200%"></div>
+                <h1 style="font-size: 200%"><del>Pydantic</del></h1>
             </div>
+        </section>
+
+        <section id="title-typing">
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
+                <h1 style="font-size: 200%">Typing in Python</h1>
+            </div>
+        </section>
+
+        <section id="typing-bdfl" data-background="graphics/bdfl.png"></section>
+
+        <section id="typing-basics">
+            <pre>
+                <code class="python"  style="font-size: 1.1em; line-height: 1.25">>>> 123      # int object
+                </code>
+                <br>
+                <code class="python"  style="font-size: 1.1em; line-height: 1.25">>>> 123.456  # float object
+                </code>
+                <br>
+                <code class="python"  style="font-size: 1.1em; line-height: 1.25">>>> "abc"    # str object
+                </code>
+                <br>
+                <code class="python"  style="font-size: 1.1em; line-height: 1.25">>>> Foo()    # custom object</code>
+<code  style="font-size: 0.9em; line-height: 1.25">
+
+                </code>
+            </pre>
+        </section>
+        <section id="typing-basicsx2-all">
+            <pre>
+                <code class="python"  style="font-size: 1.1em; line-height: 1.25">>>> 123 * 2      # int object
+246                </code>
+                <br>
+                <code class="python"  style="font-size: 1.1em; line-height: 1.25">>>> 123.456 * 2  # float object
+246.912                </code>
+                <br>
+                <code class="python"  style="font-size: 1.1em; line-height: 1.25">>>> "abc" * 2    # str object
+"abcabc"                </code>
+                <br>
+                <code class="python "  style="font-size: 1.1em; line-height: 1.25">>>> Foo() * 2    # custom object</code>
+<code  style="font-size: 0.95em; line-height: 1.25">Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+TypeError: unsupported operand type(s) for *: 'Foo' and 'int'</code>
+            </pre>
         </section>
         <section id="pydantic-typehints">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
