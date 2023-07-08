@@ -381,16 +381,19 @@ async def root(term: str = None):
 
         <section id="typing-basics">
             <pre>
-                <code class="python"  style="font-size: 1.1em; line-height: 1.25">>>> 123      # int object
+                <code class="python"  style="font-size: 1.1em; line-height: 1.25">>>> 123           # int object
                 </code>
                 <br>
-                <code class="python"  style="font-size: 1.1em; line-height: 1.25">>>> 123.456  # float object
+                <code class="python"  style="font-size: 1.1em; line-height: 1.25">>>> 123.456       # float object
                 </code>
                 <br>
-                <code class="python"  style="font-size: 1.1em; line-height: 1.25">>>> "abc"    # str object
+                <code class="python"  style="font-size: 1.1em; line-height: 1.25">>>> "abc"         # str object
                 </code>
                 <br>
-                <code class="python"  style="font-size: 1.1em; line-height: 1.25">>>> Foo()    # custom object</code>
+                <code class="python"  style="font-size: 1.1em; line-height: 1.25">>>> True          # bool object
+                </code>
+                <br>
+                <code class="python"  style="font-size: 1.1em; line-height: 1.25">>>> Foo()         # custom object</code>
 <code  style="font-size: 0.9em; line-height: 1.25">
 
                 </code>
@@ -398,72 +401,53 @@ async def root(term: str = None):
         </section>
         <section id="typing-basicsx2-all">
             <pre>
-                <code class="python"  style="font-size: 1.1em; line-height: 1.25">>>> 123 * 2      # int object
+                <code class="python"  style="font-size: 1.1em; line-height: 1.25">>>> 123     * 2   # int object
 246                </code>
                 <br>
-                <code class="python"  style="font-size: 1.1em; line-height: 1.25">>>> 123.456 * 2  # float object
+                <code class="python"  style="font-size: 1.1em; line-height: 1.25">>>> 123.456 * 2   # float object
 246.912                </code>
                 <br>
-                <code class="python"  style="font-size: 1.1em; line-height: 1.25">>>> "abc" * 2    # str object
+                <code class="python"  style="font-size: 1.1em; line-height: 1.25">>>> "abc"   * 2   # str object
 "abcabc"                </code>
                 <br>
-                <code class="python "  style="font-size: 1.1em; line-height: 1.25">>>> Foo() * 2    # custom object</code>
+                <code class="python"  style="font-size: 1.1em; line-height: 1.25">>>> True    * 2   # bool object
+2                </code>
+                <br>
+                <code class="python "  style="font-size: 1.1em; line-height: 1.25">>>> Foo()   * 2   # custom object</code>
 <code  style="font-size: 0.95em; line-height: 1.25">Traceback (most recent call last):
   File "&lt;stdin&gt;", line 1, in &lt;module&gt;
 TypeError: unsupported operand type(s) for *: 'Foo' and 'int'</code>
             </pre>
         </section>
 
-        <section id="typing-basicsx2-int">
-            <pre>
-                <code class="python"  style="font-size: 1.1em; line-height: 1.25">>>> 123 * 2      # int object
-246                </code>
-                <br>
-                <code class="python"  style="font-size: 1.1em; line-height: 1.25">>>> 123.456  # float object
-                </code>
-                <br>
-                <code class="python"  style="font-size: 1.1em; line-height: 1.25">>>> "abc"    # str object
-                </code>
-                <br>
-                <code class="python"  style="font-size: 1.1em; line-height: 1.25">>>> Foo()    # custom object</code>
-<code  style="font-size: 0.9em; line-height: 1.25">
 
-                </code>
             </pre>
         </section>
-        <section id="typing-basicsx2-float">
-            <pre>
-                <code class="python"  style="font-size: 1.1em; line-height: 1.25">>>> 123 * 2      # int object
-246                </code>
-                <br>
-                <code class="python"  style="font-size: 1.1em; line-height: 1.25">>>> 123.456 * 2  # float object
-246.912                </code>
-                <br>
-                <code class="python"  style="font-size: 1.1em; line-height: 1.25">>>> "abc"    # str object
-                </code>
-                <br>
-                <code class="python"  style="font-size: 1.1em; line-height: 1.25">>>> Foo()    # custom object</code>
-<code  style="font-size: 0.9em; line-height: 1.25">
 
-                </code>
-            </pre>
+        <section id="title-pydantic"  data-background="graphics/github_pydantic.png">
+            <div style="background-color: rgba(0, 0, 0, 0.6); color: #fff; padding: 20px;">
+                <div style="font-size: 200%">Pydantic</div>
+            </div>
         </section>
-        <section id="typing-basicsx2-str">
-            <pre>
-                <code class="python"  style="font-size: 1.1em; line-height: 1.25">>>> 123 * 2      # int object
-246                </code>
-                <br>
-                <code class="python"  style="font-size: 1.1em; line-height: 1.25">>>> 123.456 * 2  # float object
-246.912                </code>
-                <br>
-                <code class="python"  style="font-size: 1.1em; line-height: 1.25">>>> "abc" * 2    # str object
-"abcabc"                </code>
-                <br>
-                <code class="python"  style="font-size: 1.1em; line-height: 1.25">>>> Foo()    # custom object</code>
-<code  style="font-size: 0.9em; line-height: 1.25">
 
+        <section id="pydantic-validation-basic0">
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
+                Type checking in Pydantic:
+            </div>
+            <pre>
+                <code class="python"  style="font-size: 1.1em; line-height: 1.25; ">from pydantic import BaseModel
+
+class MyPydantic(BaseModel):
+    my_int: int
+    my_float: float
+    my_str: str
+    my_bool: bool
                 </code>
             </pre>
+            <aside class="notes">
+                Pydantic is a Python library that provides an easy and convenient way to validate and manipulate data.
+                Something to do with serialisation.
+            </aside>
         </section>
         <section id="typing-basicsx2-all0">
             <pre>
