@@ -131,8 +131,21 @@
             </div>
         </section>
 
-        <section id="title-fastapi">
-            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
+        <section id="title-flask"  data-background="graphics/github_flask.png">
+            <div style="background-color: rgba(0, 0, 0, 0.6); color: #fff; padding: 20px;">
+                <div style="font-size: 200%">Flask</div>
+            </div>
+        </section>
+
+        <section id="title-flask-del"  data-background="graphics/github_flask.png">
+            <div style="background-color: rgba(0, 0, 0, 0.6); color: #fff; padding: 20px;">
+                <div style="font-size: 200%"><del>Flask</del></div>
+            </div>
+        </section>
+
+
+        <section id="title-fastapi"  data-background="graphics/github_fastapi.png">
+            <div style="background-color: rgba(0, 0, 0, 0.6); color: #fff; padding: 20px;">
                 <div style="font-size: 200%">FastAPI</div>
             </div>
         </section>
@@ -400,7 +413,75 @@ async def root(term: str = None):
 TypeError: unsupported operand type(s) for *: 'Foo' and 'int'</code>
             </pre>
         </section>
-        <section id="pydantic-typehints">
+
+        <section id="typing-basicsx2-int">
+            <pre>
+                <code class="python"  style="font-size: 1.1em; line-height: 1.25">>>> 123 * 2      # int object
+246                </code>
+                <br>
+                <code class="python"  style="font-size: 1.1em; line-height: 1.25">>>> 123.456  # float object
+                </code>
+                <br>
+                <code class="python"  style="font-size: 1.1em; line-height: 1.25">>>> "abc"    # str object
+                </code>
+                <br>
+                <code class="python"  style="font-size: 1.1em; line-height: 1.25">>>> Foo()    # custom object</code>
+<code  style="font-size: 0.9em; line-height: 1.25">
+
+                </code>
+            </pre>
+        </section>
+        <section id="typing-basicsx2-float">
+            <pre>
+                <code class="python"  style="font-size: 1.1em; line-height: 1.25">>>> 123 * 2      # int object
+246                </code>
+                <br>
+                <code class="python"  style="font-size: 1.1em; line-height: 1.25">>>> 123.456 * 2  # float object
+246.912                </code>
+                <br>
+                <code class="python"  style="font-size: 1.1em; line-height: 1.25">>>> "abc"    # str object
+                </code>
+                <br>
+                <code class="python"  style="font-size: 1.1em; line-height: 1.25">>>> Foo()    # custom object</code>
+<code  style="font-size: 0.9em; line-height: 1.25">
+
+                </code>
+            </pre>
+        </section>
+        <section id="typing-basicsx2-str">
+            <pre>
+                <code class="python"  style="font-size: 1.1em; line-height: 1.25">>>> 123 * 2      # int object
+246                </code>
+                <br>
+                <code class="python"  style="font-size: 1.1em; line-height: 1.25">>>> 123.456 * 2  # float object
+246.912                </code>
+                <br>
+                <code class="python"  style="font-size: 1.1em; line-height: 1.25">>>> "abc" * 2    # str object
+"abcabc"                </code>
+                <br>
+                <code class="python"  style="font-size: 1.1em; line-height: 1.25">>>> Foo()    # custom object</code>
+<code  style="font-size: 0.9em; line-height: 1.25">
+
+                </code>
+            </pre>
+        </section>
+        <section id="typing-basicsx2-all0">
+            <pre>
+                <code class="python"  style="font-size: 1.1em; line-height: 1.25">>>> 123 * 2      # int object
+246                </code>
+                <br>
+                <code class="python"  style="font-size: 1.1em; line-height: 1.25">>>> 123.456 * 2  # float object
+246.912                </code>
+                <br>
+                <code class="python"  style="font-size: 1.1em; line-height: 1.25">>>> "abc" * 2    # str object
+"abcabc"                </code>
+                <br>
+                <code class="python "  style="font-size: 1.1em; line-height: 1.25">>>> Foo() * 2    # custom object</code>
+<code  style="font-size: 0.95em; line-height: 1.25">Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+TypeError: unsupported operand type(s) for *: 'Foo' and 'int'</code>
+            </pre>
+        </section>
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
                 <div style="font-size: 200%"></div>
             </div>
