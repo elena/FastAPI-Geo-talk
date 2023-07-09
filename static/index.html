@@ -16,7 +16,6 @@
         .subtext {
             font-size: 85%
         }
-
     </style>
 </head>
 <body>
@@ -421,7 +420,32 @@ TypeError: unsupported operand type(s) for *: 'Foo' and 'int'</code>
         </section>
 
 
+        <section id="typing-strictly-validate">
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
+                <em>But I want strictly validate my <code>types</code> ...</em>
+            </div>
+            Builtins:
+            <pre style="font-size: 0.85em">
+typing
+typeddict
+dataclass</pre>
+            Community:
+            <pre style="font-size: 0.85em">
+alecthomas/voluptuous
+python-attrs/attrs
+keleshev/schema
+pyeve/cerberus
+Pylons/colander
+... </pre>
+            <aside class="notes">
+                Pydantic is a Python library that provides an easy and convenient way to validate and manipulate data.
+                Something to do with serialisation.
+            <pre style="padding: 30px 0">
+                Python 3.0: Annotations/Hints (PEP484)
+                <code class="python">import typing</code>
             </pre>
+
+            </aside>
         </section>
 
         <section id="title-pydantic"  data-background="graphics/github_pydantic.png">
@@ -449,35 +473,48 @@ class MyPydantic(BaseModel):
                 Something to do with serialisation.
             </aside>
         </section>
-        <section id="typing-basicsx2-all0">
-            <pre>
-                <code class="python"  style="font-size: 1.1em; line-height: 1.25">>>> 123 * 2      # int object
-246                </code>
-                <br>
-                <code class="python"  style="font-size: 1.1em; line-height: 1.25">>>> 123.456 * 2  # float object
-246.912                </code>
-                <br>
-                <code class="python"  style="font-size: 1.1em; line-height: 1.25">>>> "abc" * 2    # str object
-"abcabc"                </code>
-                <br>
-                <code class="python "  style="font-size: 1.1em; line-height: 1.25">>>> Foo() * 2    # custom object</code>
-<code  style="font-size: 0.95em; line-height: 1.25">Traceback (most recent call last):
-  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
-TypeError: unsupported operand type(s) for *: 'Foo' and 'int'</code>
+
+        <section id="pydantic-validation-basic-data">
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
+                Type checking in Pydantic:
+            </div>
+
+            <pre style="padding: 30px 0;  width: fit-content">
+                <code class="python"  style="font-size: 1.2em; line-height: 1.25; ">
+my_data = {
+  "my_int": 123,
+  "my_float": 123.456,
+  "my_str": "abc",
+  "my_bool": True,
+}
+                </code>
             </pre>
         </section>
+
+        <section id="pydantic-validation-custom">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-                <div style="font-size: 200%"></div>
+                Type checking in Pydantic:
             </div>
+            <pre>
+                <code class="python"  style="font-size: 1.1em; line-height: 1.25; ">from pydantic import BaseModel
+
+class Foo(BaseModel):
+    baz: str
+
+class MyPydantic(BaseModel):
+    my_int: int
+    my_float: float
+    my_str: str
+    my_bool: bool
+    my_foo: Foo
+                </code>
+            </pre>
         </section>
-        <section id="pydantic-validation-basic">
-            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-                <div style="font-size: 200%"></div>
-            </div>
-        </section>
+
+
         <section id="pydantic-validation-Literal">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-                <div style="font-size: 200%"></div>
+                <div style="font-size: 200%">Yo</div>
             </div>
         </section>
         <section id="pydantic-validation-models-geopoints">
