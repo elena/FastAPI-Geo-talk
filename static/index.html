@@ -572,25 +572,42 @@ MyPydantic(my_int=123, my_float=123.456, my_str='abc', my_bool=True, my_list=[1,
             </pre>
         </section>
 
-
-
-        <section id="pydantic-validation-custom">
-            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-                Type checking in Pydantic:
-            </div>
+        <section id="pydantic-validation-bad-data">
             <pre>
-                <code class="python"  style="font-size: 1.1em; line-height: 1.25; ">from pydantic import BaseModel
+                <code class="python code-normal width-fit" >>>> my_funky_data = {
+...     "my_str": "a string",
+...     "my_int": "a string",
+...     "my_float": "a string",
+...     "my_bool": "a string",
+...     "my_list": "a string",
+...     "my_class": "a string",                                                                                               .
+... }
+>>> MyPydantic(**my_funky_data)
 
-class Foo(BaseModel):
-    baz: str
-
-class MyPydantic(BaseModel):
-    my_int: int
-    my_float: float
-    my_str: str
-    my_bool: bool
-    my_foo: Foo
-                </code>
+</code>
+            </pre>
+        </section>
+        <section id="pydantic-validation-bad-data-tracebook">
+            <pre style="margin-left: -80px">
+                <code class="python code-smaller width-fit" >>>> MyPydantic(**my_funky_data)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/elena/.local/lib/python3.11/site-packages/pydantic/main.py", line 150, in __init__
+    __pydantic_self__.__pydantic_validator__.validate_python(data, self_instance=__pydantic_self__)
+pydantic_core._pydantic_core.ValidationError: 4 validation errors for MyPydantic
+my_int
+  Input should be a valid integer, unable to parse string as an integer [type=int_parsing, input_value='a string', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.1.2/v/int_parsing
+my_float
+  Input should be a valid number, unable to parse string as a number [type=float_parsing, input_value='a string', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.1.2/v/float_parsing
+my_bool
+  Input should be a valid boolean, unable to interpret input [type=bool_parsing, input_value='a string', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.1.2/v/bool_parsing
+my_class
+  Input should be a valid dictionary or instance of Foo [type=model_type, input_value='a string', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.1.2/v/model_type
+</code>
             </pre>
         </section>
 
