@@ -16,6 +16,10 @@
         .subtext {
             font-size: 85%
         }
+        .code-smaller {
+            font-size: 0.75em;
+            line-height: 1.05em;
+        }
         .code-small {
             margin-top: 15px;
         }
@@ -397,11 +401,11 @@ async def root(term: str = None):
 
         <section id="typing-basics-0">
             <pre>
+                <code class="python code-small">>>> "abc"           # str object
+                </code>
                 <code class="python code-small">>>> 123             # int object
                 </code>
                 <code class="python code-small">>>> 123.456         # float object
-                </code>
-                <code class="python code-small">>>> "abc"           # str object
                 </code>
                 <code class="python code-small">>>> [1, 2, 3]       # list object
                 </code>
@@ -416,12 +420,12 @@ async def root(term: str = None):
         </section>
         <section id="typing-basicsx2-all">
             <pre>
+                <code class="python code-small">>>> "abc"     * 2   # str object
+"abcabc"                </code>
                 <code class="python code-small">>>> 123       * 2   # int object
 246                </code>
                 <code class="python code-small">>>> 123.456   * 2   # float object
 246.912                </code>
-                <code class="python code-small">>>> "abc"     * 2   # str object
-"abcabc"                </code>
                 <code class="python code-small">>>> [1, 2, 3] * 2   # list object
 [1, 2, 3, 1, 2, 3]</code>
                 <code class="python code-small">>>> True      * 2   # bool object
@@ -477,9 +481,9 @@ Pylons/colander
 
 
 class MyPydantic(BaseModel):
+    my_str: str
     my_int: int
     my_float: float
-    my_str: str
     my_bool: bool
 
                 </code>
@@ -498,9 +502,9 @@ from typing import List
 
 
 class MyPydantic(BaseModel):
+    my_str: str
     my_int: int
     my_float: float
-    my_str: str
     my_bool: bool
     my_list: List[int]
                 </code>
@@ -515,9 +519,9 @@ class Foo(BaseModel):
     baz: str
 
 class MyPydantic(BaseModel):
+    my_str: str
     my_int: int
     my_float: float
-    my_str: str
     my_bool: bool
     my_list: List[int]
     my_custom: Foo  </code>
@@ -526,42 +530,42 @@ class MyPydantic(BaseModel):
 
         <section id="pydantic-validation-basic-data">
             <pre>
-                <code class="python code-small width-fit" >>>> my_data = {
+                <code class="python code-normal width-fit" >>>> my_data = {
+...     "my_str": "abc",
 ...     "my_int": 123,
 ...     "my_float": 123.456,
-...     "my_str": "abc",
 ...     "my_bool": True,
 ...     "my_list": [1, 2, 3],                                                                                                      .
-...     "my_custom": Foo(baz="qux"),
+...     "my_custom": {"baz": "qux"},
 ... }
 
 
 </code>
             </pre>
         </section>
-        <section id="pydantic-validation-splat-kwargs">
+        <section id="pydantic-validation-kwargs">
             <pre>
-                <code class="python code-small width-fit" >>>> my_data = {
+                <code class="python code-normal width-fit" >>>> my_data = {
+...     "my_str": "abc",
 ...     "my_int": 123,
 ...     "my_float": 123.456,
-...     "my_str": "abc",
 ...     "my_bool": True,
 ...     "my_list": [1, 2, 3],
-...     "my_custom": Foo(baz="qux"),                                                                                             .
+...     "my_custom": {"baz": "qux"},                                                                                            .
 ... }
 >>> MyPydantic(**my_data)
                 </code>
             </pre>
         </section>
-        <section id="pydantic-validation-splat-kwargs">
+        <section id="pydantic-validation-kwargs-obj">
             <pre>
-                <code class="python code-small width-fit" >>>> my_data = {
+                <code class="python code-normal width-fit" >>>> my_data = {
+...     "my_str": "abc",
 ...     "my_int": 123,
 ...     "my_float": 123.456,
-...     "my_str": "abc",
 ...     "my_bool": True,
 ...     "my_list": [1, 2, 3],
-...     "my_custom": Foo(baz="qux"),
+...     "my_custom": {"baz": "qux"},
 ... }
 >>> MyPydantic(**my_data)
 MyPydantic(my_int=123, my_float=123.456, my_str='abc', my_bool=True, my_list=[1, 2, 3])</code>
