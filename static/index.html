@@ -529,6 +529,7 @@ class MyPydantic(BaseModel):
         </section>
 
         <section id="pydantic-validation-basic-data">
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Cast objects</div>
             <pre>
                 <code class="python code-normal width-fit" >>>> my_data = {
 ...     "my_str": "abc",
@@ -544,6 +545,7 @@ class MyPydantic(BaseModel):
             </pre>
         </section>
         <section id="pydantic-validation-kwargs">
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Cast objects</div>
             <pre>
                 <code class="python code-normal width-fit" >>>> my_data = {
 ...     "my_str": "abc",
@@ -558,6 +560,7 @@ class MyPydantic(BaseModel):
             </pre>
         </section>
         <section id="pydantic-validation-kwargs-obj">
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Cast objects</div>
             <pre>
                 <code class="python code-normal width-fit" >>>> my_data = {
 ...     "my_str": "abc",
@@ -573,6 +576,7 @@ MyPydantic(my_int=123, my_float=123.456, my_str='abc', my_bool=True, my_list=[1,
         </section>
 
         <section id="pydantic-validation-bad-data">
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Rubbish Data</div>
             <pre>
                 <code class="python code-normal width-fit" >>>> my_funky_data = {
 ...     "my_str": "a string",
@@ -587,13 +591,11 @@ MyPydantic(my_int=123, my_float=123.456, my_str='abc', my_bool=True, my_list=[1,
 </code>
             </pre>
         </section>
-        <section id="pydantic-validation-bad-data-tracebook">
-            <pre style="margin-left: -80px">
+        <section id="pydantic-validation-bad-data-traceback">
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Rubbish Data is nope</div>
+            <pre>
                 <code class="python code-smaller width-fit" >>>> MyPydantic(**my_funky_data)
 Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
-  File "/home/elena/.local/lib/python3.11/site-packages/pydantic/main.py", line 150, in __init__
-    __pydantic_self__.__pydantic_validator__.validate_python(data, self_instance=__pydantic_self__)
 pydantic_core._pydantic_core.ValidationError: 4 validation errors for MyPydantic
 my_int
   Input should be a valid integer, unable to parse string as an integer [type=int_parsing, input_value='a string', input_type=str]
@@ -611,12 +613,63 @@ my_class
             </pre>
         </section>
 
-
         <section id="pydantic-validation-Literal">
-            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-                <div style="font-size: 200%">Yo</div>
-            </div>
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;"><code>Literal</code> is good</div>
+            <pre>
+                <code class="python code-small width-fit">from pydantic import BaseModel
+from typing import Literal
+
+StateTerritory = Literal["ACT", "NSW", "NT", "OT", "QLD", "SA", "TAS", "VIC", "WA"]
+
+class Address(BaseModel):
+    street_number: str
+    street_name: str
+    locality: str
+    postcode: str
+    state: Literal[StateTerritory]
+
+  </code>
+            </pre>
         </section>
+        <section id="pydantic-validation-literal-address">
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;"><code>Literal</code> is good</div>
+            <pre>
+                <code class="python code-small width-fit" >>>> address_data = {
+...     "street_number": "101",
+...     "street_name": "North Terrace",
+...     "locality": "Adelaide",
+...     "postcode": "5000",
+...     "state": "SOME RANDOM THING NOT A STATE"                                                                                    .
+... }
+>>> Address(**address_data)
+
+
+
+
+
+</code>
+            </pre>
+        </section>
+        <section id="pydantic-validation-literal-address-traceback">
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;"><code>Literal</code> is good</div>
+            <pre>
+                <code class="python code-small width-fit" >>>> address_data = {
+...     "street_number": "101",
+...     "street_name": "North Terrace",
+...     "locality": "Adelaide",
+...     "postcode": "5000",
+...     "state": "SOME RANDOM THING NOT A STATE"
+... }
+>>> Address(**address_data)
+Traceback (most recent call last):
+pydantic_core._pydantic_core.ValidationError: 1 validation error for Address
+state
+  Input should be 'ACT', 'NSW', 'NT', 'OT', 'QLD', 'SA', 'TAS', 'VIC' or 'WA' [type=literal_error, input_value='SOME RANDOM THING NOT A STATE', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.1.2/v/literal_error
+</code>
+            </pre>
+        </section>
+
         <section id="pydantic-validation-models-geopoints">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
                 <div style="font-size: 200%"></div>
