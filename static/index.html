@@ -486,7 +486,7 @@ class MyPydantic(BaseModel):
     my_int: int
     my_float: float
     my_bool: bool
-
+    my_list: list
                 </code>
             </pre>
             <aside class="notes">
@@ -494,7 +494,7 @@ class MyPydantic(BaseModel):
                 Something to do with serialisation.
             </aside>
         </section>
-        <section id="pydantic-validation-basic-1">
+        <section id="pydantic-validation-basic-2">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Pydantic BaseModel</div>
             <pre>
                 <code class="python code-small">from pydantic import BaseModel
@@ -512,7 +512,7 @@ class MyPydantic(BaseModel):
                 </code>
             </pre>
         </section>
-        <section id="pydantic-validation-basic-2">
+        <section id="pydantic-validation-basic-3">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Pydantic BaseModel</div>
             <pre>
                 <code class="python code-small">from pydantic import BaseModel
@@ -674,6 +674,54 @@ state
         </section>
 
         <section id="title-IETF" data-background="graphics/IETF.png"></section>
+
+        <section id="geojson-response-basic">
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;"><code>GeoJSON</code></div>
+            <pre>
+                <code data-trim data-line-numbers="|2|3-5|6-9" class="hljs code-normal">{
+    "type": "Feature",
+    "properties": {
+        "name": "Adelaide Convention Centre"
+    },
+    "geometry": {
+        "type": "Point",
+        "coordinates": [138.59469, -34.92086]
+    }
+
+}
+  </code>
+            </pre>
+        </section>
+
+        <section id="geojson-point">
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Point</div>
+            <img src="graphics/geo/geo_point.png">
+        </section>
+        <section id="geojson-polygon">
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Polygon</div>
+            <img src="graphics/geo/geo_polygon.png">
+        </section>
+        <section id="geojson-multi-polygon">
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Multi-Polygon</div>
+            <img src="graphics/geo/geo_multipolygon.png">
+        </section>
+
+        <section id="pydantic-validation-Literal">
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;"><code>GeoJSON</code></div>
+            <pre>
+                <code class="python code-normal width-fit">class Feature(BaseModel):
+    street_number: str
+    street_name: str
+    locality: str
+    postcode: str
+    state: Literal[StateTerritory]
+
+
+  </code>
+            </pre>
+        </section>
+
+
 
         <section id="pydantic-validation-models-geopoints">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
