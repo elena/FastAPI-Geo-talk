@@ -473,6 +473,7 @@ Pylons/colander
         </section>
 
         <section id="pydantic-validation-basic-0">
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Pydantic BaseModel</div>
             <pre>
                 <code class="python code-small">from pydantic import BaseModel
 
@@ -494,6 +495,7 @@ class MyPydantic(BaseModel):
             </aside>
         </section>
         <section id="pydantic-validation-basic-1">
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Pydantic BaseModel</div>
             <pre>
                 <code class="python code-small">from pydantic import BaseModel
 from typing import List
@@ -511,6 +513,7 @@ class MyPydantic(BaseModel):
             </pre>
         </section>
         <section id="pydantic-validation-basic-2">
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Pydantic BaseModel</div>
             <pre>
                 <code class="python code-small">from pydantic import BaseModel
 from typing import List
@@ -529,7 +532,7 @@ class MyPydantic(BaseModel):
         </section>
 
         <section id="pydantic-validation-basic-data">
-            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Cast objects</div>
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Cast Pydantic Instance</div>
             <pre>
                 <code class="python code-normal width-fit" >>>> my_data = {
 ...     "my_str": "abc",
@@ -545,7 +548,7 @@ class MyPydantic(BaseModel):
             </pre>
         </section>
         <section id="pydantic-validation-kwargs">
-            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Cast objects</div>
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Cast Pydantic Instance</div>
             <pre>
                 <code class="python code-normal width-fit" >>>> my_data = {
 ...     "my_str": "abc",
@@ -560,7 +563,7 @@ class MyPydantic(BaseModel):
             </pre>
         </section>
         <section id="pydantic-validation-kwargs-obj">
-            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Cast objects</div>
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Cast Pydantic Instance</div>
             <pre>
                 <code class="python code-normal width-fit" >>>> my_data = {
 ...     "my_str": "abc",
@@ -621,7 +624,7 @@ from typing import Literal
 
 StateTerritory = Literal["ACT", "NSW", "NT", "OT", "QLD", "SA", "TAS", "VIC", "WA"]
 
-class Address(BaseModel):
+class Feature(BaseModel):
     street_number: str
     street_name: str
     locality: str
@@ -634,14 +637,14 @@ class Address(BaseModel):
         <section id="pydantic-validation-literal-address">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;"><code>Literal</code> is good</div>
             <pre>
-                <code class="python code-small width-fit" >>>> address_data = {
+                <code class="python code-small width-fit" >>>> feature_data = {
 ...     "street_number": "101",
 ...     "street_name": "North Terrace",
 ...     "locality": "Adelaide",
 ...     "postcode": "5000",
 ...     "state": "SOME RANDOM THING NOT A STATE"                                                                                    .
 ... }
->>> Address(**address_data)
+>>> Feature(**feature_data)
 
 
 
@@ -653,14 +656,14 @@ class Address(BaseModel):
         <section id="pydantic-validation-literal-address-traceback">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;"><code>Literal</code> is good</div>
             <pre>
-                <code class="python code-small width-fit" >>>> address_data = {
+                <code class="python code-small width-fit" >>>> feature_data = {
 ...     "street_number": "101",
 ...     "street_name": "North Terrace",
 ...     "locality": "Adelaide",
 ...     "postcode": "5000",
 ...     "state": "SOME RANDOM THING NOT A STATE"
 ... }
->>> Address(**address_data)
+>>> Feature(**feature_data)
 Traceback (most recent call last):
 pydantic_core._pydantic_core.ValidationError: 1 validation error for Address
 state
@@ -669,6 +672,8 @@ state
 </code>
             </pre>
         </section>
+
+        <section id="title-IETF" data-background="graphics/IETF.png"></section>
 
         <section id="pydantic-validation-models-geopoints">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
