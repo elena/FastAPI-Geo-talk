@@ -741,8 +741,33 @@ class GeoJSONFeature(BaseModel):
             </pre>
         </section>
 
+        <section id="pydantic-validation-multipolygon">
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;"><code></code></div>
+            <pre>
+                <code class="python code-normal">
+class MultiPolygon(BaseModel):
+    type: str: "MultiPolygon"
+    coordinates: List[List[List[List[Tuple[float]]]]]
+
+class GeoJSONResponse(BaseModel):
+    type: str = "Feature"
+    properties: Feature
+    geometry: Geometry
+
   </code>
             </pre>
+        </section>
+
+        <section id="geojson-why-we-care">
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
+                <div style="font-size: 200%"></div>
+            </div>
+        </section>
+
+        <section id="geojson-leaflet">
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
+                <div style="font-size: 200%"></div>
+            </div>
         </section>
 
 
