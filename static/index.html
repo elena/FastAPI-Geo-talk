@@ -132,36 +132,13 @@
                 </div>
             </div>
         </section>
-        <section id="where-do-addresses-2" data-background="graphics/background/adelaide-planning.png">
-            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-                <b>Where do addresses come from?</b>
-            </div>
-            <br>
-            <div style="background-color: rgba(0, 0, 0, 0.6); color: #fff; padding: 20px;">
-                <div><i><b>Local Governments</b></i></div>
-                <div><i class="subtext">"LGAs", eg councils<br>
-                    Not always well resourced; don't always have strict standards</i>
-                </div>
-            </div>
-        </section>
+
         <section id="1992" data-background="graphics/background/census.png">
             <div style="font-size: 125%; background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; margin-top: -300px">
                 <b>Australia 1994: <img height="70px" style="top: 20px; margin: -20px 0;" src="/graphics/background/ABS.gif"> Census year</b>
             </div>
         </section>
 
-        <section id="owned-by-states" data-background="graphics/background/states-0.png">
-            <div style="margin-top: 0px; color: rgba(0, 0, 0, 0.85); font-size: 75%;">
-                Not Government, but Government owned
-            </div>
-            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; margin-bottom: 380px; ">
-                <img height="100px" src="/graphics/background/Geoscape_Logo.jpg" />
-                <div style="color: rgba(255,255,255,0.35); font-size: 0.5em; margin: -30px 0 5px 0;"> <em>(formerly: </em>PSMA<em>)</em></div>
-                <h3 style="font-weight: normal; text-transform: none;">Owned by: <b>the States</b></h3>
-            </div>
-        </section>
-
-        <section id="gnaf" data-background="graphics/background/gnaf-0.png"></section>
         <section id="gnaf-monster" data-background="graphics/background/gnaf-1.png">
             <div style="background-color: rgba(0, 0, 0, 0.4); color: #fff; padding: 20px;">
                 <div style="font-size: 100%">G-NAF (2004) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; G-NAF-Core (2022)</div>
@@ -172,7 +149,7 @@
                 <div style="font-size: 200%">Flask</div>
             </div>
         </section>
-        <section id="title-flask-del"  data-background="graphics/github_flask.png">
+        <section data-visibility="hidden" id="title-flask-del"  data-background="graphics/github_flask.png">
             <div style="background-color: rgba(0, 0, 0, 0.6); color: #fff; padding: 20px;">
                 <div style="font-size: 200%"><del>Flask</del></div>
             </div>
@@ -182,8 +159,7 @@
                 <div style="font-size: 200%">Starlette</div>
             </div>
         </section>
-
-        <section id="title-starlette-del"  data-background="graphics/github_starlette.png">
+        <section data-visibility="hidden" id="title-starlette-del"  data-background="graphics/github_starlette.png">
             <div style="background-color: rgba(0, 0, 0, 0.6); color: #fff; padding: 20px;">
                 <div style="font-size: 200%"><del>Starlette</del></div>
             </div>
@@ -425,6 +401,24 @@ async def root(term: str = None):
 
         <section id="typing-bdfl" data-background="graphics/background/bdfl.png"></section>
 
+        <section id="typing-basics-1">
+            <pre>
+                <code class="python code-small">>>> type("abc")
+&lt;class 'str'&gt;</code>
+                <code class="python code-small">>>> type(123)
+&lt;class 'int'&gt;</code>
+                <code class="python code-small">>>> type(123.456)
+&lt;class 'float'&gt;</code>
+                <code class="python code-small">>>> type([1, 2 ,3])
+&lt;class 'list'&gt;</code>
+                <code class="python code-small">>>> type(True)
+&lt;class 'bool'&gt;</code>
+                <code class="python code-small">>>> type(Foo())
+&lt;class '__main__.Foo'&gt;
+
+                </code>
+            </pre>
+        </section>
         <section id="typing-basics-0">
             <pre>
                 <code class="python code-small">>>> "abc"           # str object
@@ -569,7 +563,6 @@ class MyPydantic(BaseModel):
 ...     "my_custom": {"baz": "qux"},
 ... }
 
-
 </code>
             </pre>
         </section>
@@ -616,7 +609,6 @@ MyPydantic(my_int=123, my_float=123.456, my_str='abc', my_bool=True, my_list=[1,
 ...     "my_class": "a string",                                                                                               .
 ... }
 >>> MyPydantic(**my_funky_data)
-
 </code>
             </pre>
         </section>
@@ -706,13 +698,13 @@ state
             <pre>
                 <code data-trim data-line-numbers="|2|3-6|7-10" class="hljs code-normal">{
     "type": "Feature",
-    "properties": {
-        "name": "Adelaide Convention Centre",
-        "is_pyconau_here": True
-    },
     "geometry": {
         "type": "Point",
         "coordinates": [138.59469, -34.92086]
+    },
+    "properties": {
+        "name": "Adelaide Convention Centre",
+        "is_pyconau_here": True
     }
 }
   </code>
