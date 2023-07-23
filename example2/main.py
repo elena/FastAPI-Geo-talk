@@ -3,20 +3,24 @@ Example:
 
 Basic parameter input.
 """
+from typing import Dict, List
 from fastapi import APIRouter
 
 routes_eg2 = APIRouter(prefix="/example2")
 
-show_list = [
+results_list = [
     "abcd",
-    "zabc",
-    "yzab",
-    "xyza",
+    "abc",
+    "ab",
+    "a",
 ]
 
+async def get_results(search_term):
+    return [i for i in results_list if search_term in i]
+
 @routes_eg2.get("/search/")
-async def root(search_term: str = None) -> dict[str, list[str]]:
-    return {"output": [i for i in show_list if search_term in i]}
+async def root(search_term: str = None) -> Dict[str, List[str]]:
+    return {"output": await get_results(search_term)}
 
 
 
@@ -31,5 +35,5 @@ address_list = [
     "12 park rd"
 ]
 @routes_eg2.get("/predict/address/")
-async def root(search_term: str = None) -> dict[str, list[str]]:
+async def root(search_term: str = None) -> Dict[str, List[str]]:
     return {"output": [i for i in address_list if search_term in i]}

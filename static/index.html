@@ -307,79 +307,57 @@ async def root():
 					</code>
 				</pre>
         </section>
-        <section id="eg1-quick=filter">
-            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-                Quick filter
-            </div>
+
+        <section id="eg1-filter-basic">
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Quick filter</div>
+            <input type="text" id="input-filter-basic" placeholder="Quick filter" style="padding: 4px 10px">
+            <div class="code-smaller" style="text-align: left; margin-left: 350px" id="results-filter-basic"></div>
             <pre>
-					<code data-line-numbers="" class="python"  style="font-size: 1.1em; line-height: 1.25">show_list = [
+                <code data-line-numbers="1-6,12-13" class="python code-small">results_list = [
     "abcd",
-    "zabc",
-    "yzab",
-    "xyza",
+    "abc",
+    "ab",
+    "a",
 ]
+
+async def get_results(term):
+    return [i for i in results_list if search_term in i]
 
 @app.get("/search/")
-async def root(term: str = None):
-    results = filter(lambda x: term in x, show_list)
-    return {"output": results}
+async def root(term: str = None) -> Dict[str, List[str]]:
+    return {"output": await get_results(term)}
 					</code>
 				</pre>
         </section>
-        <section id="eg1-quick=filter-results">
-            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-                Quick filter
-            </div>
+        <section id="eg1-filter-predictor">
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Quick filter</div>
+            <input type="text" id="input-predictor" placeholder="Address finder" style="padding: 4px 10px">
+            <div class="code-smaller" style="text-align: left; margin-left: 350px" id="results-predictor"></div>
             <pre>
-					<code data-line-numbers="" class="python"  style="font-size: 1.1em; line-height: 1.25">show_list = [
-    "abcd",
-    "zabc",
-    "yzab",
-    "xyza",
+                <code data-line-numbers="" class="python code-small">address_list = [
+    "1 p g love av",
+    "1 paanja av",
+    "1 par cres",
+    "1 park av",
+    "1 park range way",
+    "1 park rd",
+    "2 park rd"
+    "12 park rd"
 ]
 
-@app.get("/search/")
-async def root(term: str = None):
-    results = filter(lambda x: term in x, show_list)
-    return {"output": results}
+@routes_eg2.get("/predict/address/")
+async def root(term: str = None) -> dict[str, list[str]]:
+    return {"output": [i for i in address_list if term in i]}
 					</code>
 				</pre>
-        </section>
-
-        <section id="eg1-code-hello-params-step">
-            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-                Quick filter
-            </div>
-            <pre>
-					<code data-line-numbers="|1-6|9|10|" class="python"  style="font-size: 1.1em; line-height: 1.25">show_list = [
-    "abcd",
-    "zabc",
-    "yzab",
-    "xyza",
-]
-
-@ppp.get("/search/")
-async def root(term: str = None):
-    results = filter(lambda x: term in x, show_list)
-    return {"output": results}
-					</code>
-				</pre>
-        </section>
-
-        <section id="eg2-code-park">
-            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-                <div style="font-size: 200%"></div>
-            </div>
-        </section>
-        <section id="eg2-sawtooth">
-            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-                <div style="font-size: 200%"></div>
-            </div>
+            <aside class="notes">
+                * parsing
+                * update the data daily
+                * FastAPI excellent use case
+            </aside>
         </section>
         <section id="eg2-predictive">
-            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-                <div style="font-size: 200%"></div>
-            </div>
+            <iframe data-src="https://demo.geoscape.com.au/predictive/index.html" width="700px" height="500px"></iframe>
         </section>
 
         <section id="title-pydantic-0">
@@ -918,9 +896,32 @@ class GeoJSONResponse(BaseModel):
     <script src="plugin/notes/notes.js"></script>
     <script src="plugin/markdown/markdown.js"></script>
     <script src="plugin/highlight/highlight.js"></script>
-    <script src="https://unpkg.com/htmx.org@1.9.2"
-            integrity="sha384-L6OqL9pRWyyFU3+/bjdSri+iIphTN/bvYyM37tICVyOJkWZLpP2vGn6VUEXgzg6h"
-            crossorigin="anonymous"></script>
+    <script>
+        const filterInput = document.getElementById('input-filter-basic');
+        const filterResults = document.getElementById('results-filter-basic');
+        filterInput.addEventListener('input', () => {handleInput('/example2/search/', filterInput.value.trim(), filterResults);});
+
+        const predictInput = document.getElementById('input-predictor');
+        const predictResults = document.getElementById('results-predictor');
+        predictInput.addEventListener('input', () => {handleInput('/example2/predict/address/', predictInput.value.trim(), predictResults);});
+
+        function handleInput(path, input, result) {
+            result.innerHTML = '';
+            if (input.length > 0) {
+                fetch(`${path}?search_term=${encodeURIComponent(input)}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data && Array.isArray(data.output)) {
+                            data.output.forEach(suggestion => {
+                                const div = document.createElement('div');
+                                div.textContent = suggestion;
+                                result.appendChild(div);
+                            });
+                        }
+                    });
+            }
+        }
+    </script>
     <script>
         // More info about initialization & config:
         // - https://revealjs.com/initialization/
