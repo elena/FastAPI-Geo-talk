@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Map: GeoJSON Point</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+          crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin=""></script>
+    <style>#map { height: 900px; }</style>
+</head>
+<body>
+
+<div id="map"></div>
+</body>
+<script>
+    // Example: Leaflet
+    var map = L.map('map').setView([-34.92106310640921, 138.59442035534688], 18);
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    var geojsonResponse = {
+        "type": "FeatureCollection",
+        "features": [
+            {
+                "type": "Feature",
+                "properties": {
+                    "stateTerritory": "SA",
+                    "addressId": "GASA_721199769",
+                    "jurisdictionId": "1352502-0-0-0-1",
+                    "addressRecordType": "PRIMARY",
+                    "aliasPrincipal": "PRINCIPAL",
+                    "geoFeature": "PROPERTY CENTROID",
+                    "cadastralIdentifier": "D/128908/Q/605",
+                    "formattedAddress": "LOT 603 NORTH TCE, ADELAIDE SA 5000",
+                    "localityName": "ADELAIDE",
+                    "postcode": "5000",
+                    "streetName": "NORTH",
+                    "streetType": "TCE",
+                    "streetTypeDescription": "TERRACE",
+                    "lotIdentifier": "603",
+                    "localityNeighbour": [
+                        "DULWICH",
+                        "EASTWOOD",
+                        "GILBERTON",
+                        "GLENSIDE",
+                        "HACKNEY",
+                        "HINDMARSH",
+                        "KENT TOWN",
+                        "KESWICK TERMINAL",
+                        "MILE END",
+                        "NORTH ADELAIDE",
+                        "PARKSIDE",
+                        "ROSE PARK",
+                        "THEBARTON",
+                        "UNLEY",
+                        "WAYVILLE"
+                    ],
+                    "localityAlias": [
+                        "KENT TOWN",
+                        "KESWICK TERMINAL",
+                        "MILE END",
+                        "NTH ADELAIDE",
+                        "THEBARTON"
+                    ],
+                    "localityId": "loc88df4c1f6c87",
+                    "streetLocalityId": "SA549261",
+                    "streetAlias": []
+                },
+                "geometry": {
+                    "coordinates": [
+                        138.59380879,
+                        -34.92043836
+                    ],
+                    "type": "Point"
+                },
+                "messages": [],
+                "matchType": "Primary Address",
+                "matchDistance": 0.0
+            },
+            {
+                "type": "Feature",
+                "properties": {
+                    "stateTerritory": "SA",
+                    "addressId": "add837431aabccd",
+                    "jurisdictionId": "603114-0-0-0-1",
+                    "addressRecordType": "PRIMARY",
+                    "aliasPrincipal": "PRINCIPAL",
+                    "geoFeature": "PROPERTY CENTROID",
+                    "cadastralIdentifier": "D/128908/Q/604",
+                    "formattedAddress": "LOT 1 NORTH TCE, ADELAIDE SA 5000",
+                    "localityName": "ADELAIDE",
+                    "postcode": "5000",
+                    "streetName": "NORTH",
+                    "streetType": "TCE",
+                    "streetTypeDescription": "TERRACE",
+                    "lotIdentifier": "1",
+                    "localityNeighbour": [
+                        "DULWICH",
+                        "EASTWOOD",
+                        "GILBERTON",
+                        "GLENSIDE",
+                        "HACKNEY",
+                        "HINDMARSH",
+                        "KENT TOWN",
+                        "KESWICK TERMINAL",
+                        "MILE END",
+                        "NORTH ADELAIDE",
+                        "PARKSIDE",
+                        "ROSE PARK",
+                        "THEBARTON",
+                        "UNLEY",
+                        "WAYVILLE"
+                    ],
+                    "localityAlias": [
+                        "KENT TOWN",
+                        "KESWICK TERMINAL",
+                        "MILE END",
+                        "NTH ADELAIDE",
+                        "THEBARTON"
+                    ],
+                    "localityId": "loc88df4c1f6c87",
+                    "streetLocalityId": "SA549261",
+                    "streetAlias": []
+                },
+                "geometry": {
+                    "coordinates": [
+                        138.59352127,
+                        -34.92156008
+                    ],
+                    "type": "Point"
+                },
+                "messages": [],
+                "matchType": "Primary Address",
+                "matchDistance": 0.0
+            },
+            {
+                "type": "Feature",
+                "properties": {
+                    "stateTerritory": "SA",
+                    "addressId": "GASA_424196378",
+                    "addressRecordType": "PRIMARY",
+                    "aliasPrincipal": "PRINCIPAL",
+                    "geoFeature": "PROPERTY CENTROID",
+                    "cadastralIdentifier": "D/128908/Q/604",
+                    "formattedAddress": "GOVERNMENT HOUSE LOT 1 NORTH TCE, ADELAIDE SA 5000",
+                    "localityName": "ADELAIDE",
+                    "postcode": "5000",
+                    "streetName": "NORTH",
+                    "siteName": "GOVERNMENT HOUSE",
+                    "streetType": "TCE",
+                    "streetTypeDescription": "TERRACE",
+                    "lotIdentifier": "1",
+                    "localityNeighbour": [
+                        "DULWICH",
+                        "EASTWOOD",
+                        "GILBERTON",
+                        "GLENSIDE",
+                        "HACKNEY",
+                        "HINDMARSH",
+                        "KENT TOWN",
+                        "KESWICK TERMINAL",
+                        "MILE END",
+                        "NORTH ADELAIDE",
+                        "PARKSIDE",
+                        "ROSE PARK",
+                        "THEBARTON",
+                        "UNLEY",
+                        "WAYVILLE"
+                    ],
+                    "localityAlias": [
+                        "KENT TOWN",
+                        "KESWICK TERMINAL",
+                        "MILE END",
+                        "NTH ADELAIDE",
+                        "THEBARTON"
+                    ],
+                    "localityId": "loc88df4c1f6c87",
+                    "streetLocalityId": "SA549261",
+                    "streetAlias": []
+                },
+                "geometry": {
+                    "coordinates": [
+                        138.59352127,
+                        -34.92156008
+                    ],
+                    "type": "Point"
+                },
+                "messages": [],
+                "matchType": "Primary Address",
+                "matchDistance": 0.0
+            },
+            {
+                "type": "Feature",
+                "properties": {
+                    "stateTerritory": "SA",
+                    "addressId": "add1355920ce724",
+                    "jurisdictionId": "633698-0-0-0-1",
+                    "addressRecordType": "PRIMARY",
+                    "aliasPrincipal": "PRINCIPAL",
+                    "geoFeature": "PROPERTY CENTROID",
+                    "cadastralIdentifier": "D/128908/Q/604",
+                    "formattedAddress": "LOT 1 NORTH TCE, ADELAIDE SA 5000",
+                    "localityName": "ADELAIDE",
+                    "postcode": "5000",
+                    "streetName": "NORTH",
+                    "streetType": "TCE",
+                    "streetTypeDescription": "TERRACE",
+                    "lotIdentifier": "1",
+                    "localityNeighbour": [
+                        "DULWICH",
+                        "EASTWOOD",
+                        "GILBERTON",
+                        "GLENSIDE",
+                        "HACKNEY",
+                        "HINDMARSH",
+                        "KENT TOWN",
+                        "KESWICK TERMINAL",
+                        "MILE END",
+                        "NORTH ADELAIDE",
+                        "PARKSIDE",
+                        "ROSE PARK",
+                        "THEBARTON",
+                        "UNLEY",
+                        "WAYVILLE"
+                    ],
+                    "localityAlias": [
+                        "KENT TOWN",
+                        "KESWICK TERMINAL",
+                        "MILE END",
+                        "NTH ADELAIDE",
+                        "THEBARTON"
+                    ],
+                    "localityId": "loc88df4c1f6c87",
+                    "streetLocalityId": "SA549261",
+                    "streetAlias": []
+                },
+                "geometry": {
+                    "coordinates": [
+                        138.59352048,
+                        -34.92158711
+                    ],
+                    "type": "Point"
+                },
+                "messages": [],
+                "matchType": "Primary Address",
+                "matchDistance": 0.0
+            }
+        ],
+        "messages": [],
+        "attribution": "NOTICE All rights reserved. Use of this data is subject to the Geoscape Developer Terms and Conditions (https://geoscape.com.au/legal/geoscape-developer-terms/)",
+        "query": [
+            138.59547017308628,
+            -34.92023796957399
+        ],
+        "requestTimeStamp": 1690175498.646598,
+        "requestDateTime": "2023-07-24T05:11:38.646616"
+    }
+
+    var geojsonMarkerOptions = {
+        radius: 12,
+        fillColor: "#ff7800",
+        color: "#666",
+        weight: 0,
+        opacity: 1,
+        fillOpacity: 0.7
+    };
+    var marker = L.marker([-34.92016310640921, 138.59562035534688]).addTo(map);
+
+    L.geoJSON(geojsonResponse, {
+        pointToLayer: function (feature, latlng) {
+            return L.circleMarker(latlng, geojsonMarkerOptions);
+        },
+    }).addTo(map);
+</script>
+</body>
+</html>

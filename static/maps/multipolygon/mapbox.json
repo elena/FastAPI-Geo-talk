@@ -1,0 +1,536 @@
+{
+  "version": 8,
+  "name": "geoscape-light",
+  "sources": {
+    "basemap": {
+      "type": "vector",
+      "tiles": [
+        "https://api.psma.com.au/beta/v1/maps/basemap/{z}/{x}/{y}.pbf"
+      ],
+      "minZoom": 0,
+      "maxZoom": 22
+    }
+  },
+  "glyphs": "https://api.psma.com.au/beta/v1/maps/stylesheets/fonts/{fontstack}/{range}.pbf",
+  "layers": [
+    {
+      "id": "land",
+      "type": "background",
+      "layout": {},
+      "paint": {
+        "background-color": "hsl(40, 0%, 90%)"
+      }
+    },
+    {
+      "id": "greenspace",
+      "type": "fill",
+      "source": "basemap",
+      "source-layer": "greenspace",
+      "minzoom": 5,
+      "maxzoom": 22,
+      "filter": [
+        "all"
+      ],
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "fill-antialias": true,
+        "fill-color": "hsl(129,54%,95%)",
+        "fill-opacity": [
+          "interpolate",
+          [
+            "linear"
+          ],
+          [
+            "zoom"
+          ],
+          5,
+          0.1,
+          10,
+          0.5,
+          15,
+          0.7
+        ],
+        "fill-outline-color": "hsl(129,54%,85%)"
+      }
+    },
+    {
+      "id": "waterways",
+      "type": "line",
+      "source": "basemap",
+      "source-layer": "waterways",
+      "minzoom": 7,
+      "maxzoom": 22,
+      "filter": [
+        "all"
+      ],
+      "layout": {
+        "line-cap": [
+          "step",
+          [
+            "zoom"
+          ],
+          "butt",
+          14,
+          "round"
+        ],
+        "line-join": [
+          "step",
+          [
+            "zoom"
+          ],
+          "miter",
+          14,
+          "round"
+        ],
+        "visibility": "visible"
+      },
+      "paint": {
+        "line-width": [
+          "interpolate",
+          [
+            "exponential",
+            1.5
+          ],
+          [
+            "zoom"
+          ],
+          12,
+          [
+            "match",
+            [
+              "get",
+              "hydro_class"
+            ],
+            [
+              "RIVER"
+            ],
+            0.75,
+            [
+              "CREEK",
+              "WATERWAY"
+            ],
+            0.1,
+            0
+          ],
+          16,
+          [
+            "match",
+            [
+              "get",
+              "hydro_class"
+            ],
+            [
+              "RIVER"
+            ],
+            4,
+            [
+              "CREEK"
+            ],
+            2.5,
+            [
+              "WATERWAY"
+            ],
+            1,
+            0.5
+          ],
+          20,
+          [
+            "match",
+            [
+              "get",
+              "hydro_class"
+            ],
+            [
+              "RIVER"
+            ],
+            32,
+            [
+              "CREEK"
+            ],
+            26,
+            [
+              "WATERWAY"
+            ],
+            18,
+            10
+          ]
+        ],
+        "line-color": "rgba(202, 221, 255, 1)",
+        "line-opacity": 1
+      }
+    },
+    {
+      "id": "water",
+      "type": "fill",
+      "source": "basemap",
+      "source-layer": "water",
+      "minzoom": 0,
+      "maxzoom": 22,
+      "filter": [
+        "all"
+      ],
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "fill-antialias": true,
+        "fill-color": "rgba(202, 221, 255, 1)",
+        "fill-opacity": 1
+      }
+    },
+    {
+      "id": "roads",
+      "type": "line",
+      "source": "basemap",
+      "source-layer": "roads",
+      "filter": [
+        "all"
+      ],
+      "layout": {
+        "line-cap": [
+          "step",
+          [
+            "zoom"
+          ],
+          "butt",
+          14,
+          "round"
+        ],
+        "line-join": [
+          "step",
+          [
+            "zoom"
+          ],
+          "miter",
+          14,
+          "round"
+        ]
+      },
+      "paint": {
+        "line-width": [
+          "interpolate",
+          [
+            "exponential",
+            1.5
+          ],
+          [
+            "zoom"
+          ],
+          5,
+          [
+            "match",
+            [
+              "get",
+              "hierarchy"
+            ],
+            [
+              "NATIONAL OR STATE HIGHWAY",
+              "ARTERIAL ROAD",
+              "SUB-ARTERIAL ROAD"
+            ],
+            0.75,
+            [
+              "COLLECTOR ROAD",
+              "LOCAL ROAD"
+            ],
+            0.1,
+            0
+          ],
+          13,
+          [
+            "match",
+            [
+              "get",
+              "hierarchy"
+            ],
+            [
+              "NATIONAL OR STATE HIGHWAY",
+              "ARTERIAL ROAD",
+              "SUB-ARTERIAL ROAD"
+            ],
+            4,
+            [
+              "COLLECTOR ROAD",
+              "LOCAL ROAD"
+            ],
+            2.5,
+            [
+              "ACCESS ROAD",
+              "VEHICLE TRACK"
+            ],
+            1,
+            0.5
+          ],
+          18,
+          [
+            "match",
+            [
+              "get",
+              "hierarchy"
+            ],
+            [
+              "NATIONAL OR STATE HIGHWAY",
+              "ARTERIAL ROAD",
+              "SUB-ARTERIAL ROAD"
+            ],
+            32,
+            [
+              "COLLECTOR ROAD",
+              "LOCAL ROAD"
+            ],
+            26,
+            [
+              "ACCESS ROAD",
+              "VEHICLE TRACK"
+            ],
+            18,
+            10
+          ]
+        ],
+        "line-color": [
+          "match",
+          [
+            "get",
+            "hierarchy"
+          ],
+          [
+            "LOCAL ROAD",
+            "ACCESS ROAD",
+            "VEHICLE TRACK"
+          ],
+          "hsl(38, 55%, 95%)",
+          "hsl(38, 55%, 100%)"
+        ]
+      }
+    },
+    {
+      "id": "places",
+      "type": "line",
+      "source": "basemap",
+      "source-layer": "place_lines",
+      "minzoom": 0,
+      "maxzoom": 22,
+      "filter": [
+        "all"
+      ],
+      "layout": {
+        "visibility": "visible",
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#808080",
+        "line-width": 2,
+        "line-opacity": 0.3
+      }
+    },
+    {
+      "id": "place-labels",
+      "type": "symbol",
+      "source": "basemap",
+      "source-layer": "place_points",
+      "minzoom": 0,
+      "filter": [
+        "all"
+      ],
+      "layout": {
+        "text-size": [
+          "interpolate",
+          [
+            "linear"
+          ],
+          [
+            "zoom"
+          ],
+          10,
+          9,
+          18,
+          14
+        ],
+        "text-max-angle": 30,
+        "text-font": [
+          "Chakra Petch Regular",
+          "Arial Unicode MS Regular"
+        ],
+        "symbol-placement": "point",
+        "text-padding": 1,
+        "text-rotation-alignment": "map",
+        "text-pitch-alignment": "viewport",
+        "text-field": [
+          "get",
+          "place_name"
+        ],
+        "text-letter-spacing": 0.01,
+        "visibility": "visible",
+        "symbol-spacing": 250
+      },
+      "paint": {
+        "text-color": "#000000",
+        "text-halo-color": "hsla(0, 0%, 0%, 0)",
+        "text-halo-width": 1,
+        "text-opacity": 0.3
+      }
+    },
+    {
+      "id": "road-labels",
+      "type": "symbol",
+      "source": "basemap",
+      "source-layer": "roads",
+      "filter": [
+        "all"
+      ],
+      "layout": {
+        "text-size": [
+          "interpolate",
+          [
+            "linear"
+          ],
+          [
+            "zoom"
+          ],
+          10,
+          [
+            "match",
+            [
+              "get",
+              "hierarchy"
+            ],
+            [
+              "NATIONAL OR STATE HIGHWAY",
+              "ARTERIAL ROAD",
+              "SUB-ARTERIAL ROAD",
+              "COLLECTOR ROAD",
+              "LOCAL ROAD"
+            ],
+            10,
+            9
+          ],
+          18,
+          [
+            "match",
+            [
+              "get",
+              "hierarchy"
+            ],
+            [
+              "NATIONAL OR STATE HIGHWAY",
+              "ARTERIAL ROAD",
+              "SUB-ARTERIAL ROAD",
+              "COLLECTOR ROAD",
+              "LOCAL ROAD"
+            ],
+            16,
+            14
+          ]
+        ],
+        "text-max-angle": 30,
+        "text-font": [
+          "Chakra Petch Regular",
+          "Arial Unicode MS Regular"
+        ],
+        "symbol-placement": "line",
+        "text-padding": 1,
+        "text-rotation-alignment": "map",
+        "text-pitch-alignment": "viewport",
+        "text-field": [
+          "case",
+          [
+            "has",
+            "road_alias"
+          ],
+          [
+            "concat",
+            [
+              "get",
+              "road_label"
+            ],
+            " (",
+            [
+              "get",
+              "road_alias"
+            ],
+            ")"
+          ],
+          [
+            "get",
+            "road_label"
+          ]
+        ],
+        "text-letter-spacing": 0.01
+      },
+      "paint": {
+        "text-color": "hsl(40, 0%, 42%)",
+        "text-halo-color": "hsla(0, 0%, 0%, 0)",
+        "text-halo-width": 1
+      }
+    },
+    {
+      "id": "land-parcels",
+      "type": "fill",
+      "source": "basemap",
+      "source-layer": "land_parcels",
+      "minzoom": 15,
+      "maxzoom": 22,
+      "filter": [
+        "all",
+        [
+          "==",
+          "parcel_type",
+          "Lot"
+        ]
+      ],
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "fill-antialias": true,
+        "fill-color": "rgba(255, 120, 0, 0.5)",
+        "fill-opacity": [
+          "interpolate",
+          [
+            "linear"
+          ],
+          [
+            "zoom"
+          ],
+          15,
+          0.1,
+          22,
+          0.7
+        ],
+        "fill-outline-color": "rgba(255, 120, 0, 1)"
+      }
+    },
+    {
+      "id": "buildings",
+      "type": "fill",
+      "source": "basemap",
+      "source-layer": "buildings",
+      "minzoom": 16,
+      "maxzoom": 22,
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "fill-antialias": true,
+        "fill-color": "rgba(255, 120, 0, 0.8)",
+        "fill-opacity": [
+          "interpolate",
+          [
+            "linear"
+          ],
+          [
+            "zoom"
+          ],
+          15,
+          0.1,
+          22,
+          0.7
+        ],
+        "fill-outline-color": "rgba(255, 120, 0, 1)"
+      }
+    }
+  ]
+}
