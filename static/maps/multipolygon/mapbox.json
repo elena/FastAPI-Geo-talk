@@ -486,7 +486,7 @@
       },
       "paint": {
         "fill-antialias": true,
-        "fill-color": "rgba(255, 120, 0, 0.5)",
+        "fill-color": "rgba(52, 136, 255, 0.5)",
         "fill-opacity": [
           "interpolate",
           [
@@ -500,7 +500,7 @@
           22,
           0.7
         ],
-        "fill-outline-color": "rgba(255, 120, 0, 1)"
+        "fill-outline-color": "rgba(52, 136, 255, 1)"
       }
     },
     {
@@ -515,7 +515,7 @@
       },
       "paint": {
         "fill-antialias": true,
-        "fill-color": "rgba(255, 120, 0, 0.8)",
+        "fill-color": "rgba(52, 136, 255, 0.9)",
         "fill-opacity": [
           "interpolate",
           [
@@ -529,7 +529,7 @@
           22,
           0.7
         ],
-        "fill-outline-color": "rgba(255, 120, 0, 1)"
+        "fill-outline-color": "rgba(52, 136, 255, 1)"
       }
     }
   ]
