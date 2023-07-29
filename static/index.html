@@ -398,7 +398,6 @@ async def root(term: str = None) -> dict[str, list[str]]:
 &lt;class 'bool'&gt;</code>
                 <code class="python code-small">>>> type(Foo())
 &lt;class '__main__.Foo'&gt;
-
                 </code>
             </pre>
         </section>
@@ -415,7 +414,6 @@ async def root(term: str = None) -> dict[str, list[str]]:
                 <code class="python code-small">>>> True            # bool object
                 </code>
                 <code class="python code-small">>>> Foo()           # custom object
-
 
                 </code>
             </pre>
@@ -435,7 +433,6 @@ async def root(term: str = None) -> dict[str, list[str]]:
 2                </code>
                 <code class="python code-small">>>> Foo()     * 2   # custom object
 Traceback (most recent call last):
-  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
 TypeError: unsupported operand type(s) for *: 'Foo' and 'int'</code>
             </pre>
         </section>
@@ -453,7 +450,6 @@ TypeError: unsupported operand type(s) for *: 'Foo' and 'int'</code>
 3                </code>
                 <code class="python code-small">>>> Foo()     * 3   # custom object
 Traceback (most recent call last):
-  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
 TypeError: unsupported operand type(s) for *: 'Foo' and 'int'</code>
             </pre>
         </section>
@@ -471,7 +467,6 @@ TypeError: unsupported operand type(s) for *: 'Foo' and 'int'</code>
 4                </code>
                 <code class="python code-small">>>> Foo()     * 4   # custom object
 Traceback (most recent call last):
-  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
 TypeError: unsupported operand type(s) for *: 'Foo' and 'int'</code>
             </pre>
         </section>
@@ -509,6 +504,29 @@ Pylons/colander
             <div style="background-color: rgba(0, 0, 0, 0.6); color: #fff; padding: 20px;">
                 <div style="font-size: 200%">Pydantic</div>
             </div>
+        </section>
+
+        <section id="pydantic-dataclasses">
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;"><code>dataclass</code> </div>
+            <pre>
+                <code class="python code-small">from pydantic.dataclasses import dataclass
+
+
+
+
+@dataclass
+class MyDataClass:
+
+    my_str: str
+    my_int: int
+    my_float: float
+    my_bool: bool
+    my_list: list</code>
+            </pre>
+            <aside class="notes">
+                Pydantic is a Python library that provides an easy and convenient way to validate and manipulate data.
+                Something to do with serialisation.
+            </aside>
         </section>
 
         <section id="pydantic-validation-basic-0">
@@ -716,14 +734,24 @@ state
             </pre>
         </section>
         <section id="pydantic-validation">
-            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Pydantic Field Validation</div>
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Pydantic <code>Field</code></div>
             <pre style="padding: 0; margin-left: 0; margin-right: 0;">
-                <code class="width-fit python code-small" style="padding: 20px; margin-left: 0; margin-right: 0;">LonField = Annotated[Union[float, int], Field(ge=-180, le=180)]
-LatField = Annotated[Union[float, int], Field(ge=-90, le=90)]
+                <code class="width-fit python code-small" style="padding: 20px; margin-left: 0; margin-right: 0;">from typing import Union
+from uuid import uuid4
+from pydantic import BaseModel, Field
 
-class Coordinate(NamedTuple):
-    lon: LonField
-    lat: LatField</code>
+class Coordinate(BaseModel):
+The     lon: Union[float, int] = Field(ge=-180, le=180)
+    lat: Union[float, int] = Field(ge=-90, le=90)
+class Property(BaseModel):
+
+    name: str = Field(default='My house')
+    id: int = Field(default_factory=lambda: uuid4().hex)
+</code>
+
+
+
+
             </pre>
         </section>
 
