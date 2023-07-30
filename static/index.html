@@ -113,6 +113,7 @@
             </div>
 
         </section>
+        <section id="location" data-background="graphics/background/location_types.png"></section>
         <section id="where-do-addresses-1" data-background="graphics/background/adelaide-planning.png">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
                 <b>Where do addresses get defined?</b>
@@ -733,6 +734,19 @@ state
 </code>
             </pre>
         </section>
+
+
+        <section id="pydantic-field-defaults">
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Pydantic: <code>Field</code> defaults</div>
+            <pre style="padding: 0; margin-left: 0; margin-right: 0;">
+                <code class="width-fit python code-small" style="padding: 20px; margin-left: 0; margin-right: 0;">from uuid import uuid4
+from pydantic import BaseModel, Field
+
+
+class MyClass(BaseModel):
+    name: str = Field(default='My house')
+    id: int = Field(default_factory=lambda: uuid4().hex)
+</code>
         <section id="pydantic-validation">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Pydantic <code>Field</code></div>
             <pre style="padding: 0; margin-left: 0; margin-right: 0;">
@@ -740,11 +754,13 @@ state
 from uuid import uuid4
 from pydantic import BaseModel, Field
 
-class Coordinate(BaseModel):
-The     lon: Union[float, int] = Field(ge=-180, le=180)
-    lat: Union[float, int] = Field(ge=-90, le=90)
-class Property(BaseModel):
 
+class Coordinate(BaseModel):
+    lon: Union[float, int] = Field(ge=-180, le=180)
+    lat: Union[float, int] = Field(ge=-90, le=90)
+
+
+class Property(BaseModel):
     name: str = Field(default='My house')
     id: int = Field(default_factory=lambda: uuid4().hex)
 </code>
@@ -885,22 +901,22 @@ class GeoJSONFeatureCollection(BaseModel):
             <iframe data-src="/maps/multipolygon/" width="960px" height="700px"></iframe>
         </section>
 
-        <section id="pydantic-multipolygon">
+        <section id="pydantic-geometries">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-                Geometry BaseModels
+                Geometry Pydantic BaseModels
             </div>
             <pre>
                 <code class="python">class ListString(BaseModel):
     type: str = "ListString"
-    coordinates: List[List[Coordinate]]
+    coordinates: List[Coordinate]]
 
 class Polygon(BaseModel):
     type: str = "Polygon"
-    coordinates: List[List[List[Coordinate]]]
+    coordinates: List[List[Coordinate]]]
 
 class MultiPolygon(BaseModel):
     type: str = "MultiPolygon"
-    coordinates: List[List[List[List[Coordinate]]]]</code>
+    coordinates: List[List[List[Coordinate]]]]</code>
             </pre>
         </section>
 
