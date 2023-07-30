@@ -5,8 +5,8 @@ name = "pypi"
 
 [packages]
 uvicorn = "*"
-fastapi = "*"
-jupyter = "*"
+fastapi = "==0.100.1"
+pydantic = "*"
 
 [dev-packages]
 
