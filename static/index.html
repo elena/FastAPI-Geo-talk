@@ -398,6 +398,8 @@ async def root(term: str = None) -> dict[str, list[str]]:
 &lt;class 'list'&gt;</code>
                 <code class="python code-small">>>> type(True)
 &lt;class 'bool'&gt;</code>
+                <code class="python code-small">>>> type(my_fib(1))
+&lt;class 'int'&gt;</code>
                 <code class="python code-small">>>> type(Foo())
 &lt;class '__main__.Foo'&gt;
                 </code>
@@ -414,6 +416,8 @@ async def root(term: str = None) -> dict[str, list[str]]:
                 <code class="python code-small">>>> [1, 2, 3]       # list object
                 </code>
                 <code class="python code-small">>>> True            # bool object
+                </code>
+                <code class="python code-small">>>> my_fib(1)       # function/callable object
                 </code>
                 <code class="python code-small">>>> Foo()           # custom object
 
@@ -433,6 +437,8 @@ async def root(term: str = None) -> dict[str, list[str]]:
 [1, 2, 3, 1, 2, 3]</code>
                 <code class="python code-small">>>> True      * 2   # bool object
 2                </code>
+                <code class="python code-small">>>> my_fib(2) * 2   # function/callable object
+2                </code>
                 <code class="python code-small">>>> Foo()     * 2   # custom object
 Traceback (most recent call last):
 TypeError: unsupported operand type(s) for *: 'Foo' and 'int'</code>
@@ -450,6 +456,9 @@ TypeError: unsupported operand type(s) for *: 'Foo' and 'int'</code>
 [1, 2, 3, 1, 2, 3, 1, 2, 3]</code>
                 <code class="python code-small">>>> True      * 3   # bool object
 3                </code>
+                <code class="python code-small">>>> my_fib(3) * 3   # function/callable object
+6               </code>
+
                 <code class="python code-small">>>> Foo()     * 3   # custom object
 Traceback (most recent call last):
 TypeError: unsupported operand type(s) for *: 'Foo' and 'int'</code>
@@ -467,6 +476,8 @@ TypeError: unsupported operand type(s) for *: 'Foo' and 'int'</code>
 [1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3]</code>
                 <code class="python code-small">>>> True      * 4   # bool object
 4                </code>
+                <code class="python code-small">>>> my_fib(4) * 4   # function/callable object
+12                </code>
                 <code class="python code-small">>>> Foo()     * 4   # custom object
 Traceback (most recent call last):
 TypeError: unsupported operand type(s) for *: 'Foo' and 'int'</code>
