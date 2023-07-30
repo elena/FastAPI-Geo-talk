@@ -280,7 +280,7 @@ $ uvicorn app:app --reload
         <section id="async-what-matters">
             <code class="hljs-keyword">async</code> and <code class="hljs-keyword">await</code><br>
             <pre>
-                    <code data-line-numbers="|1-2|1,5|10,4|" class="python" style="font-size: 1.2em; line-height: 1.25">async def get_data():
+                    <code data-line-numbers="|1-2|1,5|10,4|1,5" class="python" style="font-size: 1.2em; line-height: 1.25">async def get_data():
     return {"item": "Bar"}
 
 async def do_logic():
@@ -296,23 +296,6 @@ async def root():
             Most cases would say this is overkill but there are cases, where we like performance. Let me share one.
             </aside>
         </section>
-        <section id="eg1-code-hello">
-            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-                Hello World
-            </div><br>
-            <pre>
-                    <code data-trim data-line-numbers="" class="python"  style="font-size: 1.2em; line-height: 1.25">
-from fastapi import FastAPI
-
-app = FastAPI()
-
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
-                    </code>
-                </pre>
-        </section>
-
         <section id="eg1-filter-basic">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Quick filter</div>
             <input type="text" id="input-filter-basic" placeholder="Quick filter" style="padding: 4px 10px">
