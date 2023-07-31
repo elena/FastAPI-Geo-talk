@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Map: GeoJSON polygon</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin=""/>
+  <style>#map { height: 900px; }</style>
+</head>
+<body>
+
+<div id="map"></div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""></script>
+<script>
+  // Example: Leaflet
+  var map = L.map('map').setView([-34.92106310640921, 138.59442035534688], 18);
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map);
+
+  var geojsonResponse = {
+      "type": "FeatureCollection",
+      "links": {
+          "numberMatched": 1,
+          "numberReturned": 1,
+          "self": "/v1/landParcels/properties/findByPoint?latitude=-34.92023796957399&longitude=138.59547017308628&offset=0&limit=100"
+      },
+      "totalArea": 35289.07,
+      "features": [
+          {
+              "geometry": {
+                  "type": "MultiPolygon",
+                  "coordinates": [
+                      [
+                          [
+                              [
+                                  138.59603841400008,
+                                  -34.92010827399997
+                              ],
+                              [
+                                  138.59592652000003,
+                                  -34.92001044299997
+                              ],
+                              [
+                                  138.5956815400001,
+                                  -34.920023673999935
+                              ],
+                              [
+                                  138.5956804340001,
+                                  -34.92002467399993
+                              ],
+                              [
+                                  138.59547547900002,
+                                  -34.92003481499995
+                              ],
+                              [
+                                  138.59491693100006,
+                                  -34.92006258099997
+                              ],
+                              [
+                                  138.59449529300002,
+                                  -34.920084532999965
+                              ],
+                              [
+                                  138.59449828800007,
+                                  -34.920130745999984
+                              ],
+                              [
+                                  138.5944768610001,
+                                  -34.92012802399995
+                              ],
+                              [
+                                  138.5944387280001,
+                                  -34.92012488299997
+                              ],
+                              [
+                                  138.59439825200002,
+                                  -34.92012264999994
+                              ],
+                              [
+                                  138.59436931100004,
+                                  -34.92012207799996
+                              ],
+                              [
+                                  138.59432934300003,
+                                  -34.920122239999955
+                              ],
+                              [
+                                  138.59429105800007,
+                                  -34.92012434399993
+                              ],
+                              [
+                                  138.59425157300007,
+                                  -34.920127854999976
+                              ],
+                              [
+                                  138.59421496800007,
+                                  -34.92013190199998
+                              ],
+                              [
+                                  138.59417716300004,
+                                  -34.92013735399996
+                              ],
+                              [
+                                  138.59413288000007,
+                                  -34.92014649499998
+                              ],
+                              [
+                                  138.5941337480001,
+                                  -34.92017647199998
+                              ],
+                              [
+                                  138.59409758900006,
+                                  -34.920166731999984
+                              ],
+                              [
+                                  138.59361849800007,
+                                  -34.92018652699994
+                              ],
+                              [
+                                  138.59357936300012,
+                                  -34.92016789799993
+                              ],
+                              [
+                                  138.59344588800002,
+                                  -34.92017486199995
+                              ],
+                              [
+                                  138.5934044290001,
+                                  -34.92019658899994
+                              ],
+                              [
+                                  138.59335942100006,
+                                  -34.92019883499995
+                              ],
+                              [
+                                  138.5934023000001,
+                                  -34.92078222799995
+                              ],
+                              [
+                                  138.593407511,
+                                  -34.92085331499993
+                              ],
+                              [
+                                  138.59346716100004,
+                                  -34.921668204999946
+                              ],
+                              [
+                                  138.59543840600008,
+                                  -34.92156983399997
+                              ],
+                              [
+                                  138.5954067880001,
+                                  -34.921120360999964
+                              ],
+                              [
+                                  138.59529498900008,
+                                  -34.921126018999985
+                              ],
+                              [
+                                  138.59528927400004,
+                                  -34.92075632399997
+                              ],
+                              [
+                                  138.5953751080001,
+                                  -34.92075229799997
+                              ],
+                              [
+                                  138.59558399800005,
+                                  -34.92089763499996
+                              ],
+                              [
+                                  138.59584443500012,
+                                  -34.92088418499998
+                              ],
+                              [
+                                  138.59603122400006,
+                                  -34.92071519499996
+                              ],
+                              [
+                                  138.59603841400008,
+                                  -34.92010827399997
+                              ]
+                          ]
+                      ]
+                  ]
+              },
+              "type": "Feature",
+              "properties": {
+                  "propertyPid": "prpp3ecwGGw_y-n",
+                  "contributorId": "02000006030000",
+                  "dateCreated": "2023-02-13",
+                  "dateModified": "",
+                  "state": "SA",
+                  "source": "SA",
+                  "baseProperty": true,
+                  "area": 35289.07,
+                  "cadastrePids": [
+                      "cadRMV9Q_zWgj4b",
+                      "cadj6O0dKVNwEjm",
+                      "cad065c604f07ca"
+                  ],
+                  "propertyPolygonPid": "ppONRI9TdRaO6qD"
+              }
+          },
+          {
+              "type": "Feature",
+              "properties": {
+                  "stateTerritory": "SA",
+                  "addressId": "GASA_721199769",
+                  "jurisdictionId": "1352502-0-0-0-1",
+                  "addressRecordType": "PRIMARY",
+                  "aliasPrincipal": "PRINCIPAL",
+                  "geoFeature": "PROPERTY CENTROID",
+                  "cadastralIdentifier": "D/128908/Q/605",
+                  "formattedAddress": "LOT 603 NORTH TCE, ADELAIDE SA 5000",
+                  "localityName": "ADELAIDE",
+                  "postcode": "5000",
+                  "streetName": "NORTH",
+                  "streetType": "TCE",
+                  "streetTypeDescription": "TERRACE",
+                  "lotIdentifier": "603",
+                  "localityNeighbour": [
+                      "DULWICH",
+                      "EASTWOOD",
+                      "GILBERTON",
+                      "GLENSIDE",
+                      "HACKNEY",
+                      "HINDMARSH",
+                      "KENT TOWN",
+                      "KESWICK TERMINAL",
+                      "MILE END",
+                      "NORTH ADELAIDE",
+                      "PARKSIDE",
+                      "ROSE PARK",
+                      "THEBARTON",
+                      "UNLEY",
+                      "WAYVILLE"
+                  ],
+                  "localityAlias": [
+                      "KENT TOWN",
+                      "KESWICK TERMINAL",
+                      "MILE END",
+                      "NTH ADELAIDE",
+                      "THEBARTON"
+                  ],
+                  "localityId": "loc88df4c1f6c87",
+                  "streetLocalityId": "SA549261",
+                  "streetAlias": []
+              },
+              "geometry": {
+                  "coordinates": [
+                      138.59380879,
+                      -34.92043836
+                  ],
+                  "type": "Point"
+              },
+              "messages": [],
+              "matchType": "Primary Address",
+              "matchDistance": 0.0
+          },
+          {
+              "type": "Feature",
+              "properties": {
+                  "stateTerritory": "SA",
+                  "addressId": "add837431aabccd",
+                  "jurisdictionId": "603114-0-0-0-1",
+                  "addressRecordType": "PRIMARY",
+                  "aliasPrincipal": "PRINCIPAL",
+                  "geoFeature": "PROPERTY CENTROID",
+                  "cadastralIdentifier": "D/128908/Q/604",
+                  "formattedAddress": "LOT 1 NORTH TCE, ADELAIDE SA 5000",
+                  "localityName": "ADELAIDE",
+                  "postcode": "5000",
+                  "streetName": "NORTH",
+                  "streetType": "TCE",
+                  "streetTypeDescription": "TERRACE",
+                  "lotIdentifier": "1",
+                  "localityNeighbour": [
+                      "DULWICH",
+                      "EASTWOOD",
+                      "GILBERTON",
+                      "GLENSIDE",
+                      "HACKNEY",
+                      "HINDMARSH",
+                      "KENT TOWN",
+                      "KESWICK TERMINAL",
+                      "MILE END",
+                      "NORTH ADELAIDE",
+                      "PARKSIDE",
+                      "ROSE PARK",
+                      "THEBARTON",
+                      "UNLEY",
+                      "WAYVILLE"
+                  ],
+                  "localityAlias": [
+                      "KENT TOWN",
+                      "KESWICK TERMINAL",
+                      "MILE END",
+                      "NTH ADELAIDE",
+                      "THEBARTON"
+                  ],
+                  "localityId": "loc88df4c1f6c87",
+                  "streetLocalityId": "SA549261",
+                  "streetAlias": []
+              },
+              "geometry": {
+                  "coordinates": [
+                      138.59352127,
+                      -34.92156008
+                  ],
+                  "type": "Point"
+              },
+              "messages": [],
+              "matchType": "Primary Address",
+              "matchDistance": 0.0
+          },
+          {
+              "type": "Feature",
+              "properties": {
+                  "stateTerritory": "SA",
+                  "addressId": "GASA_424196378",
+                  "addressRecordType": "PRIMARY",
+                  "aliasPrincipal": "PRINCIPAL",
+                  "geoFeature": "PROPERTY CENTROID",
+                  "cadastralIdentifier": "D/128908/Q/604",
+                  "formattedAddress": "GOVERNMENT HOUSE LOT 1 NORTH TCE, ADELAIDE SA 5000",
+                  "localityName": "ADELAIDE",
+                  "postcode": "5000",
+                  "streetName": "NORTH",
+                  "siteName": "GOVERNMENT HOUSE",
+                  "streetType": "TCE",
+                  "streetTypeDescription": "TERRACE",
+                  "lotIdentifier": "1",
+                  "localityNeighbour": [
+                      "DULWICH",
+                      "EASTWOOD",
+                      "GILBERTON",
+                      "GLENSIDE",
+                      "HACKNEY",
+                      "HINDMARSH",
+                      "KENT TOWN",
+                      "KESWICK TERMINAL",
+                      "MILE END",
+                      "NORTH ADELAIDE",
+                      "PARKSIDE",
+                      "ROSE PARK",
+                      "THEBARTON",
+                      "UNLEY",
+                      "WAYVILLE"
+                  ],
+                  "localityAlias": [
+                      "KENT TOWN",
+                      "KESWICK TERMINAL",
+                      "MILE END",
+                      "NTH ADELAIDE",
+                      "THEBARTON"
+                  ],
+                  "localityId": "loc88df4c1f6c87",
+                  "streetLocalityId": "SA549261",
+                  "streetAlias": []
+              },
+              "geometry": {
+                  "coordinates": [
+                      138.59352127,
+                      -34.92156008
+                  ],
+                  "type": "Point"
+              },
+              "messages": [],
+              "matchType": "Primary Address",
+              "matchDistance": 0.0
+          },
+          {
+              "type": "Feature",
+              "properties": {
+                  "stateTerritory": "SA",
+                  "addressId": "add1355920ce724",
+                  "jurisdictionId": "633698-0-0-0-1",
+                  "addressRecordType": "PRIMARY",
+                  "aliasPrincipal": "PRINCIPAL",
+                  "geoFeature": "PROPERTY CENTROID",
+                  "cadastralIdentifier": "D/128908/Q/604",
+                  "formattedAddress": "LOT 1 NORTH TCE, ADELAIDE SA 5000",
+                  "localityName": "ADELAIDE",
+                  "postcode": "5000",
+                  "streetName": "NORTH",
+                  "streetType": "TCE",
+                  "streetTypeDescription": "TERRACE",
+                  "lotIdentifier": "1",
+                  "localityNeighbour": [
+                      "DULWICH",
+                      "EASTWOOD",
+                      "GILBERTON",
+                      "GLENSIDE",
+                      "HACKNEY",
+                      "HINDMARSH",
+                      "KENT TOWN",
+                      "KESWICK TERMINAL",
+                      "MILE END",
+                      "NORTH ADELAIDE",
+                      "PARKSIDE",
+                      "ROSE PARK",
+                      "THEBARTON",
+                      "UNLEY",
+                      "WAYVILLE"
+                  ],
+                  "localityAlias": [
+                      "KENT TOWN",
+                      "KESWICK TERMINAL",
+                      "MILE END",
+                      "NTH ADELAIDE",
+                      "THEBARTON"
+                  ],
+                  "localityId": "loc88df4c1f6c87",
+                  "streetLocalityId": "SA549261",
+                  "streetAlias": []
+              },
+              "geometry": {
+                  "coordinates": [
+                      138.59352048,
+                      -34.92158711
+                  ],
+                  "type": "Point"
+              },
+              "messages": [],
+              "matchType": "Primary Address",
+              "matchDistance": 0.0
+          }
+      ],
+      "messages": [],
+      "requestTimeStamp": 1690174698.425169,
+      "requestDateTime": "2023-07-24T04:58:18.425169",
+      "attribution": "NOTICE All rights reserved. Use of this data is subject to the Geoscape Developer Terms and Conditions (https://geoscape.com.au/legal/geoscape-developer-terms/)"
+  }
+
+  var geojsonMarkerOptions = {
+      radius: 12,
+      // fillColor: "#ff7800",
+      // color: "#666",
+      weight: 0,
+      opacity: 1,
+      fillOpacity: 0.7
+  };
+  var marker = L.marker([-34.92016310640921, 138.59562035534688]).addTo(map);
+
+  // Add a popup to the marker
+  marker.bindPopup('addressId: GASA_721199769,<br />' +
+      'formattedAddress: LOT 603 NORTH TCE, ADELAIDE SA 5000,<br />\n' +
+      'cadastralIdentifier: D/128908/Q/605,<br />\n' +
+      'population: 354,<br />\n' +
+      'censusYear: 2021,<br />\n' +
+      '# Relative Advantage<br />\n' +
+      'irsadAusPercent: 69,<br />\n' +
+      'irsadStPercent: 83,<br />\n' +
+      '# Economic Disadvantage<br />\n' +
+      'irsdAusPercent: 25,<br />\n' +
+      'irsdStPercent: 30,<br />\n' +
+      '# Education/Occupaton<br />\n' +
+      'ieoAusPercent: 95,<br />\n' +
+      'ieoStPercent: 99<br />').openPopup();
+
+
+  L.geoJSON(geojsonResponse, {
+      pointToLayer: function (feature, latlng) {
+          return L.circleMarker(latlng, geojsonMarkerOptions);
+      },
+  }).addTo(map);
+</script>
+</body>
+</html>
