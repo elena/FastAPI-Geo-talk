@@ -742,6 +742,7 @@ class MyClass(BaseModel):
     name: str = Field(default='My house')
     id: int = Field(default_factory=lambda: uuid4().hex)
 </code>
+            </pre></section>
         <section id="pydantic-validation">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Pydantic <code>Field</code></div>
             <pre style="padding: 0; margin-left: 0; margin-right: 0;">
@@ -991,6 +992,12 @@ class MultiPolygon(BaseModel):
             <div style="font-size: 0.4em; text-align: right"><a href="https://github.com/elena/FastAPI-Geo-talk/blob/draft/static/maps/point/index.html">https://github.com/elena/FastAPI-Geo-talk/blob/draft/static/maps/point/index.html</a> </div>
             <iframe data-src="/leaflet/" width="960px" height="680px"></iframe>
         </section>
+
+        <section id="geojsonio-land" data-background="graphics/geojsonio1.png"></section>
+        <section id="geojsonio-locality" data-background="graphics/geojsonio2.png"></section>
+        <section id="geojsonio-commonwealth-electorate" data-background="graphics/geojsonio3.png"></section>
+        <section id="geojsonio-state-electorate" data-background="graphics/geojsonio4.png"></section>
+
         <section id="geojson-basemodel">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">GeoJSON BaseModel</div>
             <pre>
