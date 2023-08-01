@@ -158,6 +158,7 @@
             <div style="background-color: rgba(0, 0, 0, 0.4); color: #fff; padding: 20px;">
                 <div style="font-size: 100%">G-NAF (2004) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; G-NAF-Core (2022)</div>
             </div>
+            <div style="color: rgba(255, 255, 255, 0.25); font-size: 50%; text-align: right">*</div>
         </section>
         <section id="title-flask"  data-background="graphics/github_flask.png">
             <div style="background-color: rgba(0, 0, 0, 0.6); color: #fff; padding: 20px;">
@@ -357,6 +358,7 @@ async def root(term: str = None) -> dict[str, list[str]]:
         <section id="eg2-predictive">
             <iframe data-src="https://demo.geoscape.com.au/predictive/index.html" width="700px" height="500px"></iframe>
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">https://demo.geoscape.com.au/predictive/</div>
+            <div style="color: rgba(255, 255, 255, 0.25); font-size: 50%; text-align: right">*</div>
         </section>
 
         <section id="title-pydantic-0">
@@ -838,11 +840,11 @@ async def feature_properties(address_id: str) -> FeatureProperty:
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">GeoJSON</div>
             <pre>
                 <code data-trim data-line-numbers="|2-5|6|7-11" class="hljs code-normal">{
+    "type": "Feature",
     "geometry": {
         "type": "Point",
         "coordinates": [138.59469, -34.92086]
     },
-    "type": "Feature",
     "properties": {
         "name": "Adelaide Convention Centre",
         "isPyConAU": true,
@@ -860,8 +862,8 @@ async def feature_properties(address_id: str) -> FeatureProperty:
     coordinates: List[]
 
 class GeoJSONFeature(BaseModel):
-    geometry: Geometry
     type: str = "Feature"
+    geometry: Geometry
     properties: FeatureProperty
                 </code>
             </pre>
@@ -1036,7 +1038,6 @@ class MultiPolygon(Geometry):
         <section id="geojsonio-commonwealth-electorate" data-background="graphics/geojsonio3.png"></section>
         <section id="geojsonio-state-electorate" data-background="graphics/geojsonio4.png"></section>
 
-        <section id="data-layers1" data-background="graphics/s1.png"></section>
         <section id="data-layers2" data-background="graphics/s2.png"></section>
         <section id="data-layers3" data-background="graphics/s3.png"></section>
         <section id="data-layers4" data-background="graphics/s4.png"></section>
