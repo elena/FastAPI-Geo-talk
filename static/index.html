@@ -143,6 +143,16 @@
                 <b>Australia 1994: <img height="70px" style="top: 20px; margin: -20px 0;" src="/graphics/background/ABS.gif"> Census year</b>
             </div>
         </section>
+        <section id="owned-by-states" data-background="graphics/background/states-0.png">
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; margin-top: -350px; ">
+                <img height="100px" src="/graphics/background/Geoscape_Logo.jpg">
+                <h3>Owned by</h3>
+                <div style="color: rgba(255, 255, 255, 0.25); font-size: 75%;">
+                    Not Government, but Government owned
+                </div>
+            </div>
+        </section>
+        <section id="gnaf" data-background="graphics/background/gnaf-0.png"></section>
 
         <section id="gnaf-monster" data-background="graphics/background/gnaf-1.png">
             <div style="background-color: rgba(0, 0, 0, 0.4); color: #fff; padding: 20px;">
@@ -280,7 +290,7 @@ $ uvicorn app:app --reload
         <section id="async-what-matters">
             <code class="hljs-keyword">async</code> and <code class="hljs-keyword">await</code><br>
             <pre>
-                    <code data-line-numbers="|1-2|1,5|10,4|1,5" class="python" style="font-size: 1.2em; line-height: 1.25">async def get_data():
+                    <code data-line-numbers="|1-2|1,5|10,4||1,5" class="python" style="font-size: 1.2em; line-height: 1.25">async def get_data():
     return {"item": "Bar"}
 
 async def do_logic():
@@ -730,20 +740,7 @@ state
             </pre>
         </section>
 
-
-        <section id="pydantic-field-defaults">
-            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Pydantic: <code>Field</code> defaults</div>
-            <pre style="padding: 0; margin-left: 0; margin-right: 0;">
-                <code class="width-fit python code-small" style="padding: 20px; margin-left: 0; margin-right: 0;">from uuid import uuid4
-from pydantic import BaseModel, Field
-
-
-class MyClass(BaseModel):
-    name: str = Field(default='My house')
-    id: int = Field(default_factory=lambda: uuid4().hex)
-</code>
-            </pre></section>
-        <section id="pydantic-validation">
+        <section id="pydantic-field">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Pydantic <code>Field</code></div>
             <pre style="padding: 0; margin-left: 0; margin-right: 0;">
                 <code class="width-fit python code-small" style="padding: 20px; margin-left: 0; margin-right: 0;">from typing import Union
@@ -754,16 +751,57 @@ from pydantic import BaseModel, Field
 class Coordinate(BaseModel):
     lon: Union[float, int] = Field(ge=-180, le=180)
     lat: Union[float, int] = Field(ge=-90, le=90)
+                </code>
+            </pre>
+        </section>
+        <section id="pydantic-field-defaults">
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Pydantic: <code>Field</code> defaults</div>
+            <pre style="padding: 0; margin-left: 0; margin-right: 0;">
+                <code class="width-fit python" style="padding: 20px; margin-left: 0; margin-right: 0;">from uuid import uuid4
+from pydantic import BaseModel, Field
 
 
-class Property(BaseModel):
-    name: str = Field(default='My house')
-    id: int = Field(default_factory=lambda: uuid4().hex)
+class MyClass(BaseModel):
+    my_address: str = Field(default='My house')
+
+    my_hash_key: int = Field(default_factory=lambda: uuid4().hex)
+
+    love_for_python: float = Field(
+        allow_inf_nan=True, default=float('inf')
+    )
 </code>
+            </pre></section>
+        <section id="pydantic-field-aliases">
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Pydantic: <code>Field</code> aliases</div>
+            <pre style="padding: 0; margin-left: 0; margin-right: 0;">
+                <code class="width-fit python " style="padding: 20px; margin-left: 0; margin-right: 0;">class MyClass(BaseModel):
+    my_home: str = Field(alias='my_castle')
+    data_a: str = Field(
+        validation_alias='incoming_a',
+        serialization_alias='response_a'
+    )
+
+>>> MyClass(incoming_a="a").model_dump()
+{'data_a': 'a'}
+
+>>> MyClass(data_a="a").model_dump(by_alias=True)
+{'response_a': 'a'}</code>
+            </pre></section>
+        <section id="pydantic-inheritance">
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Pydantic Inheritance</div>
+            <pre style="padding: 0; margin-left: 0; margin-right: 0;">
+                <code class="width-fit python code-small" style="padding: 20px; margin-left: 0; margin-right: 0;">class Building(BaseModel):
+    id: str = "My building ID"
 
 
+class House(Building):
+    ...
 
-
+    @computed_field
+    @property
+    def get_a_field(self):
+        return "something I want computed"
+ </code>
             </pre>
         </section>
 
@@ -799,12 +837,12 @@ async def feature_properties(address_id: str) -> FeatureProperty:
         <section id="geojson-response-basic">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">GeoJSON</div>
             <pre>
-                <code data-trim data-line-numbers="|2|3-6|7-11" class="hljs code-normal">{
-    "type": "Feature",
+                <code data-trim data-line-numbers="|2-5|6|7-11" class="hljs code-normal">{
     "geometry": {
         "type": "Point",
         "coordinates": [138.59469, -34.92086]
     },
+    "type": "Feature",
     "properties": {
         "name": "Adelaide Convention Centre",
         "isPyConAU": true,
@@ -814,17 +852,17 @@ async def feature_properties(address_id: str) -> FeatureProperty:
                 </code>
             </pre>
         </section>
-        <section id="pydantic-basemodel-basic">
+        <section id="pydantic-geojson-basic">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Pydantic GeoJSON BaseModels</div>
             <pre class="width-fit" style="padding: 0; margin-left: 0;">
-                <code class="python code-normal" data-line-numbers="|1-3|1,5,7">class Geometry(BaseModel):
+                <code class="python code-normal" data-line-numbers="|1-3|1,6|7|8|">class Geometry(BaseModel):
     type: Literal["Point", "LineString", "Polygon", "MultiPolygon"]
     coordinates: List[]
 
 class GeoJSONFeature(BaseModel):
-    type: str = "Feature"
     geometry: Geometry
-    properties: Optional[FeatureProperty, None]
+    type: str = "Feature"
+    properties: FeatureProperty
                 </code>
             </pre>
         </section>
@@ -850,7 +888,7 @@ class GeoJSONFeature(BaseModel):
 }</code>
             </pre>
         </section>
-        <section id="pydantic-basemodel-collection">
+        <section id="pydantic-geojson-collection">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Pydantic GeoJSON FeatureCollection BaseModels</div>
             <pre style="padding: 0; margin-left: 0;">
                 <code class="width-fit python code-normal" data-line-numbers="|2">class Geometry(BaseModel):
@@ -902,15 +940,15 @@ class GeoJSONFeatureCollection(BaseModel):
                 Geometry Pydantic BaseModels
             </div>
             <pre>
-                <code class="python">class ListString(BaseModel):
+                <code class="python">class ListString(Geometry):
     type: str = "ListString"
     coordinates: List[Coordinate]]
 
-class Polygon(BaseModel):
+class Polygon(Geometry):
     type: str = "Polygon"
     coordinates: List[List[Coordinate]]]
 
-class MultiPolygon(BaseModel):
+class MultiPolygon(Geometry):
     type: str = "MultiPolygon"
     coordinates: List[List[List[Coordinate]]]]</code>
             </pre>
@@ -1007,152 +1045,7 @@ class MultiPolygon(BaseModel):
         <section id="data-layers7" data-background="graphics/s7.png"></section>
         <section id="data-layers8" data-background="graphics/s8.png"></section>
 
-
-        <section id="geojson-basemodel">
-            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">GeoJSON BaseModel</div>
-            <pre>
-                <code class="python code-normal">
-class Geometry(BaseModel):
-    type: Literal["Point", "Polygon", "MultiPolygon"]
-    coordinates: List[float]
-
-class GeoJSONFeature(BaseModel):
-    type: str = "Feature"
-    properties: Feature
-    geometry: Geometry
-  </code>
-            </pre>
-        </section>
-
-        <section id="pydantic-validation-multipolygon">
-            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;"><code></code></div>
-            <pre>
-                <code class="python code-normal">
-class MultiPolygon(BaseModel):
-    type: str: "MultiPolygon"
-    coordinates: List[List[List[List[Tuple[float]]]]]
-
-class GeoJSONResponse(BaseModel):
-    type: str = "Feature"
-    properties: Feature
-    geometry: Geometry
-
-  </code>
-            </pre>
-        </section>
-
-
-        <section id="geojson-why-we-care">
-            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-                <div style="font-size: 200%"></div>
-            </div>
-        </section>
-
-
-
-
-
-
-        <section id="pydantic-validation-models-geopoints">
-            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-                <div style="font-size: 200%"></div>
-            </div>
-        </section>
-        <section id="pydantic-validation-chekhov">
-            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-                <div style="font-size: 200%"></div>
-            </div>
-        </section>
-
-        <section id="eg3-baseModel">
-            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-                <div style="font-size: 200%"></div>
-            </div>
-        </section>
-        <section id="eg3-params">
-            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-                <div style="font-size: 200%"></div>
-            </div>
-        </section>
-        <section id="eg3-address">
-            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-                <div style="font-size: 200%"></div>
-            </div>
-        </section>
-        <section id="eg3-address-full-real">
-            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-                <div style="font-size: 200%"></div>
-            </div>
-        </section>
-
-        <section id="GeoJSON-RFC-7946">
-            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-                <div style="font-size: 200%"></div>
-            </div>
-        </section>
-        <section id="geojson-rfc">
-            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-                <div style="font-size: 200%"></div>
-            </div>
-        </section>
-        <section id="geojson-feature-feature-collections">
-            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-                <div style="font-size: 200%"></div>
-            </div>
-        </section>
-        <section id="geojson-validation-field">
-            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-                <div style="font-size: 200%"></div>
-            </div>
-        </section>
-        <section id="geojson-point-polys">
-            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-                <div style="font-size: 200%"></div>
-            </div>
-        </section>
-        <section id="geojson-quadruple-nested">
-            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-                <div style="font-size: 200%"></div>
-            </div>
-        </section>
-
-        <section id="eg4-layer-graphic">
-            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-                <div style="font-size: 200%"></div>
-            </div>
-        </section>
-        <section id="eg4-addProps-ABS">
-            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-                <div style="font-size: 200%"></div>
-            </div>
-        </section>
-        <section id="eg4-addProps-landparcels">
-            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-                <div style="font-size: 200%"></div>
-            </div>
-        </section>
         <section id="eg4-async-gather">
-            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-                <div style="font-size: 200%"></div>
-            </div>
-        </section>
-
-        <section id="pydantic-limits-custom-validation">
-            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-                <div style="font-size: 200%"></div>
-            </div>
-        </section>
-        <section id="pydantic-limits-method-property">
-            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-                <div style="font-size: 200%"></div>
-            </div>
-        </section>
-        <section id="pydantic-limits-attributes">
-            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-                <div style="font-size: 200%"></div>
-            </div>
-        </section>
-        <section id="pydantic-limits-performance">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
                 <div style="font-size: 200%"></div>
             </div>
@@ -1167,7 +1060,6 @@ class GeoJSONResponse(BaseModel):
             <br>
             <p>Support/be a coach at:<br><b>DjangoGirls</b></p>
         </section>
-
 
     </div>
 </div>
