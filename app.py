@@ -5,14 +5,16 @@ from fastapi.staticfiles import StaticFiles
 from example1.main import routes_eg1
 from example2.main import routes_eg2
 from example3.main import routes_eg3
+from example4.main import routes_eg4
 
 app = FastAPI()
 
 app.include_router(routes_eg1)
 app.include_router(routes_eg2)
 app.include_router(routes_eg3)
+app.include_router(routes_eg4)
 
-app.mount('/', StaticFiles(directory='static', html=True))
+app.mount("/", StaticFiles(directory="static", html=True))
 
-if __name__ == '__main__':
-    uvicorn.run(app, host='0.0.0.0')
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0")

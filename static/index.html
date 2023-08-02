@@ -738,7 +738,7 @@ state
         <section id="pydantic-field">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Pydantic <code>Field</code></div>
             <pre style="padding: 0; margin-left: 0; margin-right: 0;">
-                <code class="width-fit python code-small" style="padding: 20px; margin-left: 0; margin-right: 0;">from typing import Union
+                <code class="python code-small" style="padding: 20px; margin-left: 0; margin-right: 0;">from typing import Union
 from uuid import uuid4
 from pydantic import BaseModel, Field
 
@@ -752,7 +752,7 @@ class Coordinate(BaseModel):
         <section id="pydantic-field-defaults">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Pydantic: <code>Field</code> defaults</div>
             <pre style="padding: 0; margin-left: 0; margin-right: 0;">
-                <code class="width-fit python" style="padding: 20px; margin-left: 0; margin-right: 0;">from uuid import uuid4
+                <code class="python" style="padding: 20px; margin-left: 0; margin-right: 0;">from uuid import uuid4
 from pydantic import BaseModel, Field
 
 
@@ -766,10 +766,10 @@ class MyClass(BaseModel):
     )
 </code>
             </pre></section>
-        <section id="pydantic-field-aliases">
+        <section data-visibility="hidden" id="pydantic-field-aliases">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Pydantic: <code>Field</code> aliases</div>
             <pre style="padding: 0; margin-left: 0; margin-right: 0;">
-                <code class="width-fit python " style="padding: 20px; margin-left: 0; margin-right: 0;">class MyClass(BaseModel):
+                <code class="python " style="padding: 20px; margin-left: 0; margin-right: 0;">class MyClass(BaseModel):
     my_home: str = Field(alias='my_castle')
     data_a: str = Field(
         validation_alias='incoming_a',
@@ -785,7 +785,10 @@ class MyClass(BaseModel):
         <section id="pydantic-inheritance">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Pydantic Inheritance</div>
             <pre style="padding: 0; margin-left: 0; margin-right: 0;">
-                <code class="width-fit python code-small" style="padding: 20px; margin-left: 0; margin-right: 0;">class Building(BaseModel):
+              <code class="python code-small" style="padding: 20px; margin-left: 0; margin-right: 0;">from pydantic import BaseModel, computed_field
+
+
+class Building(BaseModel):
     id: str = "My building ID"
 
 
@@ -794,10 +797,8 @@ class House(Building):
 
     @computed_field
     @property
-    def get_a_field(self):
-        return "something I want computed"
- </code>
-            </pre>
+    def get_id_field_times_two(self):
+        return f"something I want computed: {self.id * 2}" </code></pre>
         </section>
 
         <section id="fastapi-pydantic-route">
@@ -815,7 +816,7 @@ class House(Building):
             </pre></div>
             <div>
             <pre style="margin-left: 0; margin-right: 0;">
-                <code data-line-numbers="3,5" class="width-fit python code-small" style="margin-left: 0; margin-right: 0;">
+                <code data-line-numbers="3,5" class="python code-small" style="margin-left: 0; margin-right: 0;">
 @app.get("/feature/properties")
 async def feature_properties(address_id: str) -> FeatureProperty:
     properties_kwargs: dict = await get_properties(address_id)
@@ -832,7 +833,7 @@ async def feature_properties(address_id: str) -> FeatureProperty:
         <section id="geojson-response-basic">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">GeoJSON</div>
             <pre>
-                <code data-trim data-line-numbers="|2-5|6|7-11" class="hljs code-normal">{
+                <code data-trim data-line-numbers="|2|3-6|7-11|" class="hljs code-normal">{
     "type": "Feature",
     "geometry": {
         "type": "Point",
@@ -849,7 +850,7 @@ async def feature_properties(address_id: str) -> FeatureProperty:
         </section>
         <section id="pydantic-geojson-basic">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Pydantic GeoJSON BaseModels</div>
-            <pre class="width-fit" style="padding: 0; margin-left: 0;">
+            <pre style="padding: 0; margin-left: 0;">
                 <code class="python code-normal" data-line-numbers="|1-3|1,6|7|8|">class Geometry(BaseModel):
     type: Literal["Point", "LineString", "Polygon", "MultiPolygon"]
     coordinates: List[]
@@ -866,7 +867,7 @@ class GeoJSONFeature(BaseModel):
         <section id="geojson-response-collection">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">GeoJSON FeatureCollection</div>
             <pre style="padding: 0; margin-left: 0;">
-                <code class="width-fit hljs code-small" data-line-numbers="2-3,5-6,10-11">{
+                <code class="hljs code-small" data-line-numbers="2-3,5-6,10-11">{
   "type": "FeatureCollection",
   "features": [
     {
@@ -886,7 +887,7 @@ class GeoJSONFeature(BaseModel):
         <section id="pydantic-geojson-collection">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Pydantic GeoJSON FeatureCollection BaseModels</div>
             <pre style="padding: 0; margin-left: 0;">
-                <code class="width-fit python code-normal" data-line-numbers="|2">class Geometry(BaseModel):
+                <code class="python code-normal" data-line-numbers="|2">class Geometry(BaseModel):
     type: Literal["Point", "LineString", "Polygon", "MultiPolygon"]
     coordinates: List[float]
 
@@ -935,18 +936,19 @@ class GeoJSONFeatureCollection(BaseModel):
                 Geometry Pydantic BaseModels
             </div>
             <pre>
-                <code class="python">class ListString(Geometry):
-    type: str = "ListString"
+                <code class="python">class LineString(Geometry):
+    type: str = "LineString"
     coordinates: List[Coordinate]]
+
 
 class Polygon(Geometry):
     type: str = "Polygon"
     coordinates: List[List[Coordinate]]]
 
+
 class MultiPolygon(Geometry):
     type: str = "MultiPolygon"
-    coordinates: List[List[List[Coordinate]]]]</code>
-            </pre>
+    coordinates: List[List[List[Coordinate]]]]</code>            </pre>
         </section>
 
         <section id="leaflet" data-background="graphics/leaflet.png"></section>
@@ -956,7 +958,7 @@ class MultiPolygon(Geometry):
                 G-NAF response
             </div>
             <pre style="padding: 0; margin-left: 0; margin-right: 0; height: 20em;">
-                <code data-line-numbers="2,6-7,11-12,17,20" class="hljs width-fit code-small-85" style="padding: 0; margin-left: 0; margin-right: 0;">{
+                <code data-line-numbers="2,6-7,11-12,17,20" class="hljs code-small-85" style="padding: 0; margin-left: 0; margin-right: 0;">{
     "type": "FeatureCollection",
     "features": [
         {
@@ -1043,6 +1045,7 @@ class MultiPolygon(Geometry):
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
                 <div style="font-size: 200%"></div>
             </div>
+
         </section>
 
         <section data-visibility="hidden">
@@ -1060,10 +1063,13 @@ class MultiPolygon(Geometry):
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
                 <div style="font-size: 200%">FIN</div>
             </div>
+            <p>Come speak at the:<br><b>Canberra Python User Group</b>
+              <br><em style="color: #333">contact us!</em></p>
             <br>
-            <p>Come speak at the:<br><b>Canberra Python User Group</b></p>
-            <br>
-            <p>Support/be a coach at:<br><b>DjangoGirls</b></p>
+            <p>Support/be a coach at:<br><b>DjangoGirls</b>
+              <br>Canberra event tomorrow!
+              <br>Adelaide event on PyconAU Monday
+              <br><em style="color: #333">and future events</em></p>
         </section>
 
     </div>
