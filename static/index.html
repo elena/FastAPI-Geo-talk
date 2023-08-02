@@ -62,19 +62,17 @@
                 know?"
             </div>
         </section>
-        <section id="doing-today">
+        <section id="doing-today" data-background="graphics/bg.png">
             <h3>What we ARE doing here today:</h3>
             <ul>
                 <li>Geocoded National Address File (G-NAF)</li>
                 <li><p>FastAPI</p>
                     <ul>
-                        <li>(APIs) <em>[not really]</em></li>
                         <li>(Async) <em>[not really]</em></li>
                         <li>Pydantic</li>
                     </ul>
                 </li>
                 <li><p>GeoJSON</p></li>
-                <li><p>Pydantic</p></li>
             </ul>
         </section>
         <section id="doing-not-today" style="font-size: 85%; line-height: 2">
@@ -109,7 +107,7 @@
             <br>
             <div style="background-color: rgba(0, 0, 0, 0.6); color: #fff; padding: 20px;">
                 <div></div>
-                <div><i class="subtext">Names for "locations"</i>
+                <div><i class="subtext">Names for physical "locations"</i>
                 </div>
             </div>
 
@@ -159,7 +157,7 @@
             <div style="background-color: rgba(0, 0, 0, 0.4); color: #fff; padding: 20px;">
                 <div style="font-size: 100%">G-NAF (2004) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; G-NAF-Core (2022)</div>
             </div>
-            <div style="color: rgba(255, 255, 255, 0.25); font-size: 50%; text-align: right">*</div>
+            <div style="color: rgba(0,0,0, 0.25); font-size: 50%; text-align: right">*</div>
         </section>
         <section id="title-flask"  data-background="graphics/github_flask.png">
             <div style="background-color: rgba(0, 0, 0, 0.6); color: #fff; padding: 20px;">
@@ -355,10 +353,13 @@ async def root(term: str = None) -> dict[str, list[str]]:
                 * FastAPI excellent use case
             </aside>
         </section>
-        <section id="eg2-predictive">
-            <iframe data-src="https://demo.geoscape.com.au/predictive/index.html" width="700px" height="500px"></iframe>
-            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">https://demo.geoscape.com.au/predictive/</div>
-            <div style="color: rgba(255, 255, 255, 0.25); font-size: 50%; text-align: right">*</div>
+        <section>
+            <section id="eg2-predictive">
+                <iframe data-src="https://demo.geoscape.com.au/predictive/index.html" width="700px" height="500px"></iframe>
+                <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">https://demo.geoscape.com.au/predictive/</div>
+                <div style="color: rgba(255, 255, 255, 0.25); font-size: 50%; text-align: right">*</div>
+            </section>
+            <section data-background-video="graphics/bu/predictive.mov"></section>
         </section>
 
         <section id="title-pydantic-0">
@@ -852,7 +853,7 @@ async def feature_properties(address_id: str) -> FeatureProperty:
         <section id="pydantic-geojson-basic">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Pydantic GeoJSON BaseModels</div>
             <pre style="padding: 0; margin-left: 0;">
-                <code class="python code-normal" data-line-numbers="|1-3|1,6|7|8|">class Geometry(BaseModel):
+                <code class="python code-normal" data-line-numbers="|1-3|5|6|7|8">class Geometry(BaseModel):
     type: Literal["Point", "LineString", "Polygon", "MultiPolygon"]
     coordinates: List[]
 
@@ -868,7 +869,7 @@ class GeoJSONFeature(BaseModel):
         <section id="geojson-response-collection">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">GeoJSON FeatureCollection</div>
             <pre style="padding: 0; margin-left: 0;">
-                <code class="hljs code-small" data-line-numbers="2-3,5-6,10-11">{
+                <code class="hljs code-small" data-line-numbers="2-3,5-6,10-11|5,10|6,11|7,12|2,3">{
   "type": "FeatureCollection",
   "features": [
     {
@@ -881,14 +882,13 @@ class GeoJSONFeature(BaseModel):
       "geometry": {"type": "Point", "coordinates": [151.20009, -33.87468]},
       "properties": {"name": "Sydney Convention Centre", "was_pyconau_here": True}
     }
-  ]
-}</code>
+  ]</code>
             </pre>
         </section>
         <section id="pydantic-geojson-collection">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Pydantic GeoJSON FeatureCollection BaseModels</div>
             <pre style="padding: 0; margin-left: 0;">
-                <code class="python code-normal" data-line-numbers="|2">class Geometry(BaseModel):
+                <code class="python code-normal" data-line-numbers="10-12||2">class Geometry(BaseModel):
     type: Literal["Point", "LineString", "Polygon", "MultiPolygon"]
     coordinates: List[float]
 
@@ -907,30 +907,46 @@ class GeoJSONFeatureCollection(BaseModel):
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Point</div>
             <img src="graphics/geo/geo_point.png">
         </section>
-        <section id="map-point" data-background="">
-            <iframe data-src="/maps/point/" width="960px" height="700px"></iframe>
+        <section>
+            <section id="map-point">
+                <iframe data-src="/maps/point/" width="960px" height="700px"></iframe>
+            </section>
+            <section data-background="graphics/bu/point.png"></section>
         </section>
+
         <section id="geojson-linestring">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">LineString</div>
             <img src="graphics/geo/geo_linestring.png">
         </section>
-        <section id="map-linestring" data-background="">
-            <iframe data-src="/maps/linestring/" width="960px" height="700px"></iframe>
+        <section>
+            <section id="map-linestring">
+                <iframe data-src="/maps/linestring/" width="960px" height="700px"></iframe>
+            </section>
+            <section data-background="graphics/bu/linestring.png"></section>
         </section>
+
         <section id="geojson-polygon">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Polygon</div>
             <img src="graphics/geo/geo_polygon.png">
         </section>
-        <section id="map-polygon" data-background="">
-            <iframe data-src="/maps/polygon/" width="960px" height="700px"></iframe>
+        <section>
+            <section id="map-polygon">
+                <iframe data-src="/maps/polygon/" width="960px" height="700px"></iframe>
+            </section>
+            <section data-background="graphics/bu/polygon.png"></section>
         </section>
+
         <section id="geojson-multi-polygon">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Multi-Polygon</div>
             <img src="graphics/geo/geo_multipolygon.png">
         </section>
-        <section id="map-multipolygon" data-background="">
-            <iframe data-src="/maps/multipolygon/" width="960px" height="700px"></iframe>
+        <section>
+            <section id="map-multipolygon">
+                <iframe data-src="/maps/multipolygon/" width="960px" height="700px"></iframe>
+            </section>
+            <section data-background="graphics/bu/multipolygon.png"></section>
         </section>
+
 
         <section id="pydantic-geometries">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
@@ -1025,7 +1041,7 @@ class MultiPolygon(Geometry):
             </pre>
         </section>
         <section id="maps-point">
-            <div style="font-size: 0.4em; text-align: right"><a href="https://github.com/elena/FastAPI-Geo-talk/blob/draft/static/maps/point/index.html">https://github.com/elena/FastAPI-Geo-talk/blob/draft/static/maps/point/index.html</a> </div>
+            <div style="font-size: 0.4em; text-align: right"><a href="https://github.com/elena/FastAPI-Geo-talk/main/static/maps/point/index.html">https://github.com/elena/FastAPI-Geo-talk/blob/draft/static/leaflet/index.html</a> </div>
             <iframe data-src="/leaflet/" width="960px" height="680px"></iframe>
         </section>
 
@@ -1044,14 +1060,14 @@ class MultiPolygon(Geometry):
 
         <section id="eg4-async-gather">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Putting It Together</div>
-          <pre style="left: -60px">
-              <code class="python code-small width-fit">async def get_data_geo_address(coord): ...
-async def get_roads(coord): ...
+          <pre style="left: -30px">
+              <code class="python code-small width-fit">async def get_address(coord): ...
 async def get_land(coord): ...
 async def get_buildings(coord): ...
 async def get_pools(coord): ...
 async def get_solar(coord): ...
-my_get_data_callables = [get_roads, get_land, get_buildings, get_pools, get_solar]
+async def get_electorate(coord): ...
+my_get_data_callables = [get_roads, get_land, get_buildings, get_pools, get_solar, get_electorate]
 
 @app.get("/address/")
 async def get_address(coord: Coordinate) -> GeoJSONFeatureCollection:
@@ -1063,14 +1079,14 @@ async def get_address(coord: Coordinate) -> GeoJSONFeatureCollection:
         </section>
         <section id="eg4-async-gather-jks">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Putting It Together</div>
-            <pre style="left: -60px">
-              <code class="python code-small width-fit">async def get_data_geo_address(coord): ...
-async def get_roads(coord): ...
+            <pre style="left: -30px">
+              <code class="python code-small width-fit">async def get_address(coord): ...
 async def get_land(coord): ...
 async def get_buildings(coord): ...
 async def get_pools(coord): ...
 async def get_solar(coord): ...
-my_get_data_callables = [get_roads, get_land, get_buildings, get_pools, get_solar]
+async def get_electorate(coord): ...
+my_get_data_callables = [get_roads, get_land, get_buildings, get_pools, get_solar, get_electorate]
 
 @app.get("/address/")
 async def get_address(coord: Coordinate) -> GeoJSONFeatureCollection:
