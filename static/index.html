@@ -32,10 +32,11 @@
             line-height: 1.25em;
         }
         .width-fit {width: fit-content}
+        #fastapi-talk.reveal pre {width: 100%}
     </style>
 </head>
 <body>
-<div class="reveal">
+<div class="reveal" id="fastapi-talk">
     <div class="slides">
         <section id="title" data-background-video="graphics/geoscape.mp4">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
@@ -1042,10 +1043,42 @@ class MultiPolygon(Geometry):
         <section id="data-layers8" data-background="graphics/s8.png"></section>
 
         <section id="eg4-async-gather">
-            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-                <div style="font-size: 200%"></div>
-            </div>
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Putting It Together</div>
+          <pre style="left: -60px">
+              <code class="python code-small width-fit">async def get_data_geo_address(coord): ...
+async def get_roads(coord): ...
+async def get_land(coord): ...
+async def get_buildings(coord): ...
+async def get_pools(coord): ...
+async def get_solar(coord): ...
+my_get_data_callables = [get_roads, get_land, get_buildings, get_pools, get_solar]
 
+@app.get("/address/")
+async def get_address(coord: Coordinate) -> GeoJSONFeatureCollection:
+     return GeoJSONFeature(
+         ...
+         properties=async.gather(*[c(coord) for c in my_get_data_callables])
+     )</code>
+            </pre>
+        </section>
+        <section id="eg4-async-gather-jks">
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Putting It Together</div>
+            <pre style="left: -60px">
+              <code class="python code-small width-fit">async def get_data_geo_address(coord): ...
+async def get_roads(coord): ...
+async def get_land(coord): ...
+async def get_buildings(coord): ...
+async def get_pools(coord): ...
+async def get_solar(coord): ...
+my_get_data_callables = [get_roads, get_land, get_buildings, get_pools, get_solar]
+
+@app.get("/address/")
+async def get_address(coord: Coordinate) -> GeoJSONFeatureCollection:
+     return GeoJSONFeature(
+         ...
+         properties=await async.gather(*[c(coord) for c in my_get_data_callables])
+     )</code>
+            </pre>
         </section>
 
         <section data-visibility="hidden">
