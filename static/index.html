@@ -41,7 +41,7 @@
         <section id="title" data-background-video="graphics/geoscape.mp4">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
                 <h1>Learning FastAPI</h1>
-                <h3>On Hard Hode</h3>
+                <h3>On Hard Mode</h3>
                 <p><em>Getting out lots of Geo data fast &raquo; </em></p>
             </div>
         </section>
@@ -185,7 +185,9 @@
                 <div style="font-size: 200%">FastAPI</div>
             </div>
         </section>
-        <section id="trends" data-background="graphics/background/trends.png"></section>
+        <section id="trends" data-background="graphics/background/trends.png">
+            <div style="color: rgba(0,0,0, 0.5); font-size: 50%; text-align: right;">*</div>
+        </section>
         <section id="code-flask">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
                 <code>app.py</code>
@@ -274,6 +276,7 @@ $ uvicorn app:app --reload
                 <pre style="font-size: 0.6em">http://localhost:8000<b>/docs</b></pre>
                 <div style="font-size: 0.5em; color: rgba(255, 255, 255, 0.5); text-align: left; margin-left: 25px">Self-generated OpenAPI documentation</div>
             </div>
+            <div style="color: rgba(0,0,0, 0.5); font-size: 50%; text-align: right;">*</div>
         </section>
 
         <section id="title-async">
@@ -1041,7 +1044,7 @@ class MultiPolygon(Geometry):
             </pre>
         </section>
         <section id="maps-point">
-            <div style="font-size: 0.4em; text-align: right"><a href="https://github.com/elena/FastAPI-Geo-talk/main/static/maps/point/index.html">https://github.com/elena/FastAPI-Geo-talk/blob/draft/static/leaflet/index.html</a> </div>
+            <div style="font-size: 0.4em; text-align: right"><a href="https://github.com/elena/FastAPI-Geo-talk/main/static/maps/point/index.html">https://github.com/elena/FastAPI-Geo-talk/main/static/leaflet/index.html</a> </div>
             <iframe data-src="/leaflet/" width="960px" height="680px"></iframe>
         </section>
 
@@ -1058,6 +1061,13 @@ class MultiPolygon(Geometry):
         <section id="data-layers7" data-background="graphics/s7.png"></section>
         <section id="data-layers8" data-background="graphics/s8.png"></section>
 
+        <section id="title-async">
+            <div style="color: rgba(255, 255, 255, 0.5)">
+                <em>"<b style="color: white;">threading</b> is for <b style="color: white;">working</b> in parallel,<br>
+                    <b style="color: white;">async</b> is for <b style="color: white;">waiting</b> in parallel"</em>
+            </div>
+        </section>
+
         <section id="eg4-async-gather">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Putting It Together</div>
           <pre style="left: -30px">
@@ -1066,8 +1076,9 @@ async def get_land(coord): ...
 async def get_buildings(coord): ...
 async def get_pools(coord): ...
 async def get_solar(coord): ...
+async def get_seifa(coord): ...
 async def get_electorate(coord): ...
-my_get_data_callables = [get_roads, get_land, get_buildings, get_pools, get_solar, get_electorate]
+my_get_data_callables = [get_address, get_roads, get_land, get_buildings, get_pools, get_solar, get_electorate]
 
 @app.get("/address/")
 async def get_address(coord: Coordinate) -> GeoJSONFeatureCollection:
@@ -1085,8 +1096,9 @@ async def get_land(coord): ...
 async def get_buildings(coord): ...
 async def get_pools(coord): ...
 async def get_solar(coord): ...
+async def get_seifa(coord): ...
 async def get_electorate(coord): ...
-my_get_data_callables = [get_roads, get_land, get_buildings, get_pools, get_solar, get_electorate]
+my_get_data_callables = [get_address, get_roads, get_land, get_buildings, get_pools, get_solar, get_electorate]
 
 @app.get("/address/")
 async def get_address(coord: Coordinate) -> GeoJSONFeatureCollection:
@@ -1096,6 +1108,7 @@ async def get_address(coord: Coordinate) -> GeoJSONFeatureCollection:
      )</code>
             </pre>
         </section>
+
 
         <section data-visibility="hidden">
             <section id="xkcd" data-background="graphics/xkcd.png"></section>
@@ -1115,7 +1128,7 @@ async def get_address(coord: Coordinate) -> GeoJSONFeatureCollection:
             <p>Come speak at the:<br><b>Canberra Python User Group</b>
               <br><em style="color: #333">contact us!</em></p>
             <br>
-            <p>Support/be a coach at:<br><b>DjangoGirls</b>
+            <p>Support <b>DjangoGirls</b>
               <br>Canberra event tomorrow!
               <br>Adelaide event on PyconAU Monday
               <br><em style="color: #333">and future events</em></p>
