@@ -139,7 +139,7 @@
 
         <section id="1992" data-background="graphics/background/census.png">
             <div style="font-size: 125%; background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; margin-top: -300px">
-                <b>Australia 1994: <img height="70px" style="top: 20px; margin: -20px 0;" src="/graphics/background/ABS.gif"> Census year</b>
+                <b>Australia 1996: <img height="70px" style="top: 20px; margin: -20px 0;" src="/graphics/background/ABS.gif"> Census year</b>
             </div>
         </section>
         <section id="owned-by-states" data-background="graphics/background/states-0.png">
@@ -151,6 +151,20 @@
                 </div>
             </div>
         </section>
+
+        <section id="address-contributors" data-background="graphics/background/address4.png">
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
+                <b>Most Trusted Source</b> <em>since 1992</em>
+            </div>
+            <div style="background-color: rgba(0, 0, 0, 0.8); color: #fff; margin-top: 15px; font-size: 0.7em; height: 12em">
+                    <ul style="line-height: 1.3em; margin-top: 15px">
+                        <li>No single supplier has <br>all addresses in use<br>&nbsp;</li>
+                        <li>Suppliers only agree on 67%<br>&nbsp;</li>
+                        <li>Suppliers disagree on 3-8%</li>
+                    </ul>
+                <img style="height: 350px; margin: 0 100px; position: relative; float: right" src="graphics/background/sources.png"><br>
+            </div>
+        </section>
         <section id="gnaf" data-background="graphics/background/gnaf-0.png"></section>
 
         <section id="gnaf-monster" data-background="graphics/background/gnaf-1.png">
@@ -159,6 +173,20 @@
             </div>
             <div style="color: rgba(0,0,0, 0.25); font-size: 50%; text-align: right">*</div>
         </section>
+        <section id="gnaf-monster-free" data-background="graphics/background/gnaf-1.png">
+            <div style="background-color: rgba(0, 0, 0, 0.4); color: #fff; padding: 20px;">
+                <div style="font-size: 100%">G-NAF (2004) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; G-NAF-Core (2022)</div>
+            </div>
+            <span style="padding: 5px 15px; color: rgba(255,255,255, 1); background-color: rgba(255,10,20,0.7);  height: 2em;">
+                Available for <b>FREE</b> from <code>data.gov.au</code>!
+            </span>
+            <br><span style="color: rgba(255,255,255, 1); background-color: rgba(255,10,20,0.7); font-size: 50%;">
+            as in beer<br> thanks Geoscape, thanks Australian governments
+        </span>
+        </section>
+
+        <section id="intentionally-left-blank1"></section>
+
         <section id="title-flask"  data-background="graphics/github_flask.png">
             <div style="background-color: rgba(0, 0, 0, 0.6); color: #fff; padding: 20px;">
                 <div style="font-size: 200%">Flask</div>
@@ -179,15 +207,16 @@
                 <div style="font-size: 200%"><del>Starlette</del></div>
             </div>
         </section>
-
         <section id="title-fastapi"  data-background="graphics/github_fastapi.png">
             <div style="background-color: rgba(0, 0, 0, 0.6); color: #fff; padding: 20px;">
                 <div style="font-size: 200%">FastAPI</div>
             </div>
         </section>
+
         <section id="trends" data-background="graphics/background/trends.png">
             <div style="color: rgba(0,0,0, 0.5); font-size: 50%; text-align: right;">*</div>
         </section>
+
         <section id="code-flask">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
                 <code>app.py</code>
@@ -248,6 +277,36 @@ def root():
                 </pre>
 
         </section>
+
+        <section id="code-fastapi-flask-compare-pydantic">
+            FastAPI
+            <pre>
+                    <code data-trim data-line-numbers="6-7|" class="python" style="font-size: 1.2em; line-height: 1.25">
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/")
+async def root() -> MyPydantic:
+    return MyPydantic(message="Hello World")
+                    </code>
+                </pre>
+
+            Flask
+            <pre>
+                    <code data-trim data-line-numbers="" class="python" style="opacity: 0.6; font-size: 1.2em; line-height: 1.25;">
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route("/")
+def root():
+    return "<p>Hello, World!</p>"
+                    </code>
+                </pre>
+
+        </section>
+
         <section id="runserver">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
                 Run locally:
@@ -684,8 +743,8 @@ my_class
 
         <section id="pydantic-validation-Literal">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;"><code>Literal</code> is good</div>
-            <pre class="width-fit" style="padding: 0; margin-left: 0; margin-right: 0;">
-                <code class="python code-small width-fit">from pydantic import BaseModel
+            <pre>
+                <code data-trim data-line-numbers="2,4,6,11" class="python">from pydantic import BaseModel
 from typing import Literal
 
 StateTerritory = Literal["ACT", "NSW", "NT", "OT", "QLD", "SA", "TAS", "VIC", "WA"]
@@ -695,15 +754,15 @@ class FeatureProperty(BaseModel):
     street_name: str
     locality: str
     postcode: str
-    state: Literal[StateTerritory]
+    state: Literal[StateTerritory]                                                                                       .
 
   </code>
             </pre>
         </section>
         <section id="pydantic-validation-literal-address">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;"><code>Literal</code> is good</div>
-            <pre class="width-fit" style="padding: 0; margin-left: 0; margin-right: 0;">
-                <code class="python code-small width-fit" >>>> feature_data = {
+            <pre>
+                <code data-trim data-line-numbers="6" class="python" >>>> feature_data = {
 ...     "street_number": "101",
 ...     "street_name": "North Terrace",
 ...     "locality": "Adelaide",
@@ -711,19 +770,18 @@ class FeatureProperty(BaseModel):
 ...     "state": "SOME RANDOM THING NOT A STATE"                                                                                    .
 ... }
 >>> FeatureProperty(**feature_data)
-
-
-
-
-
-</code>
+                                                                                                                        .
+                                                                                                                        .
+                                                                                                                        .
+                                                                                                                        .
+                                                                                                                        .</code>
             </pre>
         </section>
         <section id="pydantic-validation-literal-address-traceback-boom1" data-background="graphics/explode.gif"></section>
         <section id="pydantic-validation-literal-address-traceback">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Invalid <code>Literal</code> is nope</div>
-            <pre class="width-fit" style="padding: 0; margin-left: 0; margin-right: 0;">
-                <code class="python code-small width-fit" >>>> feature_data = {
+            <pre>
+                <code data-trim data-line-numbers="6,10,12" class="python" >>>> feature_data = {
 ...     "street_number": "101",
 ...     "street_name": "North Terrace",
 ...     "locality": "Adelaide",
@@ -742,24 +800,21 @@ state
 
         <section id="pydantic-field">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Pydantic <code>Field</code></div>
-            <pre style="padding: 0; margin-left: 0; margin-right: 0;">
-                <code class="python code-small" style="padding: 20px; margin-left: 0; margin-right: 0;">from typing import Union
+            <pre>
+                <code data-trim data-line-numbers="|3,6-7" class="python">from typing import Union
 from uuid import uuid4
 from pydantic import BaseModel, Field
 
-
 class Coordinate(BaseModel):
     lon: Union[float, int] = Field(ge=-180, le=180)
-    lat: Union[float, int] = Field(ge=-90, le=90)
-                </code>
+    lat: Union[float, int] = Field(ge=-90, le=90)</code>
             </pre>
         </section>
         <section id="pydantic-field-defaults">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Pydantic: <code>Field</code> defaults</div>
-            <pre style="padding: 0; margin-left: 0; margin-right: 0;">
-                <code class="python" style="padding: 20px; margin-left: 0; margin-right: 0;">from uuid import uuid4
+            <pre>
+                <code data-trim data-line-numbers="|5|7|" class="python">from uuid import uuid4
 from pydantic import BaseModel, Field
-
 
 class MyClass(BaseModel):
     my_address: str = Field(default='My house')
@@ -767,7 +822,7 @@ class MyClass(BaseModel):
     my_hash_key: int = Field(default_factory=lambda: uuid4().hex)
 
     love_for_python: float = Field(
-        allow_inf_nan=True, default=float('inf')
+        allow_inf_nan=True, default=float('inf')                                                                        .
     )
 </code>
             </pre></section>
@@ -836,9 +891,9 @@ async def feature_properties(address_id: str) -> FeatureProperty:
         </section>
 
         <section id="geojson-response-basic">
-            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">GeoJSON</div>
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">GeoJSON Feature</div>
             <pre>
-                <code data-trim data-line-numbers="|2|3-6|7-11|" class="hljs code-normal">{
+                <code data-trim data-line-numbers="|2|3-6|7-11||2|3-6|7-11|" class="hljs code-normal">{
     "type": "Feature",
     "geometry": {
         "type": "Point",
@@ -853,6 +908,7 @@ async def feature_properties(address_id: str) -> FeatureProperty:
                 </code>
             </pre>
         </section>
+
         <section id="pydantic-geojson-basic">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Pydantic GeoJSON BaseModels</div>
             <pre style="padding: 0; margin-left: 0;">
@@ -868,11 +924,10 @@ class GeoJSONFeature(BaseModel):
             </pre>
         </section>
 
-
         <section id="geojson-response-collection">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">GeoJSON FeatureCollection</div>
-            <pre style="padding: 0; margin-left: 0;">
-                <code class="hljs code-small" data-line-numbers="2-3,5-6,10-11|5,10|6,11|7,12|2,3">{
+            <pre>
+                <code data-trim data-line-numbers="2|3,5,10|5,10|6,11|7,12|" class="hljs">{
   "type": "FeatureCollection",
   "features": [
     {
@@ -885,9 +940,10 @@ class GeoJSONFeature(BaseModel):
       "geometry": {"type": "Point", "coordinates": [151.20009, -33.87468]},
       "properties": {"name": "Sydney Convention Centre", "was_pyconau_here": True}
     }
-  ]</code>
+  ]}</code>
             </pre>
         </section>
+
         <section id="pydantic-geojson-collection">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Pydantic GeoJSON FeatureCollection BaseModels</div>
             <pre style="padding: 0; margin-left: 0;">
@@ -905,6 +961,11 @@ class GeoJSONFeatureCollection(BaseModel):
     features: List[GeoJSONFeature]</code>
             </pre>
         </section>
+
+        <section id="geojson-geometries">
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">GeoJSON Geometry Types Examples</div>
+        </section>
+
 
         <section id="geojson-point">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Point</div>
@@ -947,9 +1008,8 @@ class GeoJSONFeatureCollection(BaseModel):
             <section id="map-multipolygon">
                 <iframe data-src="/maps/multipolygon/" width="960px" height="700px"></iframe>
             </section>
-            <section data-background="graphics/bu/multipolygon.png"></section>
+            <section data-background-video="graphics/bu/multipolygon.mov"></section>
         </section>
-
 
         <section id="pydantic-geometries">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
@@ -970,8 +1030,20 @@ class MultiPolygon(Geometry):
     type: str = "MultiPolygon"
     coordinates: List[List[List[Coordinate]]]]</code>            </pre>
         </section>
+        <section id="geojson-geometry-misc">
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">GeoJSON Also Allows:</code></div><br>
+            <ul>
+                <li>3D Coordinates:  <code>[x, y, z]</code><br>&nbsp;</li>
+                <li><b>Mix</b> of Features <br>eg: &nbsp; <code>Point</code> + <code>Polygon</code></li>
+            </ul>
+        </section>
 
-        <section id="leaflet" data-background="graphics/leaflet.png"></section>
+        <section id="why-geojson">
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Why do we care about GeoJSON?</div>
+        </section>
+
+        <section id="leaflet" data-background="graphics/github_leaflet.png"></section>
+        <section id="leaflet2" data-background="graphics/leaflet-tutes.png"></section>
 
         <section id="geojson-response-real">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
@@ -1061,47 +1133,84 @@ class MultiPolygon(Geometry):
         <section id="data-layers7" data-background="graphics/s7.png"></section>
         <section id="data-layers8" data-background="graphics/s8.png"></section>
 
-        <section id="title-async">
-            <div style="color: rgba(255, 255, 255, 0.5)">
-                <em>"<b style="color: white;">threading</b> is for <b style="color: white;">working</b> in parallel,<br>
-                    <b style="color: white;">async</b> is for <b style="color: white;">waiting</b> in parallel"</em>
-            </div>
-        </section>
 
-        <section id="eg4-async-gather">
+        <section id="eg4-async-gather-data">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Putting It Together</div>
-          <pre style="left: -30px">
-              <code class="python code-small width-fit">async def get_address(coord): ...
+            <pre style="left: -30px; height: 18em;">
+              <code data-line-numbers="" class="python code-small width-fit">async def get_address(coord): ...
 async def get_land(coord): ...
 async def get_buildings(coord): ...
 async def get_pools(coord): ...
 async def get_solar(coord): ...
 async def get_seifa(coord): ...
 async def get_electorate(coord): ...
-my_get_data_callables = [get_address, get_roads, get_land, get_buildings, get_pools, get_solar, get_electorate]
+my_get_data_callables = [get_address, get_land, get_buildings, get_pools, get_solar, get_electorate, get_roads]                                                                                                                         .
+
+
+
+
+
+
+
+ </code>
+            </pre>
+        </section>
+        <section id="eg4-async-gather">
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Putting It Together</div>
+          <pre style="left: -30px; height: 18em;">
+              <code data-line-numbers="8-15" class="python code-small width-fit">async def get_address(coord): ...
+async def get_land(coord): ...
+async def get_buildings(coord): ...
+async def get_pools(coord): ...
+async def get_solar(coord): ...
+async def get_seifa(coord): ...
+async def get_electorate(coord): ...
+my_get_data_callables = [get_address, get_land, get_buildings, get_pools, get_solar, get_electorate, get_roads]
 
 @app.get("/address/")
-async def get_address(coord: Coordinate) -> GeoJSONFeatureCollection:
+async def get_address(coord: Coordinate) -> GeoJSONFeature:
      return GeoJSONFeature(
          ...
          properties=async.gather(*[c(coord) for c in my_get_data_callables])
      )</code>
             </pre>
         </section>
-        <section id="eg4-async-gather-jks">
+
+        <section id="eg4-async-gather-wait">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Putting It Together</div>
-            <pre style="left: -30px">
-              <code class="python code-small width-fit">async def get_address(coord): ...
+            <pre style="left: -30px; height: 18em;">
+              <code data-line-numbers="14" class="python code-small width-fit">async def get_address(coord): ...
 async def get_land(coord): ...
 async def get_buildings(coord): ...
 async def get_pools(coord): ...
 async def get_solar(coord): ...
 async def get_seifa(coord): ...
 async def get_electorate(coord): ...
-my_get_data_callables = [get_address, get_roads, get_land, get_buildings, get_pools, get_solar, get_electorate]
+my_get_data_callables = [get_address, get_land, get_buildings, get_pools, get_solar, get_electorate, get_roads]
 
 @app.get("/address/")
-async def get_address(coord: Coordinate) -> GeoJSONFeatureCollection:
+async def get_address(coord: Coordinate) -> GeoJSONFeature:
+     return GeoJSONFeature(
+         ...
+         properties=async.gather(*[c(coord) for c in my_get_data_callables])
+     )</code>
+            </pre>
+        </section>
+
+        <section id="eg4-async-gather-await-jks">
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Putting It Together</div>
+            <pre style="left: -30px; height: 18em;">
+              <code data-line-numbers="14" class="python code-small width-fit">async def get_address(coord): ...
+async def get_land(coord): ...
+async def get_buildings(coord): ...
+async def get_pools(coord): ...
+async def get_solar(coord): ...
+async def get_seifa(coord): ...
+async def get_electorate(coord): ...
+my_get_data_callables = [get_address, get_land, get_buildings, get_pools, get_solar, get_electorate, get_roads]
+
+@app.get("/address/")
+async def get_address(coord: Coordinate) -> GeoJSONFeature:
      return GeoJSONFeature(
          ...
          properties=await async.gather(*[c(coord) for c in my_get_data_callables])
