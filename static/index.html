@@ -113,17 +113,6 @@
 
         </section>
         <section id="location" data-background="graphics/background/location_types.png"></section>
-        <section id="where-do-addresses-1" data-background="graphics/background/adelaide-planning.png">
-            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-                <b>Where do addresses get defined?</b>
-            </div>
-            <div style="margin-top: 15px">
-                <div>&nbsp;<br>
-                    <img style="height: 180px; margin: 0 100px;">&nbsp;</img><br>
-                    <br>
-                </div>
-            </div>
-        </section>
 
         <section id="where-do-addresses-3" data-background="graphics/background/adelaide-planning.png">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
@@ -136,8 +125,12 @@
                 </div>
             </div>
         </section>
-
         <section id="1992" data-background="graphics/background/census.png">
+            <div style="font-size: 125%; background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; margin-top: -300px">
+                <b>Australia 1996: <img height="70px" style="top: 20px; margin: -20px 0;" src="/graphics/background/ABS.gif"> Census year</b>
+            </div>
+        </section>
+        <section id="1996" data-background="graphics/background/1996.png">
             <div style="font-size: 125%; background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; margin-top: -300px">
                 <b>Australia 1996: <img height="70px" style="top: 20px; margin: -20px 0;" src="/graphics/background/ABS.gif"> Census year</b>
             </div>
@@ -145,16 +138,15 @@
         <section id="owned-by-states" data-background="graphics/background/states-0.png">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; margin-top: -350px; ">
                 <img height="100px" src="/graphics/background/Geoscape_Logo.jpg">
-                <h3>Owned by</h3>
+                <div style="1.25em">Owned by</div>
                 <div style="color: rgba(255, 255, 255, 0.25); font-size: 75%;">
                     Not Government, but Government owned
                 </div>
             </div>
         </section>
-
         <section id="address-contributors" data-background="graphics/background/address4.png">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-                <b>Most Trusted Source</b> <em>since 1992</em>
+                Single Geocoded National Address File (G-NAF)
             </div>
             <div style="background-color: rgba(0, 0, 0, 0.8); color: #fff; margin-top: 15px; font-size: 0.7em; height: 12em">
                     <ul style="line-height: 1.3em; margin-top: 15px">
@@ -163,10 +155,10 @@
                         <li>Suppliers disagree on 3-8%</li>
                     </ul>
                 <img style="height: 350px; margin: 0 100px; position: relative; float: right" src="graphics/background/sources.png"><br>
+                <br><b>Most trusted source</b> <em>since 1992</em>
             </div>
         </section>
         <section id="gnaf" data-background="graphics/background/gnaf-0.png"></section>
-
         <section id="gnaf-monster" data-background="graphics/background/gnaf-1.png">
             <div style="background-color: rgba(0, 0, 0, 0.4); color: #fff; padding: 20px;">
                 <div style="font-size: 100%">G-NAF (2004) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; G-NAF-Core (2022)</div>
@@ -351,7 +343,7 @@ $ uvicorn app:app --reload
         <section id="async-what-matters">
             <code class="hljs-keyword">async</code> and <code class="hljs-keyword">await</code><br>
             <pre>
-                    <code data-line-numbers="|1-2|1,5|10,4||1,5" class="python" style="font-size: 1.2em; line-height: 1.25">async def get_data():
+                    <code data-line-numbers="|1-2|1,5|10,4|" class="python" style="font-size: 1.2em; line-height: 1.25">async def get_data():
     return {"item": "Bar"}
 
 async def do_logic():
@@ -423,6 +415,8 @@ async def root(term: str = None) -> dict[str, list[str]]:
             </section>
             <section data-background-video="graphics/bu/predictive.mov"></section>
         </section>
+
+        <section id="intentionally-left-blank2"></section>
 
         <section id="title-pydantic-0">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
@@ -843,10 +837,9 @@ class MyClass(BaseModel):
 {'response_a': 'a'}</code>
             </pre></section>
         <section id="pydantic-inheritance">
-            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Pydantic Inheritance</div>
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Pydantic Inheritance and <code>@property</code></div>
             <pre style="padding: 0; margin-left: 0; margin-right: 0;">
               <code class="python code-small" style="padding: 20px; margin-left: 0; margin-right: 0;">from pydantic import BaseModel, computed_field
-
 
 class Building(BaseModel):
     id: str = "My building ID"
@@ -854,7 +847,6 @@ class Building(BaseModel):
 
 class House(Building):
     ...
-
     @computed_field
     @property
     def get_id_field_times_two(self):
@@ -1034,7 +1026,8 @@ class MultiPolygon(Geometry):
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">GeoJSON Also Allows:</code></div><br>
             <ul>
                 <li>3D Coordinates:  <code>[x, y, z]</code><br>&nbsp;</li>
-                <li><b>Mix</b> of Features <br>eg: &nbsp; <code>Point</code> + <code>Polygon</code></li>
+                <li><b>Mix</b> of Features in <code>FeatureCollection</code>
+                    <br>eg: &nbsp; <code>Point</code> + <code>Polygon</code> ✅ </li>
             </ul>
         </section>
 
@@ -1238,9 +1231,9 @@ async def get_address(coord: Coordinate) -> GeoJSONFeature:
               <br><em style="color: #333">contact us!</em></p>
             <br>
             <p>Support <b>DjangoGirls</b>
-              <br>Canberra event tomorrow!
-              <br>Adelaide event on PyconAU Monday
-              <br><em style="color: #333">and future events</em></p>
+              <br>Adelaide event on Monday!
+            <br>more Canberra events upcoming
+            <br><em style="color: #333">and future events</em></p>
         </section>
 
     </div>
