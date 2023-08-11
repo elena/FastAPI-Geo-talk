@@ -155,7 +155,7 @@
                         <li>Suppliers disagree on 3-8%</li>
                     </ul>
                 <img style="height: 350px; margin: 0 100px; position: relative; float: right" src="graphics/background/sources.png"><br>
-                <br><b>Most trusted source</b> <em>since 1992</em>
+                <br><b>Most trusted source</b> <em>since '90s</em>
             </div>
         </section>
         <section id="gnaf" data-background="graphics/background/gnaf-0.png"></section>
@@ -435,8 +435,10 @@ async def root(term: str = None) -> dict[str, list[str]]:
             </div>
         </section>
 
-        <section id="typing-bdfl" data-background="graphics/background/bdfl.png"></section>
-        <section id="typing-duck" data-background="graphics/background/duck.png"></section>
+        <section id="typing-bdfl" data-background="graphics/background/bdfl.png">
+            <div class="width-fit" style="background-color: rgba(0, 0, 0, 0.5); color: rgba(255, 255, 255, 0.5); font-size: 75%;
+            text-align: right; margin-top: -320px; margin-left: 600px; padding: 10px 30px">PyLadies auction 2019</div>
+        </section>
 
         <section id="typing-basics-1">
             <pre>
@@ -868,13 +870,13 @@ class House(Building):
             </pre></div>
             <div>
             <pre style="margin-left: 0; margin-right: 0;">
-                <code data-line-numbers="3,5" class="python code-small" style="margin-left: 0; margin-right: 0;">
-@app.get("/feature/properties")
+                <code data-line-numbers="2,4" class="python code-small" style="margin-left: 0; margin-right: 0;">@app.get("/feature/properties")
 async def feature_properties(address_id: str) -> FeatureProperty:
     properties_kwargs: dict = await get_properties(address_id)
-    return FeatureProperty(**properties_kwargs)</code>
-            </pre></div>
+    return FeatureProperty(**properties_kwargs)</code></pre></div>
         </section>
+
+        <section id="intentionally-left-blank3"></section>
 
         <section id="title-IETF" data-background="graphics/IETF.png">
             <div style="background-color: rgba(0, 0, 0, 0.6); color: #fff; padding: 20px;">
@@ -900,11 +902,10 @@ async def feature_properties(address_id: str) -> FeatureProperty:
                 </code>
             </pre>
         </section>
-
         <section id="pydantic-geojson-basic">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Pydantic GeoJSON BaseModels</div>
             <pre style="padding: 0; margin-left: 0;">
-                <code class="python code-normal" data-line-numbers="|1-3|5|6|7|8">class Geometry(BaseModel):
+                <code class="python code-normal" data-line-numbers="|1-3|5|6|7|8|">class Geometry(BaseModel):
     type: Literal["Point", "LineString", "Polygon", "MultiPolygon"]
     coordinates: List[]
 
@@ -915,11 +916,10 @@ class GeoJSONFeature(BaseModel):
                 </code>
             </pre>
         </section>
-
         <section id="geojson-response-collection">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">GeoJSON FeatureCollection</div>
             <pre>
-                <code data-trim data-line-numbers="2|3,5,10|5,10|6,11|7,12|" class="hljs">{
+                <code data-trim data-line-numbers="|2|3,5,10|5,10|6,11|7,12|" class="hljs">{
   "type": "FeatureCollection",
   "features": [
     {
@@ -935,7 +935,6 @@ class GeoJSONFeature(BaseModel):
   ]}</code>
             </pre>
         </section>
-
         <section id="pydantic-geojson-collection">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Pydantic GeoJSON FeatureCollection BaseModels</div>
             <pre style="padding: 0; margin-left: 0;">
@@ -953,11 +952,9 @@ class GeoJSONFeatureCollection(BaseModel):
     features: List[GeoJSONFeature]</code>
             </pre>
         </section>
-
         <section id="geojson-geometries">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">GeoJSON Geometry Types Examples</div>
         </section>
-
 
         <section id="geojson-point">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Point</div>
@@ -1136,7 +1133,7 @@ async def get_buildings(coord): ...
 async def get_pools(coord): ...
 async def get_solar(coord): ...
 async def get_seifa(coord): ...
-async def get_electorate(coord): ...
+async def get_electorates(coord): ...
 my_get_data_callables = [get_address, get_land, get_buildings, get_pools, get_solar, get_electorate, get_roads]                                                                                                                         .
 
 
@@ -1157,7 +1154,7 @@ async def get_buildings(coord): ...
 async def get_pools(coord): ...
 async def get_solar(coord): ...
 async def get_seifa(coord): ...
-async def get_electorate(coord): ...
+async def get_electorates(coord): ...
 my_get_data_callables = [get_address, get_land, get_buildings, get_pools, get_solar, get_electorate, get_roads]
 
 @app.get("/address/")
@@ -1178,7 +1175,7 @@ async def get_buildings(coord): ...
 async def get_pools(coord): ...
 async def get_solar(coord): ...
 async def get_seifa(coord): ...
-async def get_electorate(coord): ...
+async def get_electorates(coord): ...
 my_get_data_callables = [get_address, get_land, get_buildings, get_pools, get_solar, get_electorate, get_roads]
 
 @app.get("/address/")
@@ -1199,7 +1196,7 @@ async def get_buildings(coord): ...
 async def get_pools(coord): ...
 async def get_solar(coord): ...
 async def get_seifa(coord): ...
-async def get_electorate(coord): ...
+async def get_electorates(coord): ...
 my_get_data_callables = [get_address, get_land, get_buildings, get_pools, get_solar, get_electorate, get_roads]
 
 @app.get("/address/")
@@ -1213,6 +1210,44 @@ async def get_address(coord: Coordinate) -> GeoJSONFeature:
 
 
         <section data-visibility="hidden">
+            <section id="typing-duck" data-background="graphics/background/duck.png"></section>
+            <section id="where-do-addresses-1" data-background="graphics/background/adelaide-planning.png">
+                <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
+                    <b>Where do addresses get defined?</b>
+                </div>
+                <div style="margin-top: 15px">
+                    <div>&nbsp;<br>
+                        <img style="height: 180px; margin: 0 100px;">&nbsp;</img><br>
+                        <br>
+                    </div>
+                </div>
+            </section>
+            <section id="title-async-redux">
+                <div style="color: rgba(255, 255, 255, 0.5)">
+                    <em>"<b style="color: white;">threading</b> is for <b style="color: white;">working</b> in parallel,<br>
+                        <b style="color: white;">async</b> is for <b style="color: white;">waiting</b> in parallel"</em>
+                </div>
+            </section>
+            <section id="async-what-matters-redux">
+                <code class="hljs-keyword">async</code> and <code class="hljs-keyword">await</code><br>
+                <pre>
+                    <code data-line-numbers="1-2,8-10" class="python" style="font-size: 1.2em; line-height: 1.25">async def get_data():
+    return {"item": "Bar"}
+
+async def do_logic():
+    data = await get_data()
+    return {"Foo": data["item"]}
+
+@app.get("/")
+async def root():
+    return await do_logic()
+                    </code>
+                </pre>
+                <aside class="notes">Normal functions are fine. Don't forget await, even when it's complex.
+                    Most cases would say this is overkill but there are cases, where we like performance. Let me share one.
+                </aside>
+            </section>
+
             <section id="xkcd" data-background="graphics/xkcd.png"></section>
             <section id="xkcd-datum" data-background="graphics/xkcd-datum.png"></section>
             <section id="xkcd-datum-enhance" data-background="graphics/xkcd-datum_enhance.png"></section>
