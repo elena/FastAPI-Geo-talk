@@ -79,11 +79,11 @@
             <h3>What we are NOT doing here today:</h3>
             <ul>
                 <li><p><b>Not</b> <b>full</b> web application<br>
-                    <em>no frontend here</em></p></li>
+                    </p></li>
                 <li><p><b>Not</b> talking much about <b>data</b> layer<br>
-                    <em>it’s not python and everyone's data is special ✨</em></p></li>
+                    <em>not python, very complex</em></p></li>
                 <li><p><b>Not</b> talking about <b>deployment</b><br>
-                    <em>because serverless, feel free to pick your own poison</em></p></li>
+                    <em>cloud serverless</em></p></li>
             </ul>
             <p>Per abstract:<br><b>APIs! Async! Type validation! ISO standards!
                 Large geodata!</b></p>
@@ -125,12 +125,12 @@
                 </div>
             </div>
         </section>
-        <section id="1992" data-background="graphics/background/census.png">
+        <section data-visibility="hidden" id="1992" data-background="graphics/background/census.png">
             <div style="font-size: 125%; background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; margin-top: -300px">
                 <b><img height="70px" style="top: 20px; margin: -20px 0;" src="/graphics/background/ABS.gif"> Census</b>
             </div>
         </section>
-        <section id="1996" data-background="graphics/background/1996.png">
+        <section data-visibility="hidden" id="1996" data-background="graphics/background/1996.png">
             <div style="font-size: 125%; background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; margin-top: -300px">
                 <b>Australia 1996: <img height="70px" style="top: 20px; margin: -20px 0;" src="/graphics/background/ABS.gif"> Census year</b>
             </div>
@@ -357,6 +357,9 @@ async def root():
             Most cases would say this is overkill but there are cases, where we like performance. Let me share one.
             </aside>
         </section>
+
+        <section id="intentionally-left-blank-filter"></section>
+
         <section id="eg1-filter-basic">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Quick filter</div>
             <input type="text" id="input-filter-basic" placeholder="Quick filter" style="padding: 4px 10px">
@@ -438,7 +441,7 @@ async def root(term: str = None) -> dict[str, list[str]]:
             text-align: right; margin-top: -320px; margin-left: 600px; padding: 10px 30px">PyLadies auction 2019</div>
         </section>
 
-        <section id="typing-basics-1">
+        <section data-visibility="hidden" id="typing-basics-1">
             <pre>
                 <code class="python code-small">>>> type("abc")
 &lt;class 'str'&gt;</code>
@@ -1018,8 +1021,20 @@ class MultiPolygon(Geometry):
     type: str = "MultiPolygon"
     coordinates: List[List[List[Coordinate]]]]</code>            </pre>
         </section>
+
+        <section id="osgeo" data-background="graphics/geo/osgeo.png">
+            <div style="background-color: rgba(0, 0, 0, 0.7); color: #fff; padding: 20px; margin-top: -100px;">
+                <span style="font-size: 200%">OSGeo</span> <em>awesome! ✨</em>
+            </div>
+        </section>
+        <section id="shapely" data-background="graphics/geo/shapely.png">
+            <div style="background-color: rgba(0, 0, 0, 0.7); color: #fff; padding: 20px; margin-top: -265px;">
+                <code style="font-size: 200%">Shapely</code> <em>awesome! ✨</em>
+            </div>
+        </section>
+
         <section id="geojson-geometry-misc">
-            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">GeoJSON Also Allows:</code></div><br>
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">GeoJSON also allows:</code></div><br>
             <ul>
                 <li>3D Coordinates:  <code>[x, y, z]</code><br>&nbsp;</li>
                 <li><b>Mix</b> of Features in <code>FeatureCollection</code>
@@ -1027,19 +1042,12 @@ class MultiPolygon(Geometry):
             </ul>
         </section>
 
-        <section id="why-geojson">
-            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Why do we care about GeoJSON?</div>
-        </section>
-
-        <section id="leaflet" data-background="graphics/github_leaflet.png"></section>
-        <section id="leaflet2" data-background="graphics/leaflet-tutes.png"></section>
-
         <section id="geojson-response-real">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
                 G-NAF response
             </div>
-            <pre style="padding: 0; margin-left: 0; margin-right: 0; height: 20em;">
-                <code data-line-numbers="20|2,6-7,11-12,17,20" class="hljs code-small-85" style="padding: 0; margin-left: 0; margin-right: 0;">{
+            <pre style="padding: 0; margin-left: 0; margin-right: 0; height: 20em">
+                <code data-line-numbers="2-3,6,11,16|20" class="hljs code-small-85" style="padding: 0; margin-left: 0; margin-right: 0;">{
     "type": "FeatureCollection",
     "features": [
         {
@@ -1058,11 +1066,40 @@ class MultiPolygon(Geometry):
             "geometry": {"type": "Point", "coordinates": [138.59352048, -34.92158711]},
         }
     ],
-    "query": [138.595470, -34.920237],
+    "query": [138.59547, -34.92023],
     "requestTimeStamp": 1690247769.162439,
 }</code>
             </pre>
         </section>
+
+
+        <section id="xkcd" data-background="graphics/xkcd.png">
+            <div style="background-color: rgba(0, 0, 0, 0.7); color: #fff; padding: 20px; margin-top: -235px;">
+                xkcd
+            </div>
+        </section>
+        <section id="xkcd-datum" data-background="graphics/xkcd-datum.png"></section>
+        <section id="xkcd-datum-enhance" data-background="graphics/xkcd-datum_enhance.png"></section>
+        <section id="pyproj" data-background="graphics/geo/gda2020.png">
+            <div style="background-color: rgba(0, 0, 0, 0.7); color: #fff; padding: 20px; margin-top: -220px">
+                if in doubt, can probably use datum: <div style="font-size: 200%">GDA2020</div>
+            </div>
+        </section>
+        <section id="pyproj" data-background="graphics/geo/pyproj.png">
+            <div style="background-color: rgba(0, 0, 0, 0.7); color: #fff; padding: 20px; margin-top: -70px">
+              <code style="font-size: 200%">pyproj</code>  <em>awesome! ✨</em><br>convert datums easily
+          </div>
+        </section>
+
+
+        <section id="why-geojson">
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Why do we care about GeoJSON?</div>
+        </section>
+
+        <section id="leaflet" data-background="graphics/github_leaflet.png"></section>
+        <section id="leaflet-tutes" data-background="graphics/geo/leaflet-tutes.png"></section>
+        <section id="leaflet-tutes-focus" data-background="graphics/geo/leaflet-tutes-focus.png"></section>
+
         <section id="leaflet-point">
             <pre style="padding: 0; margin-left: 0; margin-right: 0; height: 700px;">
                 <code data-line-numbers="13-14,18-19,23-24,27,30,34" class="width-fit code-small-85" style="padding: 0; margin-left: 0; margin-right: 0;">        ...
@@ -1091,7 +1128,7 @@ class MultiPolygon(Geometry):
             "geometry": {"type": "Point", "coordinates": [138.59352127, -34.92156008]},
       ...
 
-      "query": [138.595470, -34.920237],
+      "query": [138.59547, -34.92023],
       "requestTimeStamp": 1690247769.162439,
   }
   L.geoJSON(geojsonResponse, {
@@ -1109,18 +1146,18 @@ class MultiPolygon(Geometry):
             <iframe data-src="/leaflet/" width="960px" height="680px"></iframe>
         </section>
 
-        <section id="geojsonio-land" data-background="graphics/geojsonio1.png"></section>
-        <section id="geojsonio-locality" data-background="graphics/geojsonio2.png"></section>
-        <section id="geojsonio-commonwealth-electorate" data-background="graphics/geojsonio3.png"></section>
-        <section id="geojsonio-state-electorate" data-background="graphics/geojsonio4.png"></section>
+        <section id="geojsonio-land" data-background="graphics/geo/geojsonio1.png"></section>
+        <section id="geojsonio-locality" data-background="graphics/geo/geojsonio2.png"></section>
+        <section id="geojsonio-commonwealth-electorate" data-background="graphics/geo/geojsonio3.png"></section>
+        <section id="geojsonio-state-electorate" data-background="graphics/geo/geojsonio4.png"></section>
 
-        <section id="data-layers2" data-background="graphics/s2.png"></section>
-        <section id="data-layers3" data-background="graphics/s3.png"></section>
-        <section id="data-layers4" data-background="graphics/s4.png"></section>
-        <section id="data-layers5" data-background="graphics/s5.png"></section>
-        <section id="data-layers6" data-background="graphics/s6.png"></section>
-        <section id="data-layers7" data-background="graphics/s7.png"></section>
-        <section id="data-layers8" data-background="graphics/s8.png"></section>
+        <section id="data-layers2" data-background="graphics/geo/s2.png"></section>
+        <section id="data-layers3" data-background="graphics/geo/s3.png"></section>
+        <section id="data-layers4" data-background="graphics/geo/s4.png"></section>
+        <section id="data-layers5" data-background="graphics/geo/s5.png"></section>
+        <section id="data-layers6" data-background="graphics/geo/s6.png"></section>
+        <section id="data-layers7" data-background="graphics/geo/s7.png"></section>
+        <section id="data-layers8" data-background="graphics/geo/s8.png"></section>
 
         <section id="title-async-redux">
           <div style="color: rgba(255, 255, 255, 0.5)">
@@ -1212,18 +1249,6 @@ async def get_address(lat, lon) -> GeoJSONFeature:
          properties=await async.gather(*[c(coord) for c in my_get_data_callables]))</code>
             </pre>
         </section>
-
-        <section id="intentionally-left-blank-datum"></section>
-        <section id="xkcd" data-background="graphics/xkcd.png"></section>
-        <section id="xkcd-datum" data-background="graphics/xkcd-datum.png"></section>
-        <section id="xkcd-datum-enhance" data-background="graphics/xkcd-datum_enhance.png"></section>
-        <section id="pyproj">
-          <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-            <div style="font-size: 200%"></div>
-          </div>
-        </section>
-
-
 
         <section data-visibility="hidden">
             <section id="typing-duck" data-background="graphics/background/duck.png"></section>
