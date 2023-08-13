@@ -127,7 +127,7 @@
         </section>
         <section id="1992" data-background="graphics/background/census.png">
             <div style="font-size: 125%; background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; margin-top: -300px">
-                <b>Australia 1996: <img height="70px" style="top: 20px; margin: -20px 0;" src="/graphics/background/ABS.gif"> Census year</b>
+                <b><img height="70px" style="top: 20px; margin: -20px 0;" src="/graphics/background/ABS.gif"> Census</b>
             </div>
         </section>
         <section id="1996" data-background="graphics/background/1996.png">
@@ -159,17 +159,12 @@
             </div>
         </section>
         <section id="gnaf" data-background="graphics/background/gnaf-0.png"></section>
-        <section id="gnaf-monster" data-background="graphics/background/gnaf-1.png">
-            <div style="background-color: rgba(0, 0, 0, 0.4); color: #fff; padding: 20px;">
-                <div style="font-size: 100%">G-NAF (2004) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; G-NAF-Core (2022)</div>
-            </div>
-            <div style="color: rgba(0,0,0, 0.25); font-size: 50%; text-align: right">*</div>
-        </section>
         <section id="gnaf-monster-free" data-background="graphics/background/gnaf-1.png">
-            <div style="background-color: rgba(0, 0, 0, 0.4); color: #fff; padding: 20px;">
+            <div style="background-color: rgba(0, 0, 0, 0.4); color: #fff; padding: 20px; margin-top: 5em">
                 <div style="font-size: 100%">G-NAF (2004) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; G-NAF-Core (2022)</div>
             </div>
-            <span style="padding: 5px 15px; color: rgba(255,255,255, 1); background-color: rgba(255,10,20,0.7);  height: 2em;">
+            <br>
+            <span style="padding: 5px 15px; color: rgba(255,255,255, 1); background-color: rgba(255,10,20,0.7);  height: 2em; ">
                 Available for <b>FREE</b> from <code>data.gov.au</code>!
             </span>
             <br><span style="color: rgba(255,255,255, 1); background-color: rgba(255,10,20,0.7); font-size: 50%;">
@@ -721,7 +716,7 @@ MyPydantic(my_custom=Foo(baz='qux'), my_str='abc', my_int=123, my_float=123.456,
         <section id="pydantic-validation-bad-data-traceback">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Rubbish Data is nope</div>
             <pre class="width-fit" style="padding: 0; margin-left: 0; margin-right: 0;">
-                <code class="python code-smaller width-fit" >>>> MyPydantic(**my_funky_data)
+                <code class="python code-smaller width-fit" data-line-numbers="1,4-5,7-8,10,11,13,14">>> MyPydantic(**my_funky_data)
 Traceback (most recent call last):
 pydantic_core._pydantic_core.ValidationError: 4 validation errors for MyPydantic
 my_int
@@ -736,6 +731,7 @@ my_bool
 my_class
   Input should be a valid dictionary or instance of Foo [type=model_type, input_value='a string', input_type=str]
     For further information visit https://errors.pydantic.dev/2.1.2/v/model_type
+..
 </code>
             </pre>
         </section>
@@ -1043,7 +1039,7 @@ class MultiPolygon(Geometry):
                 G-NAF response
             </div>
             <pre style="padding: 0; margin-left: 0; margin-right: 0; height: 20em;">
-                <code data-line-numbers="2,6-7,11-12,17,20" class="hljs code-small-85" style="padding: 0; margin-left: 0; margin-right: 0;">{
+                <code data-line-numbers="20|2,6-7,11-12,17,20" class="hljs code-small-85" style="padding: 0; margin-left: 0; margin-right: 0;">{
     "type": "FeatureCollection",
     "features": [
         {
@@ -1126,6 +1122,12 @@ class MultiPolygon(Geometry):
         <section id="data-layers7" data-background="graphics/s7.png"></section>
         <section id="data-layers8" data-background="graphics/s8.png"></section>
 
+        <section id="title-async-redux">
+          <div style="color: rgba(255, 255, 255, 0.5)">
+            <em>"<b style="color: white;">threading</b> is for <b style="color: white;">working</b> in parallel,<br>
+              <b style="color: white;">async</b> is for <b style="color: white;">waiting</b> in parallel"</em>
+          </div>
+        </section>
 
         <section id="eg4-async-gather-data">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Putting It Together</div>
@@ -1161,18 +1163,18 @@ async def get_electorates(coord): ...
 my_get_data_callables = [get_address, get_land, get_buildings, get_pools, get_solar, get_electorate, get_roads]
 
 @app.get("/address/")
-async def get_address(coord: Coordinate) -> GeoJSONFeature:
+async def get_address(lat, lon) -> GeoJSONFeature:
+     coord = Coordinate(lat=lat, lon=lon)
      return GeoJSONFeature(
          ...
-         properties=async.gather(*[c(coord) for c in my_get_data_callables])
-     )</code>
+         properties=async.gather(*[c(coord) for c in my_get_data_callables]))</code>
             </pre>
         </section>
 
         <section id="eg4-async-gather-wait">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Putting It Together</div>
             <pre style="left: -30px; height: 18em;">
-              <code data-line-numbers="14" class="python code-small width-fit">async def get_address(coord): ...
+              <code data-line-numbers="15" class="python code-small width-fit">async def get_address(coord): ...
 async def get_land(coord): ...
 async def get_buildings(coord): ...
 async def get_pools(coord): ...
@@ -1182,18 +1184,18 @@ async def get_electorates(coord): ...
 my_get_data_callables = [get_address, get_land, get_buildings, get_pools, get_solar, get_electorate, get_roads]
 
 @app.get("/address/")
-async def get_address(coord: Coordinate) -> GeoJSONFeature:
+async def get_address(lat, lon) -> GeoJSONFeature:
+     coord = Coordinate(lat=lat, lon=lon)
      return GeoJSONFeature(
          ...
-         properties=async.gather(*[c(coord) for c in my_get_data_callables])
-     )</code>
+         properties=async.gather(*[c(coord) for c in my_get_data_callables]))</code>
             </pre>
         </section>
 
         <section id="eg4-async-gather-await-jks">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Putting It Together</div>
             <pre style="left: -30px; height: 18em;">
-              <code data-line-numbers="14" class="python code-small width-fit">async def get_address(coord): ...
+              <code data-line-numbers="15" class="python code-small width-fit">async def get_address(coord): ...
 async def get_land(coord): ...
 async def get_buildings(coord): ...
 async def get_pools(coord): ...
@@ -1203,13 +1205,24 @@ async def get_electorates(coord): ...
 my_get_data_callables = [get_address, get_land, get_buildings, get_pools, get_solar, get_electorate, get_roads]
 
 @app.get("/address/")
-async def get_address(coord: Coordinate) -> GeoJSONFeature:
+async def get_address(lat, lon) -> GeoJSONFeature:
+     coord = Coordinate(lat=lat, lon=lon)
      return GeoJSONFeature(
          ...
-         properties=await async.gather(*[c(coord) for c in my_get_data_callables])
-     )</code>
+         properties=await async.gather(*[c(coord) for c in my_get_data_callables]))</code>
             </pre>
         </section>
+
+        <section id="intentionally-left-blank-datum"></section>
+        <section id="xkcd" data-background="graphics/xkcd.png"></section>
+        <section id="xkcd-datum" data-background="graphics/xkcd-datum.png"></section>
+        <section id="xkcd-datum-enhance" data-background="graphics/xkcd-datum_enhance.png"></section>
+        <section id="pyproj">
+          <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
+            <div style="font-size: 200%"></div>
+          </div>
+        </section>
+
 
 
         <section data-visibility="hidden">
@@ -1226,7 +1239,7 @@ async def get_address(coord: Coordinate) -> GeoJSONFeature:
                 </div>
             </section>
             <section id="title-async-redux">
-                <div style="color: rgba(255, 255, 255, 0.5)">
+                 <div style="color: rgba(255, 255, 255, 0.5)">
                     <em>"<b style="color: white;">threading</b> is for <b style="color: white;">working</b> in parallel,<br>
                         <b style="color: white;">async</b> is for <b style="color: white;">waiting</b> in parallel"</em>
                 </div>
@@ -1259,6 +1272,13 @@ async def root():
                     <div style="font-size: 200%"></div>
                 </div>
             </section>
+        <section id="gnaf-monster" data-background="graphics/background/gnaf-1.png">
+            <div style="background-color: rgba(0, 0, 0, 0.4); color: #fff; padding: 20px;">
+                <div style="font-size: 100%">G-NAF (2004) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; G-NAF-Core (2022)</div>
+            </div>
+            <div style="color: rgba(0,0,0, 0.25); font-size: 50%; text-align: right">*</div>
+        </section>
+
         </section>
 
         <section id="fin">
