@@ -48,15 +48,16 @@
         <section id="credits">
             <br>
             <h3>Elena Williams</h3>
-
+            <code>github.com/elena/</code><code style="font-weight: bolder">FastAPI-Geo-talk</code>
+            <br>
+            <br>
             <div>github/<b>elena</b></div>
             <div>Software Engineer, Geoscape</div>
             <div>Sessional Academic, CECC, ANU</div>
             <div>Organiser, Canberra Python User Group</div>
             <div>Organiser, Django Girls Canberra</div>
-            <div>DSF/PSF</div>
+            <div>Member DSF/PSF/W3C</div>
             <br>
-            <code>github.com/elena/</code><code style="font-weight: bolder">FastAPI-Geo-talk</code>
 
             <div style="color: rgba(255, 255, 255, 0.25); font-size: 50%; text-align: right">"just zis guy, you
                 know?"
@@ -138,7 +139,7 @@
         <section id="owned-by-states" data-background="graphics/background/states-0.png">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; margin-top: -350px; ">
                 <img height="100px" src="/graphics/background/Geoscape_Logo.jpg">
-                <div style="1.25em">Owned by</div>
+                <div>Owned by</div>
                 <div style="color: rgba(255, 255, 255, 0.25); font-size: 75%;">
                     Not Government, but Government owned
                 </div>
@@ -326,58 +327,23 @@ $ uvicorn app:app --reload
             <div style="color: rgba(0,0,0, 0.5); font-size: 50%; text-align: right;">*</div>
         </section>
 
-        <section id="intentionally-left-blank-async"></section>
-
-        <section id="title-async">
-            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-                <div style="font-size: 200%">Async</div>
-            </div><br>
-            <div style="color: rgba(255, 255, 255, 0.5)">
-                <em>"<b style="color: white;">threading</b> is for <b style="color: white;">working</b> in parallel,<br>
-                    <b style="color: white;">async</b> is for <b style="color: white;">waiting</b> in parallel"</em>
-            </div>
-        </section>
-        <section id="async" data-background="graphics/async.png"></section>
-        <section id="async-what-matters">
-            <code class="hljs-keyword">async</code> and <code class="hljs-keyword">await</code><br>
-            <pre>
-                    <code data-line-numbers="|1-2|1,5|10,4|" class="python" style="font-size: 1.2em; line-height: 1.25">async def get_data():
-    return {"item": "Bar"}
-
-async def do_logic():
-    data = await get_data()
-    return {"Foo": data["item"]}
-
-@app.get("/")
-async def root():
-    return await do_logic()
-                    </code>
-            </pre>
-            <aside class="notes">Normal functions are fine. Don't forget await, even when it's complex.
-            Most cases would say this is overkill but there are cases, where we like performance. Let me share one.
-            </aside>
-        </section>
-
         <section id="intentionally-left-blank-filter"></section>
 
         <section id="eg1-filter-basic">
-            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Quick filter</div>
-            <input type="text" id="input-filter-basic" placeholder="Quick filter" style="padding: 4px 10px">
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Lightweight Type-ahead Search Filter</div>
+            <input type="text" id="input-filter-basic" placeholder="Search Words [type here]" style=" width: 12em; padding: 4px 10px">
             <div class="code-smaller" style="text-align: left; margin-left: 350px" id="results-filter-basic"></div>
             <pre>
-                <code data-line-numbers="1-6,12-13" class="python code-small">results_list = [
+                <code data-line-numbers="1-6,9,10" class="python code-small">some_words = [
     "abcd",
     "abc",
     "ab",
     "a",
 ]
 
-async def get_results(term):
-    return [i for i in results_list if search_term in i]
-
 @app.get("/search/")
 async def root(term: str = None) -> Dict[str, List[str]]:
-    return {"output": await get_results(term)}
+    return {"output": [w for w in some_words if term in w]}
                 </code>
             </pre>
         </section>
@@ -417,6 +383,38 @@ async def root(term: str = None) -> dict[str, list[str]]:
             <section data-background-video="graphics/bu/predictive.mov"></section>
         </section>
 
+        <section id="intentionally-left-blank-async"></section>
+
+        <section id="title-async">
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
+                <div style="font-size: 200%">Async</div>
+            </div><br>
+            <div style="color: rgba(255, 255, 255, 0.5)">
+                <em>"<b style="color: white;">threading</b> is for <b style="color: white;">working</b> in parallel,<br>
+                    <b style="color: white;">async</b> is for <b style="color: white;">waiting</b> in parallel"</em>
+            </div>
+        </section>
+        <section id="async" data-background="graphics/async.png"></section>
+        <section id="async-what-matters">
+            <code class="hljs-keyword">async</code> and <code class="hljs-keyword">await</code><br>
+            <pre>
+                    <code data-line-numbers="|1-2|1,5|10,4|" class="python" style="font-size: 1.2em; line-height: 1.25">async def get_data():
+    return {"item": "Bar"}
+
+async def do_logic():
+    data = await get_data()
+    return {"Foo": data["item"]}
+
+@app.get("/")
+async def root():
+    return await do_logic()
+                    </code>
+            </pre>
+            <aside class="notes">Normal functions are fine. Don't forget await, even when it's complex.
+                Most cases would say this is overkill but there are cases, where we like performance. Let me share one.
+            </aside>
+        </section>
+
         <section id="intentionally-left-blank-pydantic"></section>
 
         <section id="title-pydantic-0">
@@ -437,8 +435,9 @@ async def root(term: str = None) -> dict[str, list[str]]:
         </section>
 
         <section id="typing-bdfl" data-background="graphics/background/bdfl.png">
-            <div class="width-fit" style="background-color: rgba(0, 0, 0, 0.5); color: rgba(255, 255, 255, 0.5); font-size: 75%;
-            text-align: right; margin-top: -320px; margin-left: 600px; padding: 10px 30px">PyLadies auction 2019</div>
+            <div class="width-fit" style="background-color: rgba(0, 0, 0, 0.5); color: rgba(255, 255, 255, 0.65); font-size: 75%;
+            text-align: right; margin-top: -320px; margin-left: 600px; padding: 10px 30px">PyLadies Auction 2019
+                <br><em style="font-size: x-small">credit: Emily Morehouse, PSF blog</em></div>
         </section>
 
         <section data-visibility="hidden" id="typing-basics-1">
@@ -538,35 +537,7 @@ Traceback (most recent call last):
 TypeError: unsupported operand type(s) for *: 'Foo' and 'int'</code>
             </pre>
         </section>
-
-        <section id="typing-strictly-validate">
-            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-                <em>But I want strictly validate my <code>types</code> ...</em>
-            </div>
-            Builtins:
-            <pre style="font-size: 0.85em">
-typing
-typeddict
-dataclass</pre>
-            Community:
-            <pre style="font-size: 0.85em">
-alecthomas/voluptuous
-python-attrs/attrs
-keleshev/schema
-pyeve/cerberus
-Pylons/colander
-... </pre>
-            <aside class="notes">
-                Pydantic is a Python library that provides an easy and convenient way to validate and manipulate data.
-                Something to do with serialisation.
-            <pre style="padding: 30px 0">
-                Python 3.0: Annotations/Hints (PEP484)
-                <code class="python">import typing</code>
-            </pre>
-
-            </aside>
-        </section>
-        <section id="title-pydantic"  data-background="graphics/github_pydantic.png">
+c        <section id="title-pydantic"  data-background="graphics/github_pydantic.png">
             <div style="background-color: rgba(0, 0, 0, 0.6); color: #fff; padding: 20px;">
                 <div style="font-size: 200%">Pydantic</div>
             </div>
@@ -1080,7 +1051,7 @@ class MultiPolygon(Geometry):
         </section>
         <section id="xkcd-datum" data-background="graphics/xkcd-datum.png"></section>
         <section id="xkcd-datum-enhance" data-background="graphics/xkcd-datum_enhance.png"></section>
-        <section id="pyproj" data-background="graphics/geo/gda2020.png">
+        <section id="gda2020" data-background="graphics/geo/gda2020.png">
             <div style="background-color: rgba(0, 0, 0, 0.7); color: #fff; padding: 20px; margin-top: -220px">
                 if in doubt, can probably use datum: <div style="font-size: 200%">GDA2020</div>
             </div>
@@ -1146,10 +1117,38 @@ class MultiPolygon(Geometry):
             <iframe data-src="/leaflet/" width="960px" height="680px"></iframe>
         </section>
 
-        <section id="geojsonio-land" data-background="graphics/geo/geojsonio1.png"></section>
-        <section id="geojsonio-locality" data-background="graphics/geo/geojsonio2.png"></section>
-        <section id="geojsonio-commonwealth-electorate" data-background="graphics/geo/geojsonio3.png"></section>
-        <section id="geojsonio-state-electorate" data-background="graphics/geo/geojsonio4.png"></section>
+        <section id="geojsonio-landparcels" data-background="graphics/geo/geojsonio1.png">
+            <div class="width-fit" style="background-color: rgba(0, 0, 0, 0.5); color: rgba(255, 255, 255, 0.5);
+            text-align: right; margin-top: 685px; margin-left: 610px; font-size: x-small">
+                <a href="https://www.mapbox.com/about/maps/" target="_blank" title="Mapbox" aria-label="Mapbox" role="listitem">© Mapbox</a>
+                <a href="https://www.openstreetmap.org/about/" target="_blank" title="OpenStreetMap" aria-label="OpenStreetMap" role="listitem">© OpenStreetMap</a>
+                <a href="https://www.maxar.com/" target="_blank" title="Maxar" aria-label="Maxar" role="listitem">© Maxar</a>
+            </div>
+        </section>
+        <section id="geojsonio-locality" data-background="graphics/geo/geojsonio2.png">
+            <div class="width-fit" style="background-color: rgba(0, 0, 0, 0.5); color: rgba(255, 255, 255, 0.5);
+            text-align: right; margin-top: 685px; margin-left: 610px; font-size: x-small">
+                <a href="https://www.mapbox.com/about/maps/" target="_blank" title="Mapbox" aria-label="Mapbox" role="listitem">© Mapbox</a>
+                <a href="https://www.openstreetmap.org/about/" target="_blank" title="OpenStreetMap" aria-label="OpenStreetMap" role="listitem">© OpenStreetMap</a>
+                <a href="https://www.maxar.com/" target="_blank" title="Maxar" aria-label="Maxar" role="listitem">© Maxar</a>
+            </div>
+        </section>
+        <section id="geojsonio-commonwealth-electorate" data-background="graphics/geo/geojsonio3.png">
+            <div class="width-fit" style="background-color: rgba(0, 0, 0, 0.5); color: rgba(255, 255, 255, 0.5);
+            text-align: right; margin-top: 685px; margin-left: 610px; font-size: x-small">
+                <a href="https://www.mapbox.com/about/maps/" target="_blank" title="Mapbox" aria-label="Mapbox" role="listitem">© Mapbox</a>
+                <a href="https://www.openstreetmap.org/about/" target="_blank" title="OpenStreetMap" aria-label="OpenStreetMap" role="listitem">© OpenStreetMap</a>
+                <a href="https://www.maxar.com/" target="_blank" title="Maxar" aria-label="Maxar" role="listitem">© Maxar</a>
+            </div>
+        </section>
+        <section id="geojsonio-state-electorate" data-background="graphics/geo/geojsonio4.png">
+            <div class="width-fit" style="background-color: rgba(0, 0, 0, 0.5); color: rgba(255, 255, 255, 0.5);
+            text-align: right; margin-top: 685px; margin-left: 610px; font-size: x-small">
+                <a href="https://www.mapbox.com/about/maps/" target="_blank" title="Mapbox" aria-label="Mapbox" role="listitem">© Mapbox</a>
+                <a href="https://www.openstreetmap.org/about/" target="_blank" title="OpenStreetMap" aria-label="OpenStreetMap" role="listitem">© OpenStreetMap</a>
+                <a href="https://www.maxar.com/" target="_blank" title="Maxar" aria-label="Maxar" role="listitem">© Maxar</a>
+            </div>
+        </section>
 
         <section id="data-layers2" data-background="graphics/geo/s2.png"></section>
         <section id="data-layers3" data-background="graphics/geo/s3.png"></section>
@@ -1263,12 +1262,7 @@ async def get_address(lat, lon) -> GeoJSONFeature:
                     </div>
                 </div>
             </section>
-            <section id="title-async-redux">
-                 <div style="color: rgba(255, 255, 255, 0.5)">
-                    <em>"<b style="color: white;">threading</b> is for <b style="color: white;">working</b> in parallel,<br>
-                        <b style="color: white;">async</b> is for <b style="color: white;">waiting</b> in parallel"</em>
-                </div>
-            </section>
+
             <section id="async-what-matters-redux">
                 <code class="hljs-keyword">async</code> and <code class="hljs-keyword">await</code><br>
                 <pre>
@@ -1289,14 +1283,7 @@ async def root():
                 </aside>
             </section>
 
-            <section id="xkcd" data-background="graphics/xkcd.png"></section>
-            <section id="xkcd-datum" data-background="graphics/xkcd-datum.png"></section>
-            <section id="xkcd-datum-enhance" data-background="graphics/xkcd-datum_enhance.png"></section>
-            <section id="pyproj">
-                <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-                    <div style="font-size: 200%"></div>
-                </div>
-            </section>
+
         <section id="gnaf-monster" data-background="graphics/background/gnaf-1.png">
             <div style="background-color: rgba(0, 0, 0, 0.4); color: #fff; padding: 20px;">
                 <div style="font-size: 100%">G-NAF (2004) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; G-NAF-Core (2022)</div>
@@ -1309,10 +1296,10 @@ async def root():
         <section id="fin">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
                 <div style="font-size: 200%">FIN</div>
-            </div>
+            </div><br>
+            <h3>Thank you Geoscape</h3>
             <p>Come speak at the:<br><b>Canberra Python User Group</b>
               <br><em style="color: #333">contact us!</em></p>
-            <br>
             <p>Support <b>DjangoGirls</b>
               <br>Adelaide event on Monday!
             <br>more Canberra events upcoming
