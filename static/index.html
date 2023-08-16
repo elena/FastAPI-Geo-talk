@@ -92,10 +92,10 @@
 
         <section id="not-ga" data-background="graphics/background/geoscience.png">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-                <div style="font-size: 200%"><span style="font-weight:bolder;">NOT</span> Geoscience Australia</div>
+                <div style="font-size: 200%"><span style="font-weight:bolder; color: rgba(255,10,20,0.7);  ">NOT</span> Geoscience Australia</div>
             </div>
         </section>
-        <section id="not-ga-strike" data-background="graphics/background/geoscience.png">
+        <section data-visibility="hidden" id="not-ga-strike" data-background="graphics/background/geoscience.png">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
                 <div style="font-size: 200%"><span style="font-weight:bolder; color: red">NOT</span> <del>Geoscience Australia</del></div>
             </div>
@@ -149,14 +149,14 @@
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
                 Single Geocoded National Address File (G-NAF)
             </div>
-            <div style="background-color: rgba(0, 0, 0, 0.8); color: #fff; margin-top: 15px; font-size: 0.7em; height: 12em">
+            <div style="background-color: rgba(0, 0, 0, 0.8); color: #fff; margin-top: 15px; font-size: 0.7em; height: 13em; text-align: left; padding-left: 10px; padding-right: -14px;">
                     <ul style="line-height: 1.3em; margin-top: 15px">
                         <li>No single supplier has <br>all addresses in use<br>&nbsp;</li>
                         <li>Suppliers only agree on 67%<br>&nbsp;</li>
                         <li>Suppliers disagree on 3-8%</li>
                     </ul>
                 <img style="height: 350px; margin: 0 100px; position: relative; float: right" src="graphics/background/sources.png"><br>
-                <br><b>Most trusted source</b> <em>since '90s</em>
+                <br><b>Most trusted source</b> <em>since '90s.</em> <span style="color: rgba(255,255,255,0.6)">Manage your service.</span>
             </div>
         </section>
         <section id="gnaf" data-background="graphics/background/gnaf-0.png"></section>
@@ -334,7 +334,7 @@ $ uvicorn app:app --reload
             <input type="text" id="input-filter-basic" placeholder="Search Words [type here]" style=" width: 12em; padding: 4px 10px">
             <div class="code-smaller" style="text-align: left; margin-left: 350px" id="results-filter-basic"></div>
             <pre>
-                <code data-line-numbers="1-6,9,10" class="python code-small">some_words = [
+                <code data-line-numbers="1-6,9,10" class="python code-small">words = [
     "abcd",
     "abc",
     "ab",
@@ -342,8 +342,8 @@ $ uvicorn app:app --reload
 ]
 
 @app.get("/search/")
-async def root(term: str = None) -> Dict[str, List[str]]:
-    return {"output": [w for w in some_words if term in w]}
+async def root(search: str = None) -> Dict[str, List[str]]:
+    return {"output": [w for w in words if search in w]}
                 </code>
             </pre>
         </section>
@@ -365,7 +365,7 @@ async def root(term: str = None) -> Dict[str, List[str]]:
 
 @routes_eg2.get("/predict/address/")
 async def root(term: str = None) -> dict[str, list[str]]:
-    return {"output": [i for i in address_list if term in i]}
+    return {"output": [s for s in address_list if term in s]}
                 </code>
             </pre>
             <aside class="notes">
@@ -537,7 +537,32 @@ Traceback (most recent call last):
 TypeError: unsupported operand type(s) for *: 'Foo' and 'int'</code>
             </pre>
         </section>
-c        <section id="title-pydantic"  data-background="graphics/github_pydantic.png">
+
+        <section id="typing-strictly-validate">
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
+                <em>But I want strictly validate my <code>types</code> ...</em>
+            </div>
+            Builtins:
+            <pre style="font-size: 0.85em">
+typing
+typeddict
+dataclass</pre>
+            Community:
+            <pre style="font-size: 0.85em">
+alecthomas/voluptuous
+python-attrs/attrs
+keleshev/schema
+pyeve/cerberus
+Pylons/colander
+... </pre>
+            <aside class="notes">
+                <pre style="padding: 30px 0">
+                    Python 3.0: Annotations/Hints (PEP484)
+                    <code class="python">import typing</code>
+                </pre>
+           </aside>
+        </section>
+        <section id="title-pydantic"  data-background="graphics/github_pydantic.png">
             <div style="background-color: rgba(0, 0, 0, 0.6); color: #fff; padding: 20px;">
                 <div style="font-size: 200%">Pydantic</div>
             </div>
@@ -1009,7 +1034,7 @@ class MultiPolygon(Geometry):
             <ul>
                 <li>3D Coordinates:  <code>[x, y, z]</code><br>&nbsp;</li>
                 <li><b>Mix</b> of Features in <code>FeatureCollection</code>
-                    <br>eg: &nbsp; <code>Point</code> + <code>Polygon</code> ✅ </li>
+                    <br>eg: 🍱&nbsp; <code>Point</code> + <code>Polygon</code>, etc </li>
             </ul>
         </section>
 
@@ -1067,6 +1092,22 @@ class MultiPolygon(Geometry):
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Why do we care about GeoJSON?</div>
         </section>
 
+
+        <section id="mapping-libraries">
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
+                <em>Some mapping libraries for GeoJSON ...</em>
+            </div>
+            <pre style="font-size: 0.85em">openlayers/openlayers
+Leaflet/Leaflet
+modestmaps/modestmaps-js
+Turfjs/turf
+d3/d3.js
+TerriaJS/terriajs
+... </pre>
+            <span style="font-size: xx-large"><a href="https://wiki.osgeo.org/wiki/A_comprehensive_list_of_webmapping_toolkits">https://wiki.osgeo.org/wiki/A_comprehensive_list_of_webmapping_toolkits</a></a></span>
+        </section>
+
+
         <section id="leaflet" data-background="graphics/github_leaflet.png"></section>
         <section id="leaflet-tutes" data-background="graphics/geo/leaflet-tutes.png"></section>
         <section id="leaflet-tutes-focus" data-background="graphics/geo/leaflet-tutes-focus.png"></section>
@@ -1112,38 +1153,34 @@ class MultiPolygon(Geometry):
                 </code>
             </pre>
         </section>
-        <section id="maps-point">
-            <div style="font-size: 0.4em; text-align: right"><a href="https://github.com/elena/FastAPI-Geo-talk/main/static/maps/point/index.html">https://github.com/elena/FastAPI-Geo-talk/main/static/leaflet/index.html</a> </div>
+        <section id="leaflet-actual">
+            <div style="font-size: 0.4em; text-align: right"><a href="https://github.com/elena/FastAPI-Geo-talk/tree/main/static/leaflet/index.html">https://github.com/elena/FastAPI-Geo-talk/tree/main/static/leaflet/index.html</a> </div>
             <iframe data-src="/leaflet/" width="960px" height="680px"></iframe>
         </section>
 
         <section id="geojsonio-landparcels" data-background="graphics/geo/geojsonio1.png">
-            <div class="width-fit" style="background-color: rgba(0, 0, 0, 0.5); color: rgba(255, 255, 255, 0.5);
-            text-align: right; margin-top: 685px; margin-left: 610px; font-size: x-small">
+            <div class="width-fit" style="background-color: rgba(0, 0, 0, 0.5); color: rgba(255, 255, 255, 0.5); text-align: right; margin-top: 750px; margin-left: 0px; font-size: x-small">
                 <a href="https://www.mapbox.com/about/maps/" target="_blank" title="Mapbox" aria-label="Mapbox" role="listitem">© Mapbox</a>
                 <a href="https://www.openstreetmap.org/about/" target="_blank" title="OpenStreetMap" aria-label="OpenStreetMap" role="listitem">© OpenStreetMap</a>
                 <a href="https://www.maxar.com/" target="_blank" title="Maxar" aria-label="Maxar" role="listitem">© Maxar</a>
             </div>
         </section>
         <section id="geojsonio-locality" data-background="graphics/geo/geojsonio2.png">
-            <div class="width-fit" style="background-color: rgba(0, 0, 0, 0.5); color: rgba(255, 255, 255, 0.5);
-            text-align: right; margin-top: 685px; margin-left: 610px; font-size: x-small">
+            <div class="width-fit" style="background-color: rgba(0, 0, 0, 0.5); color: rgba(255, 255, 255, 0.5); text-align: right; margin-top: 750px; margin-left: 0px; font-size: x-small">
                 <a href="https://www.mapbox.com/about/maps/" target="_blank" title="Mapbox" aria-label="Mapbox" role="listitem">© Mapbox</a>
                 <a href="https://www.openstreetmap.org/about/" target="_blank" title="OpenStreetMap" aria-label="OpenStreetMap" role="listitem">© OpenStreetMap</a>
                 <a href="https://www.maxar.com/" target="_blank" title="Maxar" aria-label="Maxar" role="listitem">© Maxar</a>
             </div>
         </section>
         <section id="geojsonio-commonwealth-electorate" data-background="graphics/geo/geojsonio3.png">
-            <div class="width-fit" style="background-color: rgba(0, 0, 0, 0.5); color: rgba(255, 255, 255, 0.5);
-            text-align: right; margin-top: 685px; margin-left: 610px; font-size: x-small">
+            <div class="width-fit" style="background-color: rgba(0, 0, 0, 0.5); color: rgba(255, 255, 255, 0.5); text-align: right; margin-top: 750px; margin-left: 0px; font-size: x-small">
                 <a href="https://www.mapbox.com/about/maps/" target="_blank" title="Mapbox" aria-label="Mapbox" role="listitem">© Mapbox</a>
                 <a href="https://www.openstreetmap.org/about/" target="_blank" title="OpenStreetMap" aria-label="OpenStreetMap" role="listitem">© OpenStreetMap</a>
                 <a href="https://www.maxar.com/" target="_blank" title="Maxar" aria-label="Maxar" role="listitem">© Maxar</a>
             </div>
         </section>
         <section id="geojsonio-state-electorate" data-background="graphics/geo/geojsonio4.png">
-            <div class="width-fit" style="background-color: rgba(0, 0, 0, 0.5); color: rgba(255, 255, 255, 0.5);
-            text-align: right; margin-top: 685px; margin-left: 610px; font-size: x-small">
+            <div class="width-fit" style="background-color: rgba(0, 0, 0, 0.5); color: rgba(255, 255, 255, 0.5); text-align: right; margin-top: 750px; margin-left: 0px; font-size: x-small">
                 <a href="https://www.mapbox.com/about/maps/" target="_blank" title="Mapbox" aria-label="Mapbox" role="listitem">© Mapbox</a>
                 <a href="https://www.openstreetmap.org/about/" target="_blank" title="OpenStreetMap" aria-label="OpenStreetMap" role="listitem">© OpenStreetMap</a>
                 <a href="https://www.maxar.com/" target="_blank" title="Maxar" aria-label="Maxar" role="listitem">© Maxar</a>
