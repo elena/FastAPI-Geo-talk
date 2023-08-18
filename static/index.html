@@ -82,7 +82,7 @@
                 <li><p><b>Not</b> <b>full</b> web application<br>
                     </p></li>
                 <li><p><b>Not</b> talking much about <b>data</b> layer<br>
-                    <em>not python, very complex</em></p></li>
+                    <em>not python, extremely variable</em></p></li>
                 <li><p><b>Not</b> talking about <b>deployment</b><br>
                     <em>cloud serverless</em></p></li>
             </ul>
@@ -696,9 +696,9 @@ MyPydantic(my_custom=Foo(baz='qux'), my_str='abc', my_int=123, my_float=123.456,
         </section>
 
         <section id="pydantic-validation-bad-data">
-            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Rubbish Data</div>
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Invalid Data</div>
             <pre class="width-fit" style="padding: 0; margin-left: 0; margin-right: 0;">
-                <code class="python code-normal width-fit" >>>> my_funky_data = {
+                <code class="python code-normal width-fit" >>>> my_invalid_data = {
 ...     "my_class": "a string",                                                                                               .
 ...     "my_str": "a string",
 ...     "my_int": "a string",
@@ -706,16 +706,16 @@ MyPydantic(my_custom=Foo(baz='qux'), my_str='abc', my_int=123, my_float=123.456,
 ...     "my_bool": "a string",
 ...     "my_list": "a string",
 ... }
->>> MyPydantic(**my_funky_data)
+>>> MyPydantic(**my_invalid_data)
 
 </code>
             </pre>
         </section>
         <section id="pydantic-validation-bad-data-traceback-boom1" data-background="graphics/explode.gif"></section>
         <section id="pydantic-validation-bad-data-traceback">
-            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Rubbish Data is nope</div>
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Invalid Data is nope</div>
             <pre class="width-fit" style="padding: 0; margin-left: 0; margin-right: 0;">
-                <code class="python code-smaller width-fit" data-line-numbers="1,4-5,7-8,10,11,13,14">>> MyPydantic(**my_funky_data)
+                <code class="python code-smaller width-fit" data-line-numbers="1,4-5,7-8,10,11,13,14">>> MyPydantic(**my_invalid_data)
 Traceback (most recent call last):
 pydantic_core._pydantic_core.ValidationError: 4 validation errors for MyPydantic
 my_int
@@ -761,7 +761,7 @@ class FeatureProperty(BaseModel):
 ...     "street_name": "North Terrace",
 ...     "locality": "Adelaide",
 ...     "postcode": "5000",
-...     "state": "SOME RANDOM THING NOT A STATE"                                                                                    .
+...     "state": "SOME INVALID VALUE NOT A STATE"                                                                                    .
 ... }
 >>> FeatureProperty(**feature_data)
                                                                                                                         .
@@ -780,13 +780,13 @@ class FeatureProperty(BaseModel):
 ...     "street_name": "North Terrace",
 ...     "locality": "Adelaide",
 ...     "postcode": "5000",
-...     "state": "SOME RANDOM THING NOT A STATE"
+...     "state": "SOME INVALID VALUE NOT A STATE"                                                                                    .
 ... }
 >>> FeatureProperty(**feature_data)
 Traceback (most recent call last):
 pydantic_core._pydantic_core.ValidationError: 1 validation error for Address
 state
-  Input should be 'ACT', 'NSW', 'NT', 'OT', 'QLD', 'SA', 'TAS', 'VIC' or 'WA' [type=literal_error, input_value='SOME RANDOM THING NOT A STATE', input_type=str]
+  Input should be 'ACT', 'NSW', 'NT', 'OT', 'QLD', 'SA', 'TAS', 'VIC' or 'WA' [type=literal_error, input_value='SOME INVALID VALUE NOT A STATE', input_type=str]
     For further information visit https://errors.pydantic.dev/2.1.2/v/literal_error
 </code>
             </pre>
@@ -950,6 +950,7 @@ class GeoJSONFeatureCollection(BaseModel):
     features: List[GeoJSONFeature]</code>
             </pre>
         </section>
+
         <section id="geojson-geometries">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">GeoJSON Geometry Types Examples</div>
         </section>
@@ -1020,7 +1021,7 @@ class MultiPolygon(Geometry):
 
         <section id="osgeo" data-background="graphics/geo/osgeo.png">
             <div style="background-color: rgba(0, 0, 0, 0.7); color: #fff; padding: 20px; margin-top: -100px;">
-                <span style="font-size: 200%">OSGeo</span> <em>awesome! ✨</em>
+                <span style="font-size: 200%">OSGeo</span><br><em>Thank you!</em>
             </div>
         </section>
         <section id="shapely" data-background="graphics/geo/shapely.png">
@@ -1033,17 +1034,54 @@ class MultiPolygon(Geometry):
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">GeoJSON also allows:</code></div><br>
             <ul>
                 <li>3D Coordinates:  <code>[x, y, z]</code><br>&nbsp;</li>
-                <li><b>Mix</b> of Features in <code>FeatureCollection</code>
+                <li><b>Mix</b> of Feature Geometry types in <code>FeatureCollection</code>
                     <br>eg: 🍱&nbsp; <code>Point</code> + <code>Polygon</code>, etc </li>
             </ul>
         </section>
 
+        <section id="geojson-geojson-lets-query">
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: rgba(255,255,255,0.85); padding: 20px;">Putting It Together</div>
+            <br><br>
+            <em>Let's do a GeoJSON query!</em>
+            <br><br><br><br>
+        </section>
+
         <section id="geojson-response-real">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-                G-NAF response
+                Real (cut-down) G-NAF response
             </div>
             <pre style="padding: 0; margin-left: 0; margin-right: 0; height: 20em">
-                <code data-line-numbers="2-3,6,11,16|20" class="hljs code-small-85" style="padding: 0; margin-left: 0; margin-right: 0;">{
+                <code data-line-numbers="2-3,6,11,16||5,10,15|6,11,16|7,12,17||2-3,6,11,16" class="hljs code-small-85" style="padding: 0; margin-left: 0; margin-right: 0;">{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {"addressId": "GASA_721199769", ...},
+            "geometry": {"type": "Point", "coordinates": [138.59380879, -34.92043836]},
+        },
+        {
+            "type": "Feature",
+            "properties": {"addressId": "GASA_424196378", ...},
+            "geometry": {"type": "Point", "coordinates": [138.59352127, -34.92156008]},
+        },
+        {
+            "type": "Feature",
+            "properties": {...},
+            "geometry": {"type": "Point", "coordinates": [138.59352048, -34.92158711]},
+        }
+    ],
+    "query": [138.59547, -34.92023],
+    "requestTimeStamp": 1690247769.162439,
+}</code>
+            </pre>
+        </section>
+
+        <section id="geojson-response-real">
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
+                Real (cut-down) G-NAF response for **here**
+            </div>
+            <pre style="padding: 0; margin-left: 0; margin-right: 0; height: 20em">
+                <code data-line-numbers="20" class="hljs code-small-85" style="padding: 0; margin-left: 0; margin-right: 0;">{
     "type": "FeatureCollection",
     "features": [
         {
@@ -1069,6 +1107,7 @@ class MultiPolygon(Geometry):
         </section>
 
 
+
         <section id="xkcd" data-background="graphics/xkcd.png">
             <div style="background-color: rgba(0, 0, 0, 0.7); color: #fff; padding: 20px; margin-top: -235px;">
                 xkcd
@@ -1078,25 +1117,23 @@ class MultiPolygon(Geometry):
         <section id="xkcd-datum-enhance" data-background="graphics/xkcd-datum_enhance.png"></section>
         <section id="gda2020" data-background="graphics/geo/gda2020.png">
             <div style="background-color: rgba(0, 0, 0, 0.7); color: #fff; padding: 20px; margin-top: -220px">
-                if in doubt, can probably use datum: <div style="font-size: 200%">GDA2020</div>
+                <span style="font-size: xx-large">If in doubt, can probably use datum:</span> <div style="font-size: 200%">GDA2020</div>
             </div>
         </section>
         <section id="pyproj" data-background="graphics/geo/pyproj.png">
-            <div style="background-color: rgba(0, 0, 0, 0.7); color: #fff; padding: 20px; margin-top: -70px">
-              <code style="font-size: 200%">pyproj</code>  <em>awesome! ✨</em><br>convert datums easily
+            <div style="background-color: rgba(0, 0, 0, 0.7); color: #fff; padding: 20px; margin-top: -30px">
+                <code style="font-size: 200%">pyproj</code><br><span style="font-size: xx-large"><em>Magical ✨</em> heavy duty but convert datums easily</span>
           </div>
         </section>
 
 
         <section id="why-geojson">
-            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Why do we care about GeoJSON?</div>
+            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">Why do we care about APIs/GeoJSON?</div>
         </section>
 
-
         <section id="mapping-libraries">
-            <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-                <em>Some mapping libraries for GeoJSON ...</em>
-            </div>
+            Digital Twins/Digital Atlases<br><br>
+            <div style="text-align: left"><em>Some mapping libraries for GeoJSON ...</em></div>
             <pre style="font-size: 0.85em">openlayers/openlayers
 Leaflet/Leaflet
 modestmaps/modestmaps-js
@@ -1114,7 +1151,7 @@ TerriaJS/terriajs
 
         <section id="leaflet-point">
             <pre style="padding: 0; margin-left: 0; margin-right: 0; height: 700px;">
-                <code data-line-numbers="13-14,18-19,23-24,27,30,34" class="width-fit code-small-85" style="padding: 0; margin-left: 0; margin-right: 0;">        ...
+                <code data-line-numbers="13-14,18,23,27,30,34" class="width-fit code-small-85" style="padding: 0; margin-left: 0; margin-right: 0;">        ...
     &lt;link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" /&gt;
     &lt;script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"&gt;&lt;/script&gt;
 &lt;/head&gt;
@@ -1339,8 +1376,8 @@ async def root():
               <br><em style="color: #333">contact us!</em></p>
             <p>Support <b>DjangoGirls</b>
               <br>Adelaide event on Monday!
-            <br>more Canberra events upcoming
-            <br><em style="color: #333">and future events</em></p>
+            <br>Canberra events
+            <br><em style="color: #333">future events TBA</em></p>
         </section>
 
     </div>

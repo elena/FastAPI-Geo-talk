@@ -1,0 +1,214 @@
+﻿1. Hello PyConAU great to be here.
+2. This talk is completely online you can play along at home
+If you have seen my talks before you will know I have too much content so let’s go
+3. We are only touching on the fundamentals of these this.
+4. We are not talking about:
+   1. Not full application
+
+APIs are intended to be a thin layer that floats on top of your data to be a small mechanism to deliver it to your client
+   2. In terms of data in the old days there was on only really RDBs – these days your data backend could be anything digital at all. 
+It could be just a python list or a file on a computer, or it could be a massive clusters or something exotic.
+We’re not going to talk about data layer at the technical level
+   3. FastAPI is comparatively easy in cloud serverless for which there are a range of vendors
+      5. #1: We are not Geoscience they are just down the road from us in Canberra, and some of the people I care about most in the world work or have worked there.
+I think the do … rocks? … and stuff?
+      6. We do: Addresses. The names for physical locations.
+Like your house or mailbox. Or apartment or office or townhouse or tower or antenna or ATM actually I’m just reading from this file that is actually in G-NAF
+      7. This is called an authority file – this is a list of every unit type that has been in use in an address as was provided by the people who create addresses.
+      8. Who creates addresses?: 
+         1. LGAs, councils and Land Planning Authorities, there are more than 500
+         2. These are fed up to the state level where they have their own processes for addresses
+         3. There are also other parts of the public sector that maintain address lists for their own purposes
+
+         4. Note: there are no actual rules for creating addresses. There are “guidelines” but no statutory authority to regulate them.
+
+But no one who creates addresses actually has the complete list, far from it.
+
+            9.  In the 90s the came together to create a single list of all the addresses. The created Geoscape to do this. Not MNE, not government. A private company, that is owned by the government, but not the federal government, the states are the shareholders and I think that’s pretty cool actually.
+            10. The suppliers of addresses not only don’t have a complete list themselves they only agree on about two-thirds, and proactively disagree about a bunch.
+            1. Over the decades geoscape has developed a range of sophisticated strategies to manage this as well layer on many layers of additional data that’s available – which we’re often tasked with to provided for specific gov services like the census/ABS, AEC or emergency services, etc
+            2. So if your work is struggling with a problem like this, don’t hire another engineer, we can probably manage it for you.
+            11. G-NAF itself as the National Address File is worth in the order of billions of dollars to the economy
+            12. Particularly as it’s free (as in beer) from data.gov.au
+            1. Note I called it a “monster” in the abstract not because it’s particularly big, it’s 15M records, but because it’s 203 files that all have to fit together just so. Ask 2pm talk about it. I believe he took about gnaf
+            2. There is also a flattened version that came out last year, but you obviously miss out on that Authority file like I showed at the beginning – it’s all a tradeoff.
+
+               13. [blank] though we’re actually here today to talk about code. So let’s talk about:
+               14. FastAPI ..
+               15. I mean, FastAPI ..
+               16. I mean, FastAPI .. many thanks to Armin, David, Tom, Marcelo and of course Sebastian Ramirez for all their hard work
+               17. FastAPI has grown really fast in popularity (I mean there are 3 talks at this conference!) – this is compared to the python web frameworks Flask and Django
+               18. [blank] but let’s look at an actually code example …
+               19. FastAPI ..
+               20. I mean, FastAPI .. (I have one joke)
+Can you see the flask influence?
+               21. But let’s dive in to the actual difference here:
+                  1. Firstly the app method here is `get` where all the HTTP verbs are acceptable which makes sense for APIs
+                  2. Secondly, that word “async” but we’ll come back to that
+                  3. And Thirdly it returns a serialisable rather than a HTML string which also makes sense for an API. You return a serialisable of some kind, maybe JSON or whatever
+                  22. Though Pydantic is all about the serialising so you can actually return Pydantic objects, we’ll come back to this later too.
+                  1. So we’ll be coming back to Async and Pydantic later
+                  23. To run you just need to install `uvicorn` which is the async version of gunicorn or whatever your local lightweight webserver is.
+                  1. We run our app
+                  2. This talk is also running on FastAPI though I’m most leveraging the original Flask static serving these slides are a JS library
+                  24. You also get the the swagger docs for your FastAPI app too, which is great
+                  25. [blank]  I’m going to make a small FastAPI example for something which is probably a pretty great example of FastAPIs comparative strengths
+                  26. This API is running live with this talk code right now – at every keystroke in to this input box it will send the input to my little backend API which will filter this list to see if what was typed is in the list. If so it’ll return it.
+                  1. So typing a, b, c and you can see terminal here
+                  27. Here is basically exactly the same example but with a more addressy flavour and also is a shout out to my friend Rachel Bunder who gave an awesome address talk at PyConAU a couple of years ago
+                  28. And here is the real-life example with all of G-NAF plugged in to it. Sadly the type ahead “predictive” feature here is the easy bit, the hard part is actually:
+                  1. Parsing the input address string
+                  2. Querying the whole database/index on that parsed input
+                  3. And we keep the data as fresh as possible from the sources every single day
+
+These are all different and fascinating problems but out of scope for today
+                     29. [blank] I quickly want to touch on Async
+                     30. But not really
+                     31. To my count there are 4 other talks at this very conference about async and definitely more.
+                     1. There’s my erstwhile Canberra Python co-organiser Zac H-D talking at PyConUS this very year, gosh we miss him, also Marietta, Andrew, (Benno!)
+                     32. But here is my core tips and tricks for if you’re like me and rock up to python async and are like I have a degree, I know how this works:
+                     1. If you would like to use asyncio in python
+You need to make sure that the interpreter knows at runtime that there will be an awaitable
+You do this by using the async/await syntax on every callable in the stack to your async function
+                     2. Here for example, if I want this “get_data” function to be async say it’s pitching off somewhere else to get some data, 
+                     3. It must be called using an `await` statement from another `async` function
+                     4. Which is turn must be called using an `await` statement from another `async` function … all the way down to the runtime
+                     5. If you forget an `async` or `await` you’ll get weird Exceptions, of if you find the term “coroutine” is coming up for you a lot double check your async/await pairs it’s really easy to overlook one
+                     6. Note: you also don’t have to use Async
+                     33. [blank] I was also going to talk about …
+                     34. Pydantic. So put your hand up please if you’ve heard of pydantic
+                     1. Leave it up if you’ve heard of PydanticV2
+                     2. Leave it up if you’ve used PydanticV2
+                     3. Cool well when this talk was conceived of and proposed, it was going to have a large section about things I’d learned using PydanticV1. Very recently V2 was released, the Pydantic API is effectively the same, but Pydantic was completely rewritten from the ground up. Pretty much everything I was going to talk about went away as relics of history (yay) and I have filled that space in this talk with pictures later instead.
+                     4. Having said that, I’m not going to talk about Pydantic just yet. I’m firstly going to talk about
+                     35. Typing in Python.
+                     1. Python is a weakly typed language
+                     2. People who feel strongly about typing in python are probably extremist one end or the other: for or against.
+                     3. My personal unsubstantiated theory is that our ..
+                     36. .. beloved BDFL stepped away from that role because of the 
+                     1. Heat that he got for his attempts to
+                     2. Very gently introduce some kind of typing in to python and people got mad
+(unsubstantiated)
+                        37. In python everything is an object
+                        38. And you can do whatever you like to it …
+                        1. .. and it will give it a red hot go
+                        39. But sometimes (particularly for performance) this is not what you want, and you wanto to …
+                        40. … strictly validate your types. There are many ways to do this in python.
+                        1. Should out to Alec Thomas who is Australian as are some of the attrs team I believe, but thanks to all hard work devs who make this stuff happen
+                        2. But today in 2023, the hottest way of doing type validation in python is …
+                        41. Pydantic.
+                        1. Many thanks to Samuel and the team, thank you for the release of v2 recently
+                        2. They received some millions of dollars of VC funding around the release of V2 also
+                        3. So … 
+                        42. Pydantic code
+                        43. I mean Pydantic code (I have 1 joke)
+                        1. You create Pydantic models by inheriting from the Pydantic BaseModel class
+                        2. You can add your attributes and annotate them – you people are smart this should be self-evident.
+                        3. You can stack your types
+                        4. You can make custom types
+
+
+                        44. Now I’d say it’s as expected what’s going to happen next, though I will mention that unlike in the old days, nowadays we often get our data back as a dictionary, as key-pair store is such a defacto way to manage data, which is quite different from an ORM
+                        1. We can then get this data dict and cast itk, ,using the kwarg syntax, in to our Pydantic model we just made.
+                        2. As expected it just makes a Pydantic instance with our data assigned to the attributes
+                        45. Again as is kind of expected if I make this dict – which has the correct attribute names, but the type of data, the strings, don’t match our class annotations
+                        1. If we try to cast this …
+                        46. … it will raise a ValidationError
+                        1. You tried to pass me a string when I expected an integer, why would you do that? etc
+                        47. There is this concept called Literal, I think this is an excellent address-based example. Under no circumstances do I want a value in this field that is not one of the defined Australian states.
+                        1. In Django we’d call these choices
+                        2. Note that this is not a List and these are no longer strings, they are “enums”. Beware of that.
+                        48. As expected you don’t put one of the enumerated values, it will again raise a ValidationError
+                        49. You also have this concept of “Field” in Pydantic. There’s an analogue in the ORMs, like Django and SQLAlchemy both have similar “Field” concepts, where there are all kinds of additional functionality available to you.
+                        1. In this example you can validate a range, for a legitimate LatLong
+                        50. Here you can add a default Field value
+                        1. A fancy default Field value
+                        2. In fact all kinds of stuff that is much too detailed to explore here
+                        3. If you’re going to spend any time with Pydantic I recommend becoming familiar with this feature
+                        51. Note that like Async: your runtime needs to have annotation for every attribute in a Pydantic BaseModel up and down the inheritance stack. So you can have Abstract Base Classes but they must be pydantic and you may get some unexpected behaviour with your attribute value inheritance so beware of that.
+                        1. Pydantic serialised outputs don’t support property methods out-of-the-box
+                        2. But you can use this “computed_field” decorator and you’ll be right
+we must use property methods a lot in Django-world because this really threw me.                
+                           52. Ok: in summary Pydantic will return a fully validated serialisable for your FastAPI response. Happy days
+                           53. [pause]
+                           54. GeoJSON
+                           1. Checkout that standard
+                           55. This is a basic GeoJSON response
+                           1. We are no longer looking at python now,  this is JSON object notation. Looks similar but is actually different
+                           2. What we have is 3 attributes:
+                           1. First is “type”’ : “Feature”
+This is the main GeoJSON type, there is another which we’ll get to but basically there is this type “Feature. It’s a string, The string is “Feature”.
+                           2. Secondly is the main core attribute of GeoJSON response: the “Geometry”.
+This object is very strictly defined. 
+It must have a type. This must be one of a defined set of geometries which we’ll gloss over next, this one is a “Point”.
+It must have some coordinates, the format of these is very strictly defined  based upon the type,
+                           3. Finally we have “properties”. Unlike the other 2 this can be whatever you want. In strict GeoJSON you must provide this attribute even if it’s empty  but you can also but whatever you like in it, we overload ours quite heavily.
+                              3. So got it?: Type, Geometry, Properties
+                              56. If we wanted to model these in Pydantic it might look something like this:
+                              1. We have a tightly defined geometry object with a type and coordinates
+                              2. Then we have our “Feature” class with our Type, Geometry, Properties
+                              57. Next we have the other “type” of GeoJSON response that is allowed, which is a “FeatureCollection
+As the name suggests, this is a collection of Features.
+Here is our list/array called Features, it’s a list of GeoJSON features.
+Features: Type, Geometry, Properties
+
+                              58. We can add that FeatureCollection Pydantic model as a new parent level of abstraction
+… and that’s basically the core the GeoJSON standard in about a minute and a half, there’s more but not much.
+What I do want to dig in to here is the geometries just quickly, I think there are some points of interest (you see what I did there)
+                              59. [pause]
+                              60. In common vernacular we say “Lat/Long” (not long/lat) where “Lat”” is actually the Y axis.
+When I came to the geo world, frankly I thought this fundamental would be a lot more figured out than it is.
+There’s the whole degrees v. decimals conversation.
+Though generally in technical context we use cartesian X,Y coordinates.
+                                 61. Here is a real-world example of a point. It’s the conference centre more-or less where we are now.
+                                 62. Here we have an ordered array or points. The connect together to form a line.
+                                 63. These can be used to represent real-world roads. If you have any interest here my colleagues Alex and Jon who are here have recently been spending a lot of time with roads I believe they can discuss with some authority connecting complicated intersections at scale over borders. Great stuff.
+                                 64. Here we have an array or points with the same start and end value which creates a polygon.
+In strictly validated GeoJSON there is “handedness” with polygon, that they must go clockwise.
+                                 65. We use these regularly as in this example of a building footprint
+                                 66. My final example is everybody’s favourite: the multipolygon, and do you know why it’s everyone’s favourite? Because it’s quadruple nested. 
+Although if you think about it if you want to have many donuts it necessarily must be quadruple nested
+                                 67. Here are some multipolygons, we use them all the time.
+                                 68. This is those examples as Pydantic classes, really this slide is only here for the List, List List, List List List
+                                 69. Now I must say thank you to OSGeo because they produce
+                                 70. Shapely, which is a python library which allows you to very easily manage and manipulate geometries.
+See that example is just one method on a polygon to get a buffered outline around.
+And then to get the area. It’s truly a pleasure to use.
+                                 71. GeoJSON also allows 3D coordinates and the ability to mix different feature geometries together in a feature collection
+                                 72. So, here is the GeoJSON response for G-NAF, it’s returning some addresses
+This is here.
+                                 73. I want to believe at least one other person in this room is now thinking about this xkcd comic about the number of digits in your coordinates
+                                 74. So we’re here.
+                                 75. OK, datum information
+                                 76. Well we’re in Australia so it’s probably safe to use GDA2020
+                                 77. But if you absolutely must convert your datums, say your ESPG to your GDA, in python it’s actually way easier than you would think. This library PyProj that actually makes it shockingly easy. I recommend it if this is a thing you have to do.
+                                 78. But (why do we care about GeoJSON)
+                                 79. Well there are squillions of mapping libraries out there which allow you to just plug in GeoJSON. I don’t know this space well so these are sincerely picked at random do your own homework here.
+                                 80. I’m picking Leaflet at random
+                                 81. You see it supports GeoJSON
+                                 82. And getting our GeoJSON response from before and just copying and pasting this in to the quickstart html template …
+                                 83. Tada! I did plonk in some extra SEIFA (socio-economic) data I had on hand because it’s cool and easy (we’re very smart here)
+This literally took in the order of seconds not minutes to put together
+                                 84. Here’s some other GeoJSON we just have: so the buildings around here
+                                 85. The ABS meshblock and the suburb of Adelaide
+                                 86. the suburb of Adelaide and the local electorate of Adelaide
+                                 87. .. and the whole state
+See this response is something like 310K coordinates
+                                 88. Some more: here are some points and roads together
+                                 89. And some polygons
+                                 90. And some shading
+                                 91. And some buildings
+                                 92. And some trees – these are actually the fairly accurate in height, Telstra uses this very data to calculate shadows and clutter for their mobile phone towers and so forth
+                                 93. Pools
+                                 94. Solar panels
+                                 95. And I was actually demonstrating that variety of data because I think it exemplifies this idea of async waiting nicely
+                                 96. So I have all my get_data functions here all going off and getting their ranges of different data, based upon our location here
+                                 97. I can create our FastAPI response function that will go off and call all of these different data sources.
+                                    1. Because this is async rather than calling them one after the other
+                                    2. Obviously it just call them all at once
+The practical outcome of this is that the whole entire response time will only be as long as our longest call
+I showed you that state administrative bound that was 300K lines, which is in the order of a small number of meg, and sincerely you’ll be hard-pressed to get that turned around in anything less than say 800-1000 ms.
+But now our entire response will all be returned within that window – as long as it takes that biggest/hardest/longest call.
+I think this demonstrates why FastAPI is some of the best tooling for these kinds of services.
+                                    98. Of course I forgot the await because it’s really easy to do
+                                    99. You’ve been a great audience.
