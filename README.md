@@ -1,7 +1,11 @@
 Learning FastAPI on Hard Mode
 ---
 
-PyConAU 2023 talk:
+Link to PDF Slide deck: https://drive.google.com/file/d/1UWQw4V3IbU6cm2azKfF2ohRKL5w67XW7/view?usp=sharing
+
+Link to recording of PyConAU 2023 presentation: http://youtu.be/UlhLRp5mbrU
+
+PyConAU 2023 talk program:
 https://2023.pycon.org.au/program/SBZNPD/
 
 
