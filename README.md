@@ -1,6 +1,12 @@
 Learning FastAPI on Hard Mode
 ---
 
+Canberra Python: 
+
+* https://www.meetup.com/canberra-python-meetup-group/
+* https://github.com/canberra-python/
+
+
 Link to PDF Slide deck: https://drive.google.com/file/d/1UWQw4V3IbU6cm2azKfF2ohRKL5w67XW7/view?usp=sharing
 
 Link to recording of PyConAU 2023 presentation: http://youtu.be/UlhLRp5mbrU
@@ -10,6 +16,8 @@ https://2023.pycon.org.au/program/SBZNPD/
 
 
 ![title.png](title.png)
+
+Credit: Geoscience Australia visualisation credit to [Jonah Sullivan](https://github.com/jonahsullivan) (cheers buddy!)
 
 Per the instructions in the talk itself:
 
